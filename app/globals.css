@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ────────────────────────────────────────── */
+@theme {
+  /* Background scale — deep charcoal */
+  --color-bg-base: #0e0e0f;
+  --color-bg-surface: #141416;
+  --color-bg-elevated: #1c1c1f;
+  --color-bg-overlay: #242428;
+
+  /* Ember/amber — the Phoenix accent */
+  --color-ember-50: #fff8ed;
+  --color-ember-100: #ffeec9;
+  --color-ember-200: #ffd98e;
+  --color-ember-300: #ffbc4d;
+  --color-ember-400: #ff9d1a;
+  --color-ember-500: #f07d00;
+  --color-ember-600: #c45e00;
+  --color-ember-700: #9a4400;
+  --color-ember-800: #7a3600;
+  --color-ember-900: #5c2800;
+
+  /* Teal — trust / safety */
+  --color-trust-50: #edfbf8;
+  --color-trust-100: #c7f3eb;
+  --color-trust-200: #8ee6d6;
+  --color-trust-300: #4fd1bd;
+  --color-trust-400: #1db8a1;
+  --color-trust-500: #0d9e89;
+  --color-trust-600: #08806e;
+  --color-trust-700: #076558;
+  --color-trust-800: #064e44;
+  --color-trust-900: #053c35;
+
+  /* Neutral scale */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f4f4f5;
+  --color-neutral-200: #e4e4e7;
+  --color-neutral-300: #d1d1d6;
+  --color-neutral-400: #a1a1aa;
+  --color-neutral-500: #71717a;
+  --color-neutral-600: #52525b;
+  --color-neutral-700: #3f3f46;
+  --color-neutral-800: #27272a;
+  --color-neutral-900: #18181b;
+
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* Border radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+}
+
+/* ─── Keyframes ────────────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes flow-line {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes ember-rise {
+  0%   { transform: translateY(0) scale(0.6); opacity: 0; }
+  15%  { opacity: 0.7; }
+  85%  { opacity: 0.4; }
+  100% { transform: translateY(-420px) scale(0.2); opacity: 0; }
+}
+
+/* ─── Base ─────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+html {
+  background-color: var(--color-bg-base);
+  color: var(--color-neutral-100);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-neutral-100);
+}
+
+::selection {
+  background: rgba(240, 125, 0, 0.3);
+  color: var(--color-neutral-50);
+}
+
+/* ─── Typography Utilities ─────────────────────────────────── */
+.text-display {
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.text-overline {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ember-400);
+}
+
+/* ─── Gradient Text ────────────────────────────────────────── */
+.gradient-ember {
+  background: linear-gradient(135deg, #f07d00 0%, #ff9d1a 50%, #ffbc4d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-hero {
+  background: linear-gradient(160deg, #ffffff 30%, #ffbc4d 70%, #f07d00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Surface Utilities ────────────────────────────────────── */
+.surface-card {
+  background: var(--color-bg-surface);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-lg);
+}
+
+.surface-elevated {
+  background: var(--color-bg-elevated);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+}
+
+.ember-glow {
+  box-shadow: 0 0 40px -8px rgba(240, 125, 0, 0.35);
+}
+
+.trust-glow {
+  box-shadow: 0 0 40px -8px rgba(13, 158, 137, 0.25);
+}
+
+/* ─── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-base); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-700);
+  border-radius: 3px;
+}
+
+/* ─── Focus ────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-ember-400);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Reduced Motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

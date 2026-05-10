@@ -1,0 +1,28 @@
+{
+  "_TODO": "Translate all English values to Uzbek (Latin script). Keys must match en.json exactly.",
+  "nav": {
+    "product": "Mahsulot",
+    "pricing": "Narxlar",
+    "caseStudies": "Misollar",
+    "security": "Xavfsizlik",
+    "docs": "Hujjatlar",
+    "signIn": "Kirish",
+    "bookDemo": "Demo buyurtma qiling"
+  },
+  "hero": {
+    "badge": "Sun'iy intellekt bilan Instagram avtomatlashtirish · O'zbekiston uchun",
+    "headline1": "Instagram avtomatlashtirish",
+    "headline2": "haqiqatda o'ylaydi.",
+    "sub": "Qaqnuz sizning DM, izoh va story javoblaringizni 7 bosqichli sun'iy intellekt quvuri orqali o'tkazadi — har bir qadamda inson nazorati bilan. O'zbekistonning yetakchi brendlari uchun.",
+    "cta1": "Demo buyurtma qiling",
+    "cta2": "Amaldagi ko'ring",
+    "stats": {
+      "pipeline": "7-bosqich",
+      "pipelineLabel": "Sun'iy intellekt quvuri",
+      "guardrails": "9-nuqta",
+      "guardrailsLabel": "xavfsizlik qoidalari",
+      "coverage": "24/7",
+      "coverageLabel": "avtonom qamrov"
+    }
+  }
+}

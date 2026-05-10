@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "product": "Product",
+    "pricing": "Pricing",
+    "caseStudies": "Case Studies",
+    "security": "Security",
+    "docs": "Docs",
+    "signIn": "Sign in",
+    "bookDemo": "Book a demo"
+  },
+  "hero": {
+    "badge": "AI-native Instagram automation · Built for Uzbekistan",
+    "headline1": "Instagram automation",
+    "headline2": "that actually thinks.",
+    "sub": "Qaqnuz runs your DMs, comments, and story replies through a 7-stage AI pipeline with human oversight at every step. Built for Uzbekistan's top brands.",
+    "cta1": "Book a demo",
+    "cta2": "See it in action",
+    "stats": {
+      "pipeline": "7-stage",
+      "pipelineLabel": "AI pipeline",
+      "guardrails": "9-point",
+      "guardrailsLabel": "safety guardrails",
+      "coverage": "24/7",
+      "coverageLabel": "autonomous coverage"
+    }
+  },
+  "pipeline": {
+    "overline": "The AI Pipeline",
+    "title1": "Eight stages.",
+    "title2": "Zero compromises.",
+    "description": "Every message your brand receives passes through a fully audited AI pipeline before a single word is published."
+  },
+  "trustRamp": {
+    "overline": "Trust Ramp",
+    "title1": "Start careful.",
+    "title2": "Scale confident.",
+    "description": "Qaqnuz grows into autonomy alongside your brand. The trust ramp means you're never forced to give up control — you earn it, level by level."
+  },
+  "guardrails": {
+    "overline": "Safety First",
+    "title1": "9 guardrails.",
+    "title2": "Every response.",
+    "description": "Before any AI reply reaches your customer, it must pass nine parallel safety checks."
+  },
+  "dashboard": {
+    "overline": "Mission Control",
+    "title1": "Six panels.",
+    "title2": "Total visibility.",
+    "description": "Your operator dashboard puts every brand, every conversation, and every AI decision on one screen."
+  },
+  "results": {
+    "overline": "Example Results",
+    "title1": "What brands achieve",
+    "title2": "with Qaqnuz.",
+    "disclaimer": "These are illustrative examples. Your results will depend on brand size, message volume, and configuration."
+  },
+  "uzbekistan": {
+    "overline": "Built for Uzbekistan",
+    "title1": "Designed for where",
+    "title2": "you actually operate.",
+    "description": "Qaqnuz isn't a Western tool adapted for Uzbekistan — it's built from the ground up for Uzbekistan's Instagram commerce ecosystem."
+  },
+  "pricing": {
+    "overline": "Pricing",
+    "title1": "Simple tiers.",
+    "title2": "No surprises.",
+    "description": "All plans include the full 8-stage AI pipeline and 9 safety guardrails."
+  },
+  "faq": {
+    "overline": "FAQ",
+    "title": "Common questions.",
+    "description": "Everything you need to know before booking a demo."
+  },
+  "cta": {
+    "headline1": "Ready to put your DMs",
+    "headline2": "on autopilot?",
+    "sub": "Book a 30-minute demo and see the full AI pipeline in action — with your own Instagram account.",
+    "primary": "Book a demo",
+    "secondary": "See how it works",
+    "note": "No commitment. No credit card. Setup in 48 hours."
+  }
+}

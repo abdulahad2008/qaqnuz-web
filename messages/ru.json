@@ -1,0 +1,28 @@
+{
+  "_TODO": "Translate all English values to Russian. Keys must match en.json exactly.",
+  "nav": {
+    "product": "Продукт",
+    "pricing": "Цены",
+    "caseStudies": "Кейсы",
+    "security": "Безопасность",
+    "docs": "Документация",
+    "signIn": "Войти",
+    "bookDemo": "Заказать демо"
+  },
+  "hero": {
+    "badge": "AI-автоматизация Instagram · Создано для Узбекистана",
+    "headline1": "Автоматизация Instagram,",
+    "headline2": "которая по-настоящему думает.",
+    "sub": "Qaqnuz обрабатывает ваши DM, комментарии и ответы на сторис через 7-этапный AI-конвейер с контролем человека на каждом шаге. Создано для ведущих брендов Узбекистана.",
+    "cta1": "Заказать демо",
+    "cta2": "Смотреть в действии",
+    "stats": {
+      "pipeline": "7 этапов",
+      "pipelineLabel": "AI-конвейер",
+      "guardrails": "9 барьеров",
+      "guardrailsLabel": "защитные фильтры",
+      "coverage": "24/7",
+      "coverageLabel": "автономная работа"
+    }
+  }
+}
