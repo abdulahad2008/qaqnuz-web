@@ -23,9 +23,9 @@
     "react-dom": "19.2.4",
     "tailwind-merge": "^3.5.0"
   },
+  "packageManager": "pnpm@11.0.9",
   "engines": {
-    "node": ">=22",
-    "pnpm": ">=11"
+    "node": ">=20"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
