@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import { Flame, Send, ExternalLink, MessageCircle } from "lucide-react";
+import { Send, ExternalLink, MessageCircle } from "lucide-react";
 
 const sitemap = [
   {
@@ -55,9 +57,19 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2.5 mb-4 group w-fit">
-              <div className="relative">
-                <Flame className="h-6 w-6 text-[var(--color-ember-400)]" />
-                <div className="absolute inset-0 blur-sm bg-[var(--color-ember-500)] opacity-40" />
+              {/* Ember pulse dot — CSS only, pulses every 4s */}
+              <div className="relative w-6 h-6 flex items-center justify-center">
+                <span
+                  className="absolute inset-0 rounded-full opacity-30"
+                  style={{
+                    background: "rgba(240,125,0,0.6)",
+                    animation: "ember-pulse 4s ease-in-out infinite",
+                  }}
+                />
+                <span
+                  className="w-3 h-3 rounded-full"
+                  style={{ background: "var(--color-ember-400)" }}
+                />
               </div>
               <span className="text-lg font-bold text-[var(--color-neutral-50)]">
                 Qaqnuz
@@ -112,7 +124,6 @@ export function Footer() {
             © {new Date().getFullYear()} Qaqnuz. All rights reserved.
           </p>
 
-          {/* Language switcher */}
           <div className="flex items-center gap-2">
             <span className="text-xs text-[var(--color-neutral-700)]">Language:</span>
             {languages.map((lang) => (

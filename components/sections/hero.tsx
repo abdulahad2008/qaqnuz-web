@@ -1,66 +1,59 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Play, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { VideoBackground } from "@/components/motion/video-background";
+import { FilmGrain } from "@/components/motion/film-grain";
+import { EmberSVG } from "@/components/motion/ember-svg";
 
-/* ─────────────────────────────────────────────────────────────
-   Hero background: abstract ember particle field
-   TODO (motionsites.ai): Replace <HeroBg> with the generated
-   motion component. Prompt:
-   "Generate a looping hero animation: dark #0e0e0f background
-   with slowly drifting ember/amber particles (rgba 240,125,0)
-   rising upward, occasional subtle wing-shaped light streaks
-   suggesting phoenix feathers. 16:9, 30fps, seamless loop."
-───────────────────────────────────────────────────────────── */
-/* Pure-CSS particles — zero JS animation overhead on the main thread */
+/* CSS-only particles — GPU composited, zero JS per frame */
 const PARTICLES = [
-  { left: "10%", delay: "0s",    dur: "6s"  },
-  { left: "22%", delay: "1.4s",  dur: "8s"  },
-  { left: "35%", delay: "0.7s",  dur: "7s"  },
-  { left: "48%", delay: "2.1s",  dur: "5s"  },
-  { left: "61%", delay: "0.3s",  dur: "9s"  },
-  { left: "74%", delay: "1.8s",  dur: "6s"  },
-  { left: "87%", delay: "1.0s",  dur: "7.5s"},
+  { left: "8%",  delay: "0s",    dur: "6s",   size: "3px" },
+  { left: "19%", delay: "1.4s",  dur: "8s",   size: "2px" },
+  { left: "33%", delay: "0.7s",  dur: "7s",   size: "4px" },
+  { left: "47%", delay: "2.1s",  dur: "5.5s", size: "2px" },
+  { left: "62%", delay: "0.3s",  dur: "9s",   size: "3px" },
+  { left: "76%", delay: "1.8s",  dur: "6.5s", size: "2px" },
+  { left: "89%", delay: "1.0s",  dur: "7.5s", size: "4px" },
 ];
 
-function HeroBg() {
+/* Headline split into words for stagger-blur reveal */
+const LINE_ONE = "Instagram automation".split(" ");
+const LINE_TWO = "that actually thinks.".split(" ");
+
+function WordBlur({
+  words,
+  delay = 0,
+  className = "",
+}: {
+  words: string[];
+  delay?: number;
+  className?: string;
+}) {
+  const reduced = useReducedMotion();
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
-      {/* Radial glow — ember core */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(240,125,0,0.12) 0%, rgba(240,125,0,0.04) 40%, transparent 70%)",
-        }}
-      />
-      {/* Subtle grid */}
-      <div
-        className="absolute inset-0 opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-        }}
-      />
-      {/* CSS-only ember particles — GPU composited, no JS per frame */}
-      {PARTICLES.map((p, i) => (
-        <span
+    <span className={className}>
+      {words.map((word, i) => (
+        <motion.span
           key={i}
-          className="absolute bottom-0 w-1 h-1 rounded-full"
-          style={{
-            left: p.left,
-            background: "rgba(240,125,0,0.7)",
-            animation: `ember-rise ${p.dur} ${p.delay} ease-out infinite`,
+          initial={reduced ? false : { opacity: 0, filter: "blur(8px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{
+            duration: 0.5,
+            delay: delay + i * 0.04,
+            ease: [0.21, 0.47, 0.32, 0.98],
           }}
-        />
+          className="inline-block mr-[0.25em]"
+        >
+          {word}
+        </motion.span>
       ))}
-    </div>
+    </span>
   );
 }
 
@@ -69,9 +62,62 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16">
-      <HeroBg />
+      {/* Layer 1 — Video background */}
+      <VideoBackground src="/video/hero.mp4" opacity={0.45} />
 
-      <div className="relative mx-auto max-w-6xl px-6 lg:px-8 py-24 lg:py-32 text-center">
+      {/* Layer 2 — Radial ember glow */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(240,125,0,0.14) 0%, rgba(240,125,0,0.04) 45%, transparent 70%)",
+        }}
+      />
+
+      {/* Layer 3 — Subtle grid */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none opacity-[0.022]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+        }}
+      />
+
+      {/* Layer 4 — CSS ember particles */}
+      <div aria-hidden className="absolute inset-0 overflow-hidden pointer-events-none">
+        {PARTICLES.map((p, i) => (
+          <span
+            key={i}
+            className="absolute bottom-0 rounded-full"
+            style={{
+              left: p.left,
+              width: p.size,
+              height: p.size,
+              background: "rgba(240,125,0,0.75)",
+              boxShadow: "0 0 6px 2px rgba(240,125,0,0.4)",
+              animation: `ember-rise ${p.dur} ${p.delay} ease-out infinite`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Layer 5 — Vignette */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none z-[5]"
+        style={{
+          background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.65) 100%)",
+        }}
+      />
+
+      {/* Layer 6 — Film grain */}
+      <FilmGrain opacity={0.028} />
+
+      {/* Content */}
+      <div className="relative z-[6] mx-auto max-w-6xl px-6 lg:px-8 py-24 lg:py-32 text-center">
         {/* Eyebrow badge */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -85,25 +131,25 @@ export function Hero() {
           </Badge>
         </motion.div>
 
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.02] tracking-tight mb-6"
-        >
-          <span className="text-[var(--color-neutral-50)]">Instagram automation</span>
-          <br />
-          <span className="text-display gradient-text-hero">
-            that actually thinks.
-          </span>
-        </motion.h1>
+        {/* Headline — word-by-word blur reveal */}
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.02] tracking-tight mb-6">
+          <WordBlur
+            words={LINE_ONE}
+            delay={0.2}
+            className="text-[var(--color-neutral-50)] block"
+          />
+          <WordBlur
+            words={LINE_TWO}
+            delay={0.36}
+            className="text-display gradient-text-hero block"
+          />
+        </h1>
 
         {/* Sub */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
           className="text-lg md:text-xl text-[var(--color-neutral-400)] max-w-2xl mx-auto leading-relaxed mb-10"
         >
           Qaqnuz runs your DMs, comments, and story replies through a 7-stage AI
@@ -115,7 +161,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
         >
           <Button size="xl" asChild className="group">
@@ -138,22 +184,13 @@ export function Hero() {
               <DialogHeader className="sr-only">
                 <DialogTitle>Qaqnuz product demo</DialogTitle>
               </DialogHeader>
-              {/* TODO (Higgsfield): Replace with generated product demo video
-                  Prompt: "60-second cinematic screen-capture walkthrough of an
-                  AI-powered Instagram DM automation dashboard. Dark mode UI,
-                  amber accent colors. Show: incoming DM → AI pipeline stages
-                  → composed reply → human approval → published." */}
+              {/* TODO (Higgsfield): Replace with generated product demo video */}
               <div className="aspect-video bg-[var(--color-bg-elevated)] flex items-center justify-center">
                 <div className="text-center">
                   <div className="w-16 h-16 rounded-full border-2 border-[var(--color-ember-400)] flex items-center justify-center mx-auto mb-4">
                     <Play className="h-7 w-7 text-[var(--color-ember-400)] fill-[var(--color-ember-400)]" />
                   </div>
-                  <p className="text-[var(--color-neutral-400)] text-sm">
-                    Demo video — coming soon
-                  </p>
-                  <p className="text-[var(--color-neutral-600)] text-xs mt-1">
-                    TODO: Replace with Higgsfield-generated product demo
-                  </p>
+                  <p className="text-[var(--color-neutral-400)] text-sm">Demo video — coming soon</p>
                 </div>
               </div>
             </DialogContent>
@@ -164,7 +201,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
           className="grid grid-cols-3 gap-8 max-w-lg mx-auto"
         >
           {[
@@ -182,10 +219,23 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator — CSS animation only */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-60"
-           style={{ animation: "fade-up 1s 1.2s ease-out both" }}>
-        <div className="w-px h-8 bg-gradient-to-b from-[var(--color-ember-400)] to-transparent" />
+      {/* Layer 7 — Liquid ember SVG flame motif */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none z-[6] opacity-30">
+        <EmberSVG width={80} height={120} />
+      </div>
+
+      {/* Scroll chevron */}
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[7] opacity-60"
+        style={{ animation: "fade-up 1s 1.4s ease-out both" }}
+      >
+        <div className="flex flex-col items-center gap-1">
+          <div className="w-px h-8 bg-gradient-to-b from-[var(--color-ember-400)] to-transparent" />
+          <div
+            className="w-1.5 h-1.5 border-r border-b border-[var(--color-ember-400)] rotate-45"
+            style={{ animation: "fade-up 0.8s 1.8s ease-out both" }}
+          />
+        </div>
       </div>
     </section>
   );

@@ -1,13 +1,10 @@
 "use client";
 
+import { useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { Plus } from "lucide-react";
 import { Section, Container, SectionHeader } from "@/components/ui/section";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion";
-import { FadeIn } from "@/components/motion/fade-in";
+import { FadeIn, FadeInStagger, FadeInChild } from "@/components/motion/fade-in";
 
 const faqs = [
   {
@@ -44,6 +41,49 @@ const faqs = [
   },
 ];
 
+function FAQItem({ faq, index }: { faq: (typeof faqs)[0]; index: number }) {
+  const [open, setOpen] = useState(false);
+  const reduced = useReducedMotion();
+
+  return (
+    <div className="border-b border-[rgba(255,255,255,0.07)] last:border-0">
+      <button
+        className="w-full flex items-center justify-between gap-4 py-5 text-left group"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+      >
+        <span className="text-sm font-medium text-[var(--color-neutral-200)] group-hover:text-[var(--color-neutral-50)] transition-colors leading-relaxed">
+          {faq.q}
+        </span>
+        <motion.div
+          animate={reduced ? {} : { rotate: open ? 45 : 0 }}
+          transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          className="shrink-0 w-5 h-5 rounded-full border border-[rgba(255,255,255,0.15)] flex items-center justify-center"
+        >
+          <Plus className="h-3 w-3 text-[var(--color-ember-400)]" />
+        </motion.div>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="content"
+            initial={reduced ? false : { height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={reduced ? {} : { height: 0, opacity: 0 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            style={{ overflow: "hidden" }}
+          >
+            <p className="pb-5 text-sm text-[var(--color-neutral-400)] leading-relaxed pr-8">
+              {faq.a}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export function FAQ() {
   return (
     <Section id="faq" variant="surface">
@@ -58,14 +98,11 @@ export function FAQ() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <Accordion type="single" collapsible className="w-full">
+          <div className="glass rounded-2xl px-6 divide-y divide-[rgba(255,255,255,0.06)]">
             {faqs.map((faq, idx) => (
-              <AccordionItem key={idx} value={`faq-${idx}`}>
-                <AccordionTrigger>{faq.q}</AccordionTrigger>
-                <AccordionContent>{faq.a}</AccordionContent>
-              </AccordionItem>
+              <FAQItem key={idx} faq={faq} index={idx} />
             ))}
-          </Accordion>
+          </div>
         </FadeIn>
       </Container>
     </Section>

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useMotionValue, useTransform, useReducedMotion } from "framer-motion";
 import {
   UserX,
   DollarSign,
@@ -22,7 +23,8 @@ const guardrails = [
     description:
       "Automatically detects and redacts personal information — phone numbers, addresses, national IDs — before any response is composed or published.",
     color: "var(--color-trust-400)",
-    bg: "rgba(29,184,161,0.1)",
+    rgb: "29,184,161",
+    bg: "rgba(29,184,161,0.08)",
   },
   {
     icon: DollarSign,
@@ -30,7 +32,8 @@ const guardrails = [
     description:
       "Cross-references quoted prices against your live product catalog. Prevents AI from promising incorrect discounts or out-of-date pricing.",
     color: "var(--color-ember-300)",
-    bg: "rgba(255,188,77,0.1)",
+    rgb: "255,188,77",
+    bg: "rgba(255,188,77,0.08)",
   },
   {
     icon: Flame,
@@ -38,7 +41,8 @@ const guardrails = [
     description:
       "Multi-lingual toxicity detection (Uzbek + Russian + English). Ensures AI responses remain professional even when customers don't.",
     color: "#f87171",
-    bg: "rgba(248,113,113,0.1)",
+    rgb: "248,113,113",
+    bg: "rgba(248,113,113,0.08)",
   },
   {
     icon: Copy,
@@ -46,7 +50,8 @@ const guardrails = [
     description:
       "Identifies repeated messages and near-duplicate responses to prevent spam, reply loops, and the uncanny feeling of talking to a broken bot.",
     color: "var(--color-ember-400)",
-    bg: "rgba(255,157,26,0.1)",
+    rgb: "255,157,26",
+    bg: "rgba(255,157,26,0.08)",
   },
   {
     icon: Lock,
@@ -54,7 +59,8 @@ const guardrails = [
     description:
       "Stops the AI from disclosing internal pricing strategies, supplier details, unreleased products, or any information flagged as confidential.",
     color: "var(--color-trust-300)",
-    bg: "rgba(79,209,189,0.1)",
+    rgb: "79,209,189",
+    bg: "rgba(79,209,189,0.08)",
   },
   {
     icon: Users,
@@ -62,7 +68,8 @@ const guardrails = [
     description:
       "Detects references to competitor brands and either deflects gracefully or escalates to a human — no accidental competitor endorsements.",
     color: "#c084fc",
-    bg: "rgba(192,132,252,0.1)",
+    rgb: "192,132,252",
+    bg: "rgba(192,132,252,0.08)",
   },
   {
     icon: Compass,
@@ -70,25 +77,98 @@ const guardrails = [
     description:
       "Keeps the AI on-brand and on-topic. Rejects responses that drift outside your configured business scope, preventing hallucinations from leaking through.",
     color: "var(--color-ember-500)",
-    bg: "rgba(240,125,0,0.1)",
+    rgb: "240,125,0",
+    bg: "rgba(240,125,0,0.08)",
   },
   {
     icon: AlignLeft,
     title: "Length Validation",
     description:
-      "Enforces configurable character limits. No response that's too terse to be useful, and no wall-of-text that kills the conversation.",
+      "Enforces configurable character limits. No response too terse to be useful, and no wall-of-text that kills the conversation.",
     color: "var(--color-neutral-400)",
-    bg: "rgba(161,161,170,0.1)",
+    rgb: "161,161,170",
+    bg: "rgba(161,161,170,0.08)",
   },
   {
     icon: Scale,
     title: "Compliance Check",
     description:
-      "Flags responses that could expose the brand to regulatory issues — false advertising claims, unverifiable guarantees, or legally sensitive language.",
+      "Flags responses that could expose the brand to regulatory issues — false advertising, unverifiable guarantees, or legally sensitive language.",
     color: "var(--color-trust-500)",
-    bg: "rgba(13,158,137,0.1)",
+    rgb: "13,158,137",
+    bg: "rgba(13,158,137,0.08)",
   },
 ];
+
+function TiltCard({
+  guardrail,
+  idx,
+}: {
+  guardrail: (typeof guardrails)[0];
+  idx: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+  const Icon = guardrail.icon;
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [6, -6]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-6, 6]);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (reduced || !ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+  }
+
+  function handleMouseLeave() {
+    mouseX.set(0);
+    mouseY.set(0);
+  }
+
+  const tiltStyle = reduced
+    ? { perspective: "1000px", borderColor: `rgba(${guardrail.rgb},0.15)` }
+    : { perspective: "1000px", rotateX, rotateY, borderColor: `rgba(${guardrail.rgb},0.15)` };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={tiltStyle}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.2 }}
+      className="glass rounded-2xl p-5 h-full group cursor-default will-change-transform"
+    >
+      <div className="flex items-start gap-4">
+        <div
+          className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+          style={{ background: guardrail.bg }}
+        >
+          <Icon className="h-4 w-4" style={{ color: guardrail.color }} />
+        </div>
+        <div>
+          <div className="flex items-center gap-2 mb-1.5">
+            <h3 className="text-sm font-semibold text-[var(--color-neutral-100)]">
+              {guardrail.title}
+            </h3>
+            <span
+              className="text-[10px] font-bold font-mono opacity-50"
+              style={{ color: guardrail.color }}
+            >
+              G{idx + 1}
+            </span>
+          </div>
+          <p className="text-xs text-[var(--color-neutral-500)] leading-relaxed">
+            {guardrail.description}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export function Guardrails() {
   return (
@@ -108,57 +188,17 @@ export function Guardrails() {
           />
         </FadeIn>
 
-        <FadeInStagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {guardrails.map((guardrail, idx) => {
-            const Icon = guardrail.icon;
-            return (
-              <FadeInChild key={guardrail.title}>
-                <motion.div
-                  whileHover={{ y: -4, scale: 1.01 }}
-                  transition={{ duration: 0.2 }}
-                  className="surface-card p-5 h-full group cursor-default"
-                  style={{
-                    borderColor: "rgba(255,255,255,0.06)",
-                  }}
-                  onHoverStart={(e) => {
-                    const el = e.target as HTMLElement;
-                    el.closest?.(".surface-card")?.setAttribute(
-                      "style",
-                      `border-color: ${guardrail.color}30; box-shadow: 0 0 24px -6px ${guardrail.bg}`
-                    );
-                  }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div
-                      className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300"
-                      style={{ background: guardrail.bg }}
-                    >
-                      <Icon className="h-4.5 w-4.5" style={{ color: guardrail.color }} />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <h3 className="text-sm font-semibold text-[var(--color-neutral-100)]">
-                          {guardrail.title}
-                        </h3>
-                        <span
-                          className="text-[10px] font-bold font-mono opacity-60"
-                          style={{ color: guardrail.color }}
-                        >
-                          G{idx + 1}
-                        </span>
-                      </div>
-                      <p className="text-xs text-[var(--color-neutral-500)] leading-relaxed">
-                        {guardrail.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </FadeInChild>
-            );
-          })}
+        <FadeInStagger
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          stagger={0.06}
+        >
+          {guardrails.map((guardrail, idx) => (
+            <FadeInChild key={guardrail.title}>
+              <TiltCard guardrail={guardrail} idx={idx} />
+            </FadeInChild>
+          ))}
         </FadeInStagger>
 
-        {/* Bottom note */}
         <FadeIn delay={0.3}>
           <div className="mt-12 text-center">
             <p className="text-sm text-[var(--color-neutral-500)]">

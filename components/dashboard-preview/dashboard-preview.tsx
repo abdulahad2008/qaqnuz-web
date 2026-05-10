@@ -1,7 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import {
   MessageSquare,
   Building2,
@@ -13,25 +19,17 @@ import {
 import { Section, Container, SectionHeader } from "@/components/ui/section";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { FadeIn } from "@/components/motion/fade-in";
-import { Badge } from "@/components/ui/badge";
-
-/* ─────────────────────────────────────────────────────────────
-   TODO (Higgsfield): Replace each panel's placeholder with a
-   cinematic screenshot or animation of the actual Mission Control
-   dashboard panel. Prompt base:
-   "Dark-mode SaaS dashboard screenshot, charcoal #141416 background,
-   amber accent colors, clean Inter typography. Panel: [panel name].
-   Shot at 2x resolution, slight depth-of-field blur on edges."
-───────────────────────────────────────────────────────────── */
 
 const panels = [
   {
     id: "inbox",
     label: "Inbox",
     icon: MessageSquare,
-    description: "Unified 3-tab conversation view across DMs, Comments, and Story mentions. Each thread shows pipeline status, trust level, and response queue.",
-    mockColor: "#1a1a2e",
+    description:
+      "Unified 3-tab conversation view across DMs, Comments, and Story mentions. Each thread shows pipeline status, trust level, and response queue.",
+    mockColor: "#111118",
     accent: "var(--color-ember-400)",
+    accentRgb: "255,157,26",
     stats: [
       { label: "DMs", value: "247" },
       { label: "Comments", value: "1.2k" },
@@ -42,9 +40,11 @@ const panels = [
     id: "brands",
     label: "Brands",
     icon: Building2,
-    description: "11-tab brand profile editor: identity, voice, products, campaigns, payments, delivery, FAQs, guardrails, escalation, hours, and compliance settings.",
-    mockColor: "#1a2e1a",
+    description:
+      "11-tab brand profile editor: identity, voice, products, campaigns, payments, delivery, FAQs, guardrails, escalation, hours, and compliance settings.",
+    mockColor: "#0f1811",
     accent: "var(--color-trust-400)",
+    accentRgb: "29,184,161",
     stats: [
       { label: "Brands", value: "12" },
       { label: "Profiles", value: "11 tabs" },
@@ -55,9 +55,11 @@ const panels = [
     id: "monitor",
     label: "Monitor",
     icon: Activity,
-    description: "Real-time pipeline health metrics. Service status for all 7 AMT microservices, queue depth, error rates, and LLM latency — all in one view.",
-    mockColor: "#1a1a2e",
+    description:
+      "Real-time pipeline health metrics. Service status for all 7 AMT microservices, queue depth, error rates, and LLM latency — all in one view.",
+    mockColor: "#111118",
     accent: "#c084fc",
+    accentRgb: "192,132,252",
     stats: [
       { label: "Services", value: "7/7" },
       { label: "Queue", value: "Live" },
@@ -68,9 +70,11 @@ const panels = [
     id: "queue",
     label: "Queue",
     icon: ListChecks,
-    description: "Proactive action approval queue. Review, edit, approve, or reject AI-generated responses. One-click publish or send back for recomposition.",
-    mockColor: "#2e1a1a",
+    description:
+      "Proactive action approval queue. Review, edit, approve, or reject AI-generated responses. One-click publish or send back for recomposition.",
+    mockColor: "#181010",
     accent: "var(--color-ember-500)",
+    accentRgb: "240,125,0",
     stats: [
       { label: "Pending", value: "14" },
       { label: "Approved/hr", value: "38" },
@@ -81,9 +85,11 @@ const panels = [
     id: "analytics",
     label: "Analytics",
     icon: BarChart3,
-    description: "Interactive charts: response volume, sentiment trends, pipeline funnel, cost per conversation, and per-brand LLM spend breakdown.",
-    mockColor: "#1a2e2e",
+    description:
+      "Interactive charts: response volume, sentiment trends, pipeline funnel, cost per conversation, and per-brand LLM spend breakdown.",
+    mockColor: "#0f1818",
     accent: "var(--color-trust-500)",
+    accentRgb: "13,158,137",
     stats: [
       { label: "Cost/conv", value: "$0.04" },
       { label: "Sentiment", value: "+87%" },
@@ -94,9 +100,11 @@ const panels = [
     id: "metrics",
     label: "Metrics",
     icon: TrendingUp,
-    description: "Conversation volumes and status tracking. Daily/weekly/monthly breakdowns, trust level distribution, and operator performance scorecards.",
-    mockColor: "#1e1a2e",
+    description:
+      "Conversation volumes and status tracking. Daily/weekly/monthly breakdowns, trust level distribution, and operator performance scorecards.",
+    mockColor: "#131118",
     accent: "var(--color-ember-300)",
+    accentRgb: "255,188,77",
     stats: [
       { label: "Total convs", value: "18.4k" },
       { label: "Auto rate", value: "76%" },
@@ -105,7 +113,7 @@ const panels = [
   },
 ];
 
-/* Stable chart heights — computed once per panel id, never on re-render */
+/* Stable chart heights — computed once at module level, never on re-render */
 const CHART_HEIGHTS: Record<string, number[]> = {};
 panels.forEach((p) => {
   CHART_HEIGHTS[p.id] = Array.from({ length: 18 }, (_, i) =>
@@ -121,23 +129,25 @@ function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
       className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[rgba(255,255,255,0.08)]"
       style={{ background: panel.mockColor }}
     >
-      {/* Simulated dashboard chrome */}
       <div className="absolute inset-0 flex flex-col">
-        {/* Top bar */}
-        <div className="flex items-center gap-2 px-4 h-9 border-b border-[rgba(255,255,255,0.06)] bg-[rgba(0,0,0,0.2)]">
+        {/* Glass browser chrome */}
+        <div className="flex items-center gap-2 px-4 h-9 border-b border-[rgba(255,255,255,0.06)] backdrop-blur-sm bg-[rgba(255,255,255,0.03)]">
           <div className="w-2 h-2 rounded-full bg-red-500/60" />
           <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
           <div className="w-2 h-2 rounded-full bg-green-500/60" />
           <div className="flex-1" />
           <div
-            className="text-[10px] font-mono px-2 py-0.5 rounded"
-            style={{ color: panel.accent, background: `${panel.accent}20` }}
+            className="text-[10px] font-mono px-2 py-0.5 rounded border"
+            style={{
+              color: `rgba(${panel.accentRgb},0.9)`,
+              background: `rgba(${panel.accentRgb},0.08)`,
+              borderColor: `rgba(${panel.accentRgb},0.2)`,
+            }}
           >
             Mission Control · {panel.label}
           </div>
         </div>
 
-        {/* Content area */}
         <div className="flex flex-1 overflow-hidden">
           {/* Sidebar */}
           <div className="w-14 border-r border-[rgba(255,255,255,0.05)] flex flex-col items-center py-3 gap-3">
@@ -149,13 +159,17 @@ function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
                   key={p.id}
                   className="w-8 h-8 rounded-lg flex items-center justify-center"
                   style={{
-                    background: isActive ? `${panel.accent}25` : "transparent",
+                    background: isActive
+                      ? `rgba(${panel.accentRgb},0.15)`
+                      : "transparent",
                   }}
                 >
                   <PIcon
                     className="h-3.5 w-3.5"
                     style={{
-                      color: isActive ? panel.accent : "rgba(255,255,255,0.2)",
+                      color: isActive
+                        ? `rgba(${panel.accentRgb},1)`
+                        : "rgba(255,255,255,0.18)",
                     }}
                   />
                 </div>
@@ -163,7 +177,7 @@ function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
             })}
           </div>
 
-          {/* Main content placeholder */}
+          {/* Main content */}
           <div className="flex-1 p-4 flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -179,16 +193,16 @@ function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
                 {panel.stats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="px-2 py-1 rounded text-[9px] font-mono border border-[rgba(255,255,255,0.08)]"
-                    style={{ color: "rgba(255,255,255,0.5)" }}
+                    className="px-2 py-1 rounded text-[9px] font-mono border border-[rgba(255,255,255,0.07)]"
+                    style={{ color: "rgba(255,255,255,0.45)" }}
                   >
-                    {stat.label}: <span style={{ color: panel.accent }}>{stat.value}</span>
+                    {stat.label}:{" "}
+                    <span style={{ color: panel.accent }}>{stat.value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Simulated content rows */}
             <div className="flex-1 flex flex-col gap-1.5">
               {Array.from({ length: 7 }).map((_, i) => (
                 <div
@@ -202,15 +216,14 @@ function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
               ))}
             </div>
 
-            {/* Simulated chart or list */}
-            <div className="h-20 rounded-lg bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.05)] flex items-end px-3 pb-3 gap-1">
+            <div className="h-20 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] flex items-end px-3 pb-3 gap-1">
               {chartHeights.map((h, i) => (
                 <div
                   key={i}
                   className="flex-1 rounded-sm"
                   style={{
                     height: `${h}%`,
-                    background: `${panel.accent}${Math.round(40 + i * 3).toString(16).padStart(2, "0")}`,
+                    background: `rgba(${panel.accentRgb},${(0.4 + i * 0.03).toFixed(2)})`,
                   }}
                 />
               ))}
@@ -218,19 +231,23 @@ function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
           </div>
         </div>
       </div>
-
-      {/* TODO overlay */}
-      <div className="absolute bottom-2 right-2">
-        <span className="text-[9px] font-mono text-[rgba(255,255,255,0.2)]">
-          TODO: replace with Higgsfield screenshot
-        </span>
-      </div>
     </div>
   );
 }
 
 export function DashboardPreview() {
   const [activePanel, setActivePanel] = useState("inbox");
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 0.9", "start 0.3"],
+  });
+
+  const rotateX = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [8, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const translateY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [40, 0]);
 
   return (
     <Section id="mission-control">
@@ -249,64 +266,81 @@ export function DashboardPreview() {
           />
         </FadeIn>
 
-        <FadeIn delay={0.1}>
-          <Tabs value={activePanel} onValueChange={setActivePanel}>
-            <div className="flex justify-center mb-6">
-              <TabsList className="flex-wrap gap-1 h-auto">
-                {panels.map((panel) => {
-                  const Icon = panel.icon;
-                  return (
-                    <TabsTrigger key={panel.id} value={panel.id} className="gap-2">
-                      <Icon className="h-3.5 w-3.5" />
-                      {panel.label}
-                    </TabsTrigger>
-                  );
-                })}
-              </TabsList>
-            </div>
+        <div ref={sectionRef}>
+          <FadeIn delay={0.1}>
+            <Tabs value={activePanel} onValueChange={setActivePanel}>
+              <div className="flex justify-center mb-6">
+                <TabsList className="flex-wrap gap-1 h-auto">
+                  {panels.map((panel) => {
+                    const Icon = panel.icon;
+                    return (
+                      <TabsTrigger key={panel.id} value={panel.id} className="gap-2">
+                        <Icon className="h-3.5 w-3.5" />
+                        {panel.label}
+                      </TabsTrigger>
+                    );
+                  })}
+                </TabsList>
+              </div>
 
-            {panels.map((panel) => (
-              <TabsContent key={panel.id} value={panel.id}>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={panel.id}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.25 }}
-                  >
-                    <MockPanel panel={panel} />
-                    <div className="mt-5 flex flex-col sm:flex-row sm:items-center gap-4">
-                      <div className="flex-1">
-                        <h3 className="text-base font-semibold text-[var(--color-neutral-100)] mb-1">
-                          {panel.label} Panel
-                        </h3>
-                        <p className="text-sm text-[var(--color-neutral-400)] leading-relaxed">
-                          {panel.description}
-                        </p>
-                      </div>
-                      <div className="flex gap-3 shrink-0">
-                        {panel.stats.map((stat) => (
-                          <div key={stat.label} className="text-center">
-                            <div
-                              className="text-lg font-bold"
-                              style={{ color: panel.accent }}
-                            >
-                              {stat.value}
-                            </div>
-                            <div className="text-[10px] text-[var(--color-neutral-500)] mt-0.5">
-                              {stat.label}
-                            </div>
+              {/* Perspective scroll container */}
+              <motion.div
+                style={{
+                  perspective: "1200px",
+                  rotateX,
+                  opacity,
+                  translateY,
+                }}
+                className="will-change-transform"
+              >
+                {panels.map((panel) => (
+                  <TabsContent key={panel.id} value={panel.id}>
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={panel.id}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                      >
+                        {/* Glass browser chrome wrapper */}
+                        <div className="glass rounded-2xl p-1 overflow-hidden">
+                          <MockPanel panel={panel} />
+                        </div>
+
+                        <div className="mt-5 flex flex-col sm:flex-row sm:items-center gap-4">
+                          <div className="flex-1">
+                            <h3 className="text-base font-semibold text-[var(--color-neutral-100)] mb-1">
+                              {panel.label} Panel
+                            </h3>
+                            <p className="text-sm text-[var(--color-neutral-400)] leading-relaxed">
+                              {panel.description}
+                            </p>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </FadeIn>
+                          <div className="flex gap-3 shrink-0">
+                            {panel.stats.map((stat) => (
+                              <div key={stat.label} className="text-center">
+                                <div
+                                  className="text-lg font-bold"
+                                  style={{ color: panel.accent }}
+                                >
+                                  {stat.value}
+                                </div>
+                                <div className="text-[10px] text-[var(--color-neutral-500)] mt-0.5">
+                                  {stat.label}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    </AnimatePresence>
+                  </TabsContent>
+                ))}
+              </motion.div>
+            </Tabs>
+          </FadeIn>
+        </div>
       </Container>
     </Section>
   );
