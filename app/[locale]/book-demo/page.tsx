@@ -32,14 +32,16 @@ export default function BookDemoPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    await supabase.from("leads").insert({
-      name: form.name,
-      company: form.brand,
-      role: form.igHandle,
-      message: form.volume,
-      email: form.email,
-      source: "book-demo",
-    });
+    if (supabase) {
+      await supabase.from("leads").insert({
+        name: form.name,
+        company: form.brand,
+        role: form.igHandle,
+        message: form.volume,
+        email: form.email,
+        source: "book-demo",
+      });
+    }
     setLoading(false);
     setSubmitted(true);
   }
