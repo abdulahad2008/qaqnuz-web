@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/lib/navigation";
 import { LocaleSwitcher } from "@/components/ui/locale-switcher";
+import { QaqnuzWordmark } from "@/components/ui/qaqnuz-logo";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -39,16 +40,8 @@ export function Nav() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Wordmark */}
-          <Link href="/" className="flex items-center gap-1.5 group">
-            <span
-              className="text-accent font-display text-base leading-none select-none"
-              aria-hidden
-            >
-              ✦
-            </span>
-            <span className="font-display italic text-lg text-foreground tracking-tight group-hover:text-accent transition-colors duration-200">
-              Qaqnuz
-            </span>
+          <Link href="/" className="group">
+            <QaqnuzWordmark textClassName="group-hover:text-accent transition-colors duration-200" />
           </Link>
 
           {/* Desktop center nav */}

@@ -4,6 +4,7 @@ import { Send, ExternalLink, MessageCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/lib/navigation";
 import { LocaleSwitcher } from "@/components/ui/locale-switcher";
+import { QaqnuzMark } from "@/components/ui/qaqnuz-logo";
 
 const SITEMAP = [
   {
@@ -54,23 +55,10 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-16">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-1.5 mb-4 group w-fit">
-              {/* Ember pulse dot — CSS only, pulses every 4s */}
-              <div className="relative w-6 h-6 flex items-center justify-center">
-                <span
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: "rgba(240,125,0,0.35)",
-                    animation: "ember-pulse 4s ease-in-out infinite",
-                  }}
-                />
-                <span
-                  className="w-2.5 h-2.5 rounded-full z-10"
-                  style={{ background: "var(--color-ember-400)" }}
-                />
-              </div>
+            <Link href="/" className="flex items-center gap-2 mb-4 group w-fit">
+              <QaqnuzMark className="h-6 w-5 group-hover:opacity-80 transition-opacity" />
               <span className="font-display italic text-lg text-foreground group-hover:text-accent transition-colors">
-                Qaqnuz
+                QaqnUz
               </span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed mb-5 max-w-[16rem]">

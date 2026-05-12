@@ -473,5 +473,293 @@
       "aiDisclosure": "AI oshkorligi",
       "dataRetention": "Ma'lumotlarni saqlash"
     }
+  },
+  "bookDemo": {
+    "title": "30 daqiqalik",
+    "titleEmphasis": "demo buyurtma qiling.",
+    "description": "Biz to'liq AI quvurini sizning Instagram hisobingiz, xabarlaringiz va brend ovozingiz bilan jonli namoyish qilamiz. Slaydlar yo'q, quruq so'zlar yo'q.",
+    "features": [
+      {
+        "title": "Jonli quvur demosi",
+        "description": "Haqiqiy DM yuboring va u qanday classify → guard → publish bosqichlaridan o'tishini real vaqtda kuzating."
+      },
+      {
+        "title": "Brend konfiguratsiyasi",
+        "description": "Qo'ng'iroq davomida brend ovozi, qo'riqlovchilar va ishonch darajangizni sozlaymiz."
+      },
+      {
+        "title": "Hajmingizga mos narx",
+        "description": "Qo'ng'iroq tugashidan oldin narx taklifini olasiz — qo'shimcha muloqot kerak emas."
+      }
+    ],
+    "calendarLabel": "Taqvim",
+    "calendarPlaceholder": "Taqvim widget joylashuvi",
+    "form": {
+      "title": "Brendingiz haqida ayting",
+      "name": "Ismingiz",
+      "namePlaceholder": "Azizbek Karimov",
+      "brand": "Brend nomi",
+      "brandPlaceholder": "Masalan: BeautyBox UZ",
+      "igHandle": "Instagram handle",
+      "igHandlePlaceholder": "@brendingiz",
+      "email": "Ish emaili",
+      "emailPlaceholder": "siz@brend.uz",
+      "volume": "Oylik DM hajmi",
+      "volumeDefault": "Hajmni tanlang...",
+      "volumeOptions": [
+        "500 dan kam DM/oy",
+        "500–2 000 DM/oy",
+        "2 000–10 000 DM/oy",
+        "10 000+ DM/oy",
+        "Hali aniq emas"
+      ],
+      "submit": "Demo so'rash",
+      "disclaimer": "Majburiyat yo'q. 24 soat ichida tasdiqlaymiz."
+    },
+    "success": {
+      "title": "Demo so'rovi qabul qilindi!",
+      "description": "24 soat ichida vaqtingizni tasdiqlaymiz. Tezkor demo kerak bo'lsa, Telegramda yozing.",
+      "backHome": "Bosh sahifaga qaytish"
+    }
+  },
+  "pricingPage": {
+    "overline": "Narxlar",
+    "title": "Shaffof narxlar.",
+    "titleEmphasis": "Yashirin to'lovlar yo'q.",
+    "description": "Barcha rejalar to'liq 8 bosqichli AI quvuri, 9 ta xavfsizlik qo'riqlovchisi va audit jurналини o'z ichiga oladi. Imkoniyatlar uchun emas, hajm uchun to'laysiz.",
+    "tiers": [
+      { "name": "Starter", "description": "Bitta brend, AI avtomatlashtirish bilan boshlanish.", "cta": "Demo buyurtma" },
+      { "name": "Growth", "description": "O'sib borayotgan brendlar va ko'p hisob operatorlari.", "badge": "Eng mashhur", "cta": "Demo buyurtma" },
+      { "name": "Enterprise", "description": "Agentliklar va cheksiz miqyosli operatsiyalar.", "cta": "Savdo bilan gaplashing" }
+    ],
+    "tableFeature": "Xususiyat",
+    "tableStarter": "Starter",
+    "tableGrowth": "Growth",
+    "tableEnterprise": "Enterprise",
+    "features": [
+      { "name": "Instagram hisoblar", "starter": "1", "growth": "5 tagacha", "enterprise": "Cheksiz" },
+      { "name": "Oylik DM hajmi", "starter": "1 000", "growth": "10 000", "enterprise": "Cheksiz" },
+      { "name": "8 bosqichli AI quvuri", "starter": true, "growth": true, "enterprise": true },
+      { "name": "9 ta xavfsizlik qo'riqlovchisi", "starter": true, "growth": true, "enterprise": true },
+      { "name": "Ishonch ramkasi (L1–L4)", "starter": "L1–L2", "growth": "L1–L4", "enterprise": "L1–L4" },
+      { "name": "Faol DM kampaniyalari", "starter": false, "growth": true, "enterprise": true },
+      { "name": "Xarajat boshqaruvi", "starter": false, "growth": true, "enterprise": true },
+      { "name": "Ko'p til (UZ/RU/EN)", "starter": false, "growth": true, "enterprise": true },
+      { "name": "To'liq Mission Control", "starter": false, "growth": true, "enterprise": true },
+      { "name": "Maxsus LLM konfiguratsiyasi", "starter": false, "growth": false, "enterprise": true },
+      { "name": "Audit jurnalini eksport", "starter": false, "growth": false, "enterprise": true },
+      { "name": "SLA kafolati", "starter": false, "growth": false, "enterprise": true },
+      { "name": "On-premises joylashtirilishi", "starter": false, "growth": false, "enterprise": true },
+      { "name": "Qo'llab-quvvatlash", "starter": "Email", "growth": "Ustuvor + CSM", "enterprise": "Maxsus SLA" }
+    ],
+    "customQuote": "Maxsus narx taklifi olish",
+    "customQuoteNote": "Barcha narxlar sizning hajmingiz va talablaringiz asosida individual hisoblanadi."
+  },
+  "productPage": {
+    "overline": "Mahsulot tahlili",
+    "title": "Har bir javob ortidagi",
+    "titleEmphasis": "AI mexanizmi.",
+    "description": "Qaqnuz oddiy chatbot emas. Bu tasniflash, qidirish, kompozitsiya, xavfsizlik, sifat, ishonch nazorati va nashr uchun alohida xizmatlar bilan ko'p bosqichli AI quvuri.",
+    "seeLive": "Jonli ko'ring",
+    "securityLink": "Xavfsizlik va muvofiqlik",
+    "archOverline": "Arxitektura",
+    "archTitle": "Korporativ",
+    "archTitleEmphasis": "standartlarga muvofiq.",
+    "archDescription": "Qaqnuz — to'liq kuzatuvchanlik bilan mikroservislar arxitekturasida ishlaydigan Phoenix platformasining operator tomoni.",
+    "architecturePoints": [
+      {
+        "title": "7 ta alohida mikroservis",
+        "description": "amt-intel (tasniflash), amt-rag (qidirish), amt-guard (xavfsizlik), amt-eval (sifat), amt-trust (shlyuz), amt-conversations (holat), amt-comms (nashr). Har bir xizmat izolyatsiya qilingan va OpenTelemetry orqali kuzatiladi."
+      },
+      {
+        "title": "Ishlamay qolishdan himoyalangan",
+        "description": "Har bir AI javobi nashr etilishidan oldin barcha 9 ta qo'riqlovchidan o'tadi. Agar biror tekshiruv muvaffaqiyatsiz tugasa, javob rad etiladi. Quvur himoyasiz javob nashr eta olmaydi."
+      },
+      {
+        "title": "O'rnatilgan xarajat boshqaruvi",
+        "description": "Har bir brend uchun kunlik cheklovli LLM byudjeti. Suhbat tannarxi real vaqtda kuzatiladi. Byudjetga yaqinlashgan brendlar operator ogohlantirishlarini avtomatik ravishda keltirib chiqaradi."
+      },
+      {
+        "title": "To'liq kuzatuvchanlik stack",
+        "description": "OpenTelemetry taqsimlangan kuzatish, Prometheus metrikalari, Pino tuzilgan jurnallash va Grafana boshqaruv panellari. Har bir quvur bosqichi izlarni chiqaradi."
+      }
+    ],
+    "techTitle": "Texnik stack",
+    "techStack": [
+      ["Backend API", "Hono · Node.js"],
+      ["Quvur navbati", "BullMQ · Redis 7"],
+      ["Ma'lumotlar bazasi", "PostgreSQL 16 + pgvector"],
+      ["Vektor qidiruvi", "pgvector embeddings"],
+      ["LLM provayderlari", "OpenRouter · Anthropic · OpenAI"],
+      ["Frontend", "Next.js 16 · React 19"],
+      ["Kuzatuvchanlik", "OpenTelemetry · Prometheus"],
+      ["Joylashtirilishi", "Docker · Dokploy · Traefik"]
+    ],
+    "ctaTitle": "Chuqurroq ko'rishga tayyormisiz?",
+    "ctaDescription": "Texnik demo buyurtma qiling va to'liq quvurni o'z Instagram hisobingiz bilan ko'rib chiqing.",
+    "ctaButton": "Texnik demo buyurtma"
+  },
+  "securityPage": {
+    "overline": "Xavfsizlik va muvofiqlik",
+    "title": "Xatolar",
+    "titleEmphasis": "qabul qilib bo'lmaydigan brendlar uchun.",
+    "description": "Qaqnuz birinchi kundan boshlab korporativ darajadagi xavfsizlik bilan yaratilgan. Har bir javob himoyalangan, jurnalda qayd etilgan va tekshirilishi mumkin.",
+    "sections": [
+      {
+        "id": "pii",
+        "title": "Shaxsiy ma'lumotlarni aniqlash va boshqarish",
+        "content": [
+          "Barcha kiruvchi xabarlar AI tomonidan qayta ishlanishidan oldin shaxsni aniqlovchi ma'lumotlar uchun skanlanadi.",
+          "Telefon raqamlari, shaxsiy identifikator raqamlar, manzillar va moliyaviy ma'lumotlar sozlangan saqlash siyosatiga muvofiq aniqlanadi va boshqariladi.",
+          "Shaxsiy ma'lumotlar hech qachon LLM so'rovlariga kiritilmaydi — u ajratib olinadi, belgilanadi va cheklangan kirishli holda alohida saqlanadi.",
+          "Barcha shaxsiy ma'lumotlarni boshqarish to'liq audit jurnalida operator attributsiyasi bilan qayd etiladi."
+        ]
+      },
+      {
+        "id": "disclosure",
+        "title": "AI oshkorligi",
+        "content": [
+          "Qaqnuz sozlanadigan AI oshkorligini qo'llab-quvvatlaydi. Birinchi AI javobiga oshkorlash iborasini kiritishingiz mumkin.",
+          "Oshkorlash shablonlari o'zbek, rus va ingliz tillarida taqdim etiladi.",
+          "Operatorlar tanlashi mumkin: har doim oshkor qilish, birinchi xabarda oshkor qilish yoki mahalliy qoidalar ruxsat bergan joylarda oshkorlashsiz ishlash.",
+          "Oshkorlash konfiguratsiyasi audit jurnalida qayd etiladi."
+        ]
+      },
+      {
+        "id": "optout",
+        "title": "Rad etish: STOP kalit so'zi",
+        "content": [
+          "STOP so'zini (istalgan tilda, istalgan registrda) yubborgan har qanday mijoz darhol AI avtomatlashtirishdan chiqadi.",
+          "Rad etish real vaqtda qayta ishlanadi — o'sha hisobdan keyingi xabar to'g'ridan-to'g'ri inson operatorga yo'naltiriladi.",
+          "Rad etishlar operator tomonidan hujjatlashtirilgan sabab bilan qo'lda bekor qilinmaguncha doimiydir.",
+          "Barcha rad etish hodisalari vaqt tamg'asi bilan qayd etiladi va muvofiqlik eksportlariga kiritiladi."
+        ]
+      },
+      {
+        "id": "audit",
+        "title": "To'liq audit jurnali",
+        "content": [
+          "Har bir AI qarori — qualify, classify, retrieve, compose, guard natijasi, baholash ballari, ishonch shlyuzi natijasi — nanosaniya vaqt tamg'alari bilan qayd etiladi.",
+          "Audit jurnallari to'liq quvur izini o'z ichiga oladi: qaysi LLM javob berdi, qaysi qo'riqlovchilar ishladi, qaysi operator tasdiqladi yoki rad etdi.",
+          "Jurnallar yozilgandan keyin o'zgarmas. Operatorlar to'liq audit jurnallarini JSON yoki CSV formatida eksport qilishi mumkin.",
+          "Enterprise rejalari uzoq muddatli audit jurnali saqlash va muvofiqlik hisobotlarini o'z ichiga oladi."
+        ]
+      },
+      {
+        "id": "retention",
+        "title": "Ma'lumotlarni saqlash",
+        "content": [
+          "Xabar mazmunini saqlash har bir brend uchun sozlanadi: 30, 90, 180 yoki 365 kun, yoki maxsus.",
+          "Saqlash muddati tugagandan so'ng, xabar mazmuni faol xotiradan o'chiriladi.",
+          "Mijoz ma'lumotlari LLM modellarini o'qitish, nozik sozlash yoki yaxshilash uchun ishlatilmaydi.",
+          "Ma'lumotlar enterprise konfiguratsiyangizga qarab O'zbekistonda yoki Yevropa hududlarida saqlanadi."
+        ]
+      },
+      {
+        "id": "guardrails",
+        "title": "9 nuqtali qo'riqlovchilar tizimi",
+        "content": [
+          "To'qqizta xavfsizlik tekshiruvi har bir javobda, hatto L4 to'liq avtomatik rejimida ham ishlaydi.",
+          "Qo'riqlovchilarni o'chirib bo'lmaydi — faqat sozlash mumkin. Shaxsiy ma'lumotlarni aniqlash va toksiklikni filtrlash har doim yoqilgan.",
+          "Har bir muvaffaqiyatsiz qo'riqlovchi muayyan qoidabuzarlik sababi bilan qayd etiladi.",
+          "Qo'riqlovchi konfiguratsiyalari versiyalangan — istalgan tarixiy nuqtada qaysi qoidalar faol bo'lganini ko'rishingiz mumkin."
+        ]
+      }
+    ],
+    "ctaTitle": "Xavfsizlik savollari? Jamoamiz bilan gaplashing.",
+    "ctaDescription": "Enterprise xavfsizlik tekshiruvlari, maxsus muvofiqlik konfiguratsiyalari va on-premises joylashtirilishi mavjud.",
+    "ctaButton": "Xavfsizlik ko'rib chiqishini buyurtma qiling",
+    "docsButton": "Hujjatlarni o'qing"
+  },
+  "docsPage": {
+    "overline": "Hujjatlar",
+    "title": "Qaqnuz Hujjatlari",
+    "description": "To'liq hujjatlar docs.qaqnuz.uz saytida joylashgan. Quyidagi havolalar sizni u yerga olib boradi.",
+    "openDocs": "Hujjatlarni ochish",
+    "sections": [
+      {
+        "title": "Boshlash",
+        "description": "Brendni qo'shish, hisob ulash, ishonch darajasini sozlash."
+      },
+      {
+        "title": "Mission Control",
+        "description": "Operator boshqaruv paneli: Inbox, Brands, Monitor, Queue, Analytics."
+      },
+      {
+        "title": "API ma'lumotnoma",
+        "description": "Webhook integratsiyasi, brend profil API, suhbat eksport API."
+      },
+      {
+        "title": "AI quvuri",
+        "description": "qualify → classify → retrieve → compose → guard → evaluate → trust → publish bosqichlari."
+      }
+    ],
+    "cantFind": "Kerakli narsani topa olmadingizmi?",
+    "talkToTeam": "Jamoa bilan gaplashing"
+  },
+  "caseStudiesPage": {
+    "overline": "Misollar",
+    "title": "AI boshqaruvni qabul qilganda",
+    "titleEmphasis": "nima bo'ladi.",
+    "description": "Haqiqiy joylashtiruvlar, haqiqiy quvurlar, haqiqiy natijalar. To'ldiruvchi kontent — yakuniy versiyalar tasdiqlangan ko'rsatkichlar bilan haqiqiy brendlarni ko'rsatadi.",
+    "readStudy": "Misolni o'qish",
+    "studies": [
+      {
+        "slug": "brand-growth",
+        "title": "Fashion brend Instagram DM javob tezligini qanday uch baravarga oshirdi",
+        "excerpt": "Toshkentdagi fashion chakana sotuvchi Qaqnuzni L1 ishonch darajasida joriy etdi va 8 hafta ichida L3 ga ko'tarildi. Javob darajasi 31% dan 94% ga o'sdi.",
+        "metric": "3×",
+        "metricLabel": "Javob darajasi",
+        "tags": ["Fashion", "Faollik", "L3 Ishonch"]
+      },
+      {
+        "slug": "24-7-automation",
+        "title": "24/7 jamoa bo'lmagan holda 24/7 qamrov",
+        "excerpt": "Kosmetika brendi kecha-kunduz va dam olish kunlaridagi javob kechikishlarini yo'q qildi. L2 avtomatik nashr oddiy so'rovlarni hal qiladi; operator navbati faqat murakkab holatlarni ko'rsatadi.",
+        "metric": "24/7",
+        "metricLabel": "Har doim faol",
+        "tags": ["Kosmetika", "Operatsiyalar", "L2 Ishonch"]
+      }
+    ],
+    "ctaTitle": "Misol bo'lishni xohlaysizmi?",
+    "ctaDescription": "Dastlabki Qaqnuz brendlari ko'rsatilgan misollar, qo'shma marketing va chegirmali enterprise narxlarini oladi.",
+    "ctaButton": "Demo buyurtma",
+    "backToStudies": "Barcha misollar",
+    "brandGrowth": {
+      "tags": ["Fashion", "Toshkent", "L3 Ishonch", "Ko'p kanal"],
+      "title": "Fashion brend DM javob darajasini qanday uch baravarga oshirdi",
+      "description": "Toshkentdagi fashion chakana sotuvchi Qaqnuzni uchta hisob bo'yicha Instagram DMlarini boshqarish uchun joriy etdi. L1 ishonch darajasidan boshlab, 8 hafta ichida L3 ga ko'tarildi.",
+      "metrics": [
+        { "value": "3×", "label": "Javob darajasi" },
+        { "value": "4 daqiqa", "label": "O'rtacha javob vaqti" },
+        { "value": "94%", "label": "AI tomonidan ko'rilgan DMlar" },
+        { "value": "1 200+", "label": "DM/oy" }
+      ],
+      "challengeTitle": "Muammo",
+      "challengeText": "Qaqnuzdan oldin brendning DM javob darajasi 31% edi — ko'p xabarlar soatlar yoki kunlar davomida javovsiz qoldi.",
+      "deploymentTitle": "Qaqnuz joriy etilishi",
+      "deploymentText": "Brend L1 ishonch darajasida boshladi va dastlabki ikki hafta davomida har bir AI tuzilgan javobni ko'rib chiqdi. 50+ tasdiqdan keyin L2 ni faollashtirishdi. 8-haftaga kelib L3 da ishlashdi.",
+      "resultsTitle": "Natijalar",
+      "resultsText": "Javob darajasi birinchi oyda 31% dan 94% ga ko'tarildi. O'rtacha javob vaqti soatlardan 4 daqiqadan kamga tushdi.",
+      "ctaButton": "Brendingiz uchun shunga o'xshash natijalar"
+    },
+    "automation247": {
+      "tags": ["Kosmetika", "Toshkent", "L2 Ishonch", "Har doim faol"],
+      "title": "24/7 jamoa bo'lmagan holda 24/7 qamrov",
+      "description": "Toshkentdagi kosmetika brendi kecha va dam olish kuni javob bo'shliqlarini yo'q qildi. 30 kun ichida AI barcha so'rovlarning 78% ini mustaqil ravishda hal qildi.",
+      "metrics": [
+        { "value": "24/7", "label": "Qamrov" },
+        { "value": "78%", "label": "Avtomatik ko'rilgan" },
+        { "value": "2 daqiqa", "label": "O'rtacha javob vaqti" },
+        { "value": "800+", "label": "DM/oy" }
+      ],
+      "challengeTitle": "Muammo",
+      "challengeText": "Brend haftalik yuzlab DM olardi, lekin kechasi va dam olish kunlarida qamrov yo'q edi.",
+      "deploymentTitle": "Qaqnuz joriy etilishi",
+      "deploymentText": "Brend L2 ishonch darajasida joriy etildi va darhol FAQ javoblarini avtomatik nashr qildi.",
+      "resultsTitle": "Natijalar",
+      "resultsText": "Brend endi DMlarning 78% iga avtomatik ravishda, 24 soat davomida javob beradi.",
+      "ctaButton": "Brendingiz uchun qanday ishlashini ko'ring"
+    }
   }
 }
