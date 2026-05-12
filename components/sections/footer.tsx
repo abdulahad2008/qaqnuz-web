@@ -1,94 +1,92 @@
 "use client";
 
-import Link from "next/link";
 import { Send, ExternalLink, MessageCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/lib/navigation";
+import { LocaleSwitcher } from "@/components/ui/locale-switcher";
 
-const sitemap = [
+const SITEMAP = [
   {
-    heading: "Product",
+    sectionKey: "product" as const,
     links: [
-      { label: "How it works", href: "/product" },
-      { label: "The AI Pipeline", href: "/product#pipeline" },
-      { label: "Mission Control", href: "/product#dashboard" },
-      { label: "Security", href: "/security" },
+      { labelKey: "howItWorks",    href: "/product"              },
+      { labelKey: "pipeline",      href: "/product#pipeline"     },
+      { labelKey: "missionControl",href: "/product#dashboard"    },
+      { labelKey: "security",      href: "/security"             },
     ],
   },
   {
-    heading: "Pricing",
+    sectionKey: "pricing" as const,
     links: [
-      { label: "Pricing", href: "/pricing" },
-      { label: "Starter", href: "/pricing#starter" },
-      { label: "Growth", href: "/pricing#growth" },
-      { label: "Enterprise", href: "/pricing#enterprise" },
+      { labelKey: "pricingPage", href: "/pricing"            },
+      { labelKey: "starter",     href: "/pricing#starter"    },
+      { labelKey: "growth",      href: "/pricing#growth"     },
+      { labelKey: "enterprise",  href: "/pricing#enterprise" },
     ],
   },
   {
-    heading: "Resources",
+    sectionKey: "resources" as const,
     links: [
-      { label: "Case Studies", href: "/case-studies" },
-      { label: "Documentation", href: "/docs" },
-      { label: "Book a Demo", href: "/book-demo" },
-      { label: "Blog", href: "#" },
+      { labelKey: "caseStudies", href: "/case-studies" },
+      { labelKey: "docs",        href: "/docs"          },
+      { labelKey: "bookDemo",    href: "/book-demo"     },
+      { labelKey: "blog",        href: "#"              },
     ],
   },
   {
-    heading: "Legal",
+    sectionKey: "legal" as const,
     links: [
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Service", href: "#" },
-      { label: "AI Disclosure", href: "/security#disclosure" },
-      { label: "Data Retention", href: "/security#retention" },
+      { labelKey: "privacy",       href: "#"                    },
+      { labelKey: "terms",         href: "#"                    },
+      { labelKey: "aiDisclosure",  href: "/security#disclosure" },
+      { labelKey: "dataRetention", href: "/security#retention"  },
     ],
   },
-];
-
-const languages = [
-  { code: "EN", href: "/en" },
-  { code: "UZ", href: "/uz" },
-  { code: "RU", href: "/ru" },
 ];
 
 export function Footer() {
+  const t = useTranslations("footer");
+
   return (
-    <footer className="border-t border-[rgba(255,255,255,0.07)] bg-[var(--color-bg-surface)]">
+    <footer className="border-t border-border bg-secondary">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16">
         {/* Top row */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-16">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-4 group w-fit">
+            <Link href="/" className="flex items-center gap-1.5 mb-4 group w-fit">
               {/* Ember pulse dot — CSS only, pulses every 4s */}
               <div className="relative w-6 h-6 flex items-center justify-center">
                 <span
-                  className="absolute inset-0 rounded-full opacity-30"
+                  className="absolute inset-0 rounded-full"
                   style={{
-                    background: "rgba(240,125,0,0.6)",
+                    background: "rgba(240,125,0,0.35)",
                     animation: "ember-pulse 4s ease-in-out infinite",
                   }}
                 />
                 <span
-                  className="w-3 h-3 rounded-full"
+                  className="w-2.5 h-2.5 rounded-full z-10"
                   style={{ background: "var(--color-ember-400)" }}
                 />
               </div>
-              <span className="text-lg font-bold text-[var(--color-neutral-50)]">
+              <span className="font-display italic text-lg text-foreground group-hover:text-accent transition-colors">
                 Qaqnuz
               </span>
             </Link>
-            <p className="text-sm text-[var(--color-neutral-500)] leading-relaxed mb-5 max-w-[16rem]">
-              AI-native Instagram automation for Uzbekistan&apos;s top brands.
+            <p className="text-sm text-muted-foreground leading-relaxed mb-5 max-w-[16rem]">
+              {t("tagline")}
             </p>
             <div className="flex gap-3">
               {[
                 { icon: MessageCircle, label: "X / Twitter", href: "#" },
-                { icon: Send, label: "Telegram", href: "#" },
-                { icon: ExternalLink, label: "Instagram", href: "#" },
+                { icon: Send,          label: "Telegram",    href: "#" },
+                { icon: ExternalLink,  label: "Instagram",   href: "#" },
               ].map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-8 h-8 rounded-lg border border-[rgba(255,255,255,0.08)] flex items-center justify-center text-[var(--color-neutral-500)] hover:text-[var(--color-neutral-200)] hover:border-[rgba(255,255,255,0.16)] transition-all"
+                  className="w-8 h-8 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-accent/40 transition-all"
                 >
                   <Icon className="h-3.5 w-3.5" />
                 </a>
@@ -97,19 +95,19 @@ export function Footer() {
           </div>
 
           {/* Sitemap */}
-          {sitemap.map((col) => (
-            <div key={col.heading}>
-              <h4 className="text-xs font-semibold text-[var(--color-neutral-300)] uppercase tracking-widest mb-4">
-                {col.heading}
+          {SITEMAP.map((col) => (
+            <div key={col.sectionKey}>
+              <h4 className="text-xs font-semibold text-foreground uppercase tracking-widest mb-4">
+                {t(`sections.${col.sectionKey}` as Parameters<typeof t>[0])}
               </h4>
               <ul className="space-y-3">
                 {col.links.map((link) => (
-                  <li key={link.label}>
+                  <li key={link.labelKey}>
                     <Link
                       href={link.href}
-                      className="text-sm text-[var(--color-neutral-500)] hover:text-[var(--color-neutral-200)] transition-colors"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      {link.label}
+                      {t(`links.${link.labelKey}` as Parameters<typeof t>[0])}
                     </Link>
                   </li>
                 ))}
@@ -119,22 +117,13 @@ export function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-8 border-t border-[rgba(255,255,255,0.06)]">
-          <p className="text-xs text-[var(--color-neutral-600)]">
-            © {new Date().getFullYear()} Qaqnuz. All rights reserved.
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-8 border-t border-border">
+          <p className="text-xs text-muted-foreground">
+            {t("copyright", { year: new Date().getFullYear() })}
           </p>
-
           <div className="flex items-center gap-2">
-            <span className="text-xs text-[var(--color-neutral-700)]">Language:</span>
-            {languages.map((lang) => (
-              <Link
-                key={lang.code}
-                href={lang.href}
-                className="text-xs px-2.5 py-1 rounded-md border border-[rgba(255,255,255,0.08)] text-[var(--color-neutral-500)] hover:text-[var(--color-neutral-200)] hover:border-[rgba(255,255,255,0.16)] transition-all"
-              >
-                {lang.code}
-              </Link>
-            ))}
+            <span className="text-xs text-muted-foreground">{t("language")}</span>
+            <LocaleSwitcher />
           </div>
         </div>
       </div>

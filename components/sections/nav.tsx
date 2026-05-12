@@ -1,21 +1,23 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Flame } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/lib/navigation";
+import { LocaleSwitcher } from "@/components/ui/locale-switcher";
 import { cn } from "@/lib/utils";
 
-const links = [
-  { label: "Product", href: "/product" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Security", href: "/security" },
-  { label: "Docs", href: "/docs" },
-];
+const NAV_LINKS = [
+  { key: "product",     href: "/product" },
+  { key: "pricing",     href: "/pricing" },
+  { key: "caseStudies", href: "/case-studies" },
+  { key: "security",    href: "/security" },
+  { key: "docs",        href: "/docs" },
+] as const;
 
 export function Nav() {
+  const t = useTranslations("nav");
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -30,53 +32,59 @@ export function Nav() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-[rgba(14,14,15,0.92)] backdrop-blur-xl border-b border-[rgba(255,255,255,0.06)]"
+          ? "bg-background/90 backdrop-blur-xl border-b border-border"
           : "bg-transparent"
       )}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="relative">
-              <Flame className="h-6 w-6 text-[var(--color-ember-400)] group-hover:text-[var(--color-ember-300)] transition-colors" />
-              <div className="absolute inset-0 blur-sm bg-[var(--color-ember-500)] opacity-40 group-hover:opacity-60 transition-opacity" />
-            </div>
-            <span className="text-lg font-bold tracking-tight text-[var(--color-neutral-50)]">
+          {/* Wordmark */}
+          <Link href="/" className="flex items-center gap-1.5 group">
+            <span
+              className="text-accent font-display text-base leading-none select-none"
+              aria-hidden
+            >
+              ✦
+            </span>
+            <span className="font-display italic text-lg text-foreground tracking-tight group-hover:text-accent transition-colors duration-200">
               Qaqnuz
             </span>
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            {links.map((link) => (
+          {/* Desktop center nav */}
+          <nav className="hidden md:flex items-center gap-0.5">
+            {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3.5 py-2 text-sm text-[var(--color-neutral-400)] hover:text-[var(--color-neutral-100)] rounded-lg hover:bg-[rgba(255,255,255,0.06)] transition-all duration-200"
+                className="px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-secondary transition-all duration-200"
               >
-                {link.label}
+                {t(link.key)}
               </Link>
             ))}
           </nav>
 
-          {/* Desktop CTA */}
+          {/* Desktop right */}
           <div className="hidden md:flex items-center gap-3">
+            <LocaleSwitcher />
             <Link
               href="/book-demo"
-              className="text-sm text-[var(--color-neutral-400)] hover:text-[var(--color-neutral-100)] transition-colors"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
             >
-              Sign in
+              {t("signIn")}
             </Link>
-            <Button size="md" asChild>
-              <Link href="/book-demo">Book a demo</Link>
-            </Button>
+            <Link
+              href="/book-demo"
+              className="rounded-full bg-accent text-accent-foreground px-5 py-2 text-sm font-medium hover:bg-accent/90 transition-colors duration-200"
+            >
+              {t("bookDemo")}
+            </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 rounded-lg text-[var(--color-neutral-400)] hover:text-[var(--color-neutral-100)] hover:bg-[rgba(255,255,255,0.08)] transition-all"
+            className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-all"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -84,7 +92,7 @@ export function Nav() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -92,25 +100,30 @@ export function Nav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-[rgba(14,14,15,0.98)] backdrop-blur-xl border-b border-[rgba(255,255,255,0.06)]"
+            className="md:hidden bg-background/98 backdrop-blur-xl border-b border-border"
           >
             <div className="px-6 py-4 space-y-1">
-              {links.map((link) => (
+              {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-sm text-[var(--color-neutral-300)] hover:text-[var(--color-neutral-50)] rounded-lg hover:bg-[rgba(255,255,255,0.06)] transition-all"
+                  className="block px-4 py-3 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-secondary transition-all"
                 >
-                  {link.label}
+                  {t(link.key)}
                 </Link>
               ))}
-              <div className="pt-3 pb-1">
-                <Button size="md" className="w-full" asChild>
-                  <Link href="/book-demo" onClick={() => setMobileOpen(false)}>
-                    Book a demo
-                  </Link>
-                </Button>
+              <div className="pt-3 pb-1 space-y-3">
+                <div className="px-4">
+                  <LocaleSwitcher />
+                </div>
+                <Link
+                  href="/book-demo"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center w-full rounded-full bg-accent text-accent-foreground px-5 py-2.5 text-sm font-medium hover:bg-accent/90 transition-colors"
+                >
+                  {t("bookDemo")}
+                </Link>
               </div>
             </div>
           </motion.div>

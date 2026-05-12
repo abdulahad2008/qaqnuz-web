@@ -1,90 +1,48 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Zap } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/lib/navigation";
 import { Section, Container, SectionHeader } from "@/components/ui/section";
-import { Button } from "@/components/ui/button";
 import { FadeIn, FadeInStagger, FadeInChild } from "@/components/motion/fade-in";
-import { Badge } from "@/components/ui/badge";
 
-const tiers = [
-  {
-    name: "Starter",
-    price: "Contact us",
-    period: "",
-    description: "For single brands getting started with AI automation.",
-    features: [
-      "1 Instagram account",
-      "Up to 1,000 DMs / month",
-      "Full AI pipeline (all 8 stages)",
-      "9 safety guardrails",
-      "L1–L2 trust ramp",
-      "Email support",
-    ],
-    cta: "Book a demo",
-    ctaVariant: "secondary" as const,
-    highlighted: false,
-  },
-  {
-    name: "Growth",
-    price: "Contact us",
-    period: "",
-    description: "For brands scaling their Instagram commerce operations.",
-    features: [
-      "Up to 5 Instagram accounts",
-      "Up to 10,000 DMs / month",
-      "Full AI pipeline + proactive DM campaigns",
-      "Cost governance & per-brand budgets",
-      "L1–L4 trust ramp",
-      "Multi-language support (UZ/RU/EN)",
-      "Priority support",
-    ],
-    cta: "Book a demo",
-    ctaVariant: "primary" as const,
-    highlighted: true,
-    badge: "Most popular",
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    description: "For agencies and multi-brand operators at scale.",
-    features: [
-      "Unlimited brands",
-      "Unlimited message volume",
-      "Full Mission Control dashboard",
-      "Custom LLM configuration",
-      "SLA + dedicated support",
-      "Custom integrations & audit trail export",
-      "On-premises deployment available",
-    ],
-    cta: "Talk to sales",
-    ctaVariant: "outline" as const,
-    highlighted: false,
-  },
-];
+const TIER_CONFIG = [
+  { priceKey: "contactUs", ctaVariant: "outline" as const, highlighted: false  },
+  { priceKey: "contactUs", ctaVariant: "primary" as const, highlighted: true   },
+  { priceKey: "custom",    ctaVariant: "outline" as const, highlighted: false  },
+] as const;
 
 export function PricingTeaser() {
+  const t = useTranslations("pricing");
+  const rawTiers = t.raw("tiers") as Array<{
+    name: string;
+    description: string;
+    cta: string;
+    features: string[];
+  }>;
+
+  const tiers = TIER_CONFIG.map((cfg, i) => ({ ...cfg, ...rawTiers[i] }));
+
   return (
     <Section id="pricing">
       <Container>
         <FadeIn>
           <SectionHeader
-            overline="Pricing"
+            overline={t("overline")}
             title={
               <>
-                Simple tiers.{" "}
-                <span className="gradient-ember">No surprises.</span>
+                {t("title")}{" "}
+                <em className="not-italic text-accent">{t("titleEmphasis")}</em>
               </>
             }
-            description="All plans include the full 8-stage AI pipeline and 9 safety guardrails. You pay for volume, not features."
+            description={t("description")}
             center
           />
         </FadeIn>
 
         <FadeInStagger className="grid md:grid-cols-3 gap-6">
-          {tiers.map((tier) => (
+          {tiers.map((tier, i) => (
             <FadeInChild key={tier.name}>
               <motion.div
                 whileHover={{ y: -4 }}
@@ -93,36 +51,29 @@ export function PricingTeaser() {
                 style={
                   tier.highlighted
                     ? {
-                        borderColor: "rgba(240,125,0,0.35)",
-                        boxShadow: "0 0 40px -12px rgba(240,125,0,0.25)",
+                        borderColor: "hsl(var(--accent))",
+                        boxShadow: "0 0 0 1px hsl(var(--accent)), 0 20px 60px -12px rgba(99,102,241,0.15)",
                       }
                     : {}
                 }
               >
-                {tier.badge && (
+                {tier.highlighted && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <Badge variant="ember" className="gap-1">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-accent text-accent-foreground px-3 py-1 text-[10px] font-semibold">
                       <Zap className="h-2.5 w-2.5" />
-                      {tier.badge}
-                    </Badge>
+                      {t("mostPopular")}
+                    </span>
                   </div>
                 )}
 
                 <div className="mb-6">
-                  <h3 className="text-lg font-bold text-[var(--color-neutral-50)] mb-1">
-                    {tier.name}
-                  </h3>
+                  <h3 className="text-lg font-semibold text-foreground mb-1">{tier.name}</h3>
                   <div className="flex items-baseline gap-1 mb-2">
-                    <span className="text-3xl font-bold text-[var(--color-neutral-100)]">
-                      {tier.price}
+                    <span className="text-2xl font-semibold text-foreground">
+                      {t(tier.priceKey)}
                     </span>
-                    {tier.period && (
-                      <span className="text-sm text-[var(--color-neutral-500)]">
-                        {tier.period}
-                      </span>
-                    )}
                   </div>
-                  <p className="text-sm text-[var(--color-neutral-500)] leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {tier.description}
                   </p>
                 </div>
@@ -130,20 +81,23 @@ export function PricingTeaser() {
                 <ul className="space-y-3 flex-1 mb-7">
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3 text-sm">
-                      <Check
-                        className="h-4 w-4 mt-0.5 shrink-0 text-[var(--color-ember-400)]"
-                      />
-                      <span className="text-[var(--color-neutral-300)]">{feature}</span>
+                      <Check className="h-4 w-4 mt-0.5 shrink-0 text-accent" />
+                      <span className="text-muted-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
-                <Button variant={tier.ctaVariant} size="lg" className="w-full" asChild>
-                  <Link href="/book-demo">
-                    {tier.cta}
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
+                <Link
+                  href="/book-demo"
+                  className={
+                    tier.highlighted
+                      ? "flex items-center justify-center gap-2 w-full rounded-full bg-accent text-accent-foreground px-5 py-2.5 text-sm font-medium hover:bg-accent/90 transition-colors"
+                      : "flex items-center justify-center gap-2 w-full rounded-full border border-border text-foreground px-5 py-2.5 text-sm font-medium hover:bg-secondary transition-colors"
+                  }
+                >
+                  {tier.cta}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </motion.div>
             </FadeInChild>
           ))}
@@ -153,9 +107,9 @@ export function PricingTeaser() {
           <div className="text-center mt-10">
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-2 text-sm text-[var(--color-ember-400)] hover:text-[var(--color-ember-300)] transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent/80 transition-colors"
             >
-              View full pricing & comparison table
+              {t("viewFull")}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

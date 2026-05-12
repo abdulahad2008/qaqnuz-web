@@ -2,145 +2,64 @@
 
 import { useRef, useState } from "react";
 import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-  useReducedMotion,
+  motion, AnimatePresence, useScroll, useTransform, useReducedMotion,
 } from "framer-motion";
 import {
-  MessageSquare,
-  Building2,
-  Activity,
-  ListChecks,
-  BarChart3,
-  TrendingUp,
+  MessageSquare, Building2, Activity, ListChecks, BarChart3, TrendingUp,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Section, Container, SectionHeader } from "@/components/ui/section";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { FadeIn } from "@/components/motion/fade-in";
 
-const panels = [
-  {
-    id: "inbox",
-    label: "Inbox",
-    icon: MessageSquare,
-    description:
-      "Unified 3-tab conversation view across DMs, Comments, and Story mentions. Each thread shows pipeline status, trust level, and response queue.",
-    mockColor: "#111118",
-    accent: "var(--color-ember-400)",
-    accentRgb: "255,157,26",
-    stats: [
-      { label: "DMs", value: "247" },
-      { label: "Comments", value: "1.2k" },
-      { label: "Stories", value: "89" },
-    ],
-  },
-  {
-    id: "brands",
-    label: "Brands",
-    icon: Building2,
-    description:
-      "11-tab brand profile editor: identity, voice, products, campaigns, payments, delivery, FAQs, guardrails, escalation, hours, and compliance settings.",
-    mockColor: "#0f1811",
-    accent: "var(--color-trust-400)",
-    accentRgb: "29,184,161",
-    stats: [
-      { label: "Brands", value: "12" },
-      { label: "Profiles", value: "11 tabs" },
-      { label: "Active", value: "9" },
-    ],
-  },
-  {
-    id: "monitor",
-    label: "Monitor",
-    icon: Activity,
-    description:
-      "Real-time pipeline health metrics. Service status for all 7 AMT microservices, queue depth, error rates, and LLM latency — all in one view.",
-    mockColor: "#111118",
-    accent: "#c084fc",
-    accentRgb: "192,132,252",
-    stats: [
-      { label: "Services", value: "7/7" },
-      { label: "Queue", value: "Live" },
-      { label: "Uptime", value: "99.9%" },
-    ],
-  },
-  {
-    id: "queue",
-    label: "Queue",
-    icon: ListChecks,
-    description:
-      "Proactive action approval queue. Review, edit, approve, or reject AI-generated responses. One-click publish or send back for recomposition.",
-    mockColor: "#181010",
-    accent: "var(--color-ember-500)",
-    accentRgb: "240,125,0",
-    stats: [
-      { label: "Pending", value: "14" },
-      { label: "Approved/hr", value: "38" },
-      { label: "Avg review", value: "12s" },
-    ],
-  },
-  {
-    id: "analytics",
-    label: "Analytics",
-    icon: BarChart3,
-    description:
-      "Interactive charts: response volume, sentiment trends, pipeline funnel, cost per conversation, and per-brand LLM spend breakdown.",
-    mockColor: "#0f1818",
-    accent: "var(--color-trust-500)",
-    accentRgb: "13,158,137",
-    stats: [
-      { label: "Cost/conv", value: "$0.04" },
-      { label: "Sentiment", value: "+87%" },
-      { label: "Response rate", value: "98%" },
-    ],
-  },
-  {
-    id: "metrics",
-    label: "Metrics",
-    icon: TrendingUp,
-    description:
-      "Conversation volumes and status tracking. Daily/weekly/monthly breakdowns, trust level distribution, and operator performance scorecards.",
-    mockColor: "#131118",
-    accent: "var(--color-ember-300)",
-    accentRgb: "255,188,77",
-    stats: [
-      { label: "Total convs", value: "18.4k" },
-      { label: "Auto rate", value: "76%" },
-      { label: "CSAT", value: "4.8/5" },
-    ],
-  },
-];
+type PanelTranslation = {
+  label: string;
+  description: string;
+  stats: { label: string; value: string }[];
+};
 
-/* Stable chart heights — computed once at module level, never on re-render */
+const PANEL_VISUAL = [
+  { id: "inbox",    icon: MessageSquare, accentRgb: "99,102,241"  },
+  { id: "brands",   icon: Building2,     accentRgb: "29,184,161"  },
+  { id: "monitor",  icon: Activity,      accentRgb: "192,132,252" },
+  { id: "queue",    icon: ListChecks,    accentRgb: "240,125,0"   },
+  { id: "analytics",icon: BarChart3,     accentRgb: "13,158,137"  },
+  { id: "metrics",  icon: TrendingUp,    accentRgb: "255,188,77"  },
+] as const;
+
 const CHART_HEIGHTS: Record<string, number[]> = {};
-panels.forEach((p) => {
+PANEL_VISUAL.forEach((p) => {
   CHART_HEIGHTS[p.id] = Array.from({ length: 18 }, (_, i) =>
     20 + Math.sin(i * 0.8) * 30 + ((i * 37 + 13) % 20)
   );
 });
 
-function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
+function MockPanel({
+  panel,
+  allIcons,
+}: {
+  panel: (typeof PANEL_VISUAL)[number] & PanelTranslation;
+  allIcons: typeof PANEL_VISUAL;
+}) {
   const Icon = panel.icon;
   const chartHeights = CHART_HEIGHTS[panel.id];
   return (
     <div
-      className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[rgba(255,255,255,0.08)]"
-      style={{ background: panel.mockColor }}
+      className="relative w-full aspect-[16/9] rounded-xl overflow-hidden border border-[rgba(0,0,0,0.08)]"
+      style={{ background: "#f8f9fc" }}
     >
       <div className="absolute inset-0 flex flex-col">
-        {/* Glass browser chrome */}
-        <div className="flex items-center gap-2 px-4 h-9 border-b border-[rgba(255,255,255,0.06)] backdrop-blur-sm bg-[rgba(255,255,255,0.03)]">
-          <div className="w-2 h-2 rounded-full bg-red-500/60" />
-          <div className="w-2 h-2 rounded-full bg-yellow-500/60" />
-          <div className="w-2 h-2 rounded-full bg-green-500/60" />
+        {/* Browser chrome */}
+        <div className="flex items-center gap-2 px-4 h-9 border-b border-border bg-white/80 backdrop-blur-sm">
+          <div className="w-2 h-2 rounded-full bg-rose-400/70" />
+          <div className="w-2 h-2 rounded-full bg-amber-400/70" />
+          <div className="w-2 h-2 rounded-full bg-emerald-400/70" />
           <div className="flex-1" />
           <div
             className="text-[10px] font-mono px-2 py-0.5 rounded border"
             style={{
               color: `rgba(${panel.accentRgb},0.9)`,
-              background: `rgba(${panel.accentRgb},0.08)`,
+              background: `rgba(${panel.accentRgb},0.06)`,
               borderColor: `rgba(${panel.accentRgb},0.2)`,
             }}
           >
@@ -150,26 +69,22 @@ function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
 
         <div className="flex flex-1 overflow-hidden">
           {/* Sidebar */}
-          <div className="w-14 border-r border-[rgba(255,255,255,0.05)] flex flex-col items-center py-3 gap-3">
-            {panels.map((p) => {
+          <div className="w-14 border-r border-border flex flex-col items-center py-3 gap-3 bg-secondary/60">
+            {allIcons.map((p) => {
               const PIcon = p.icon;
               const isActive = p.id === panel.id;
               return (
                 <div
                   key={p.id}
                   className="w-8 h-8 rounded-lg flex items-center justify-center"
-                  style={{
-                    background: isActive
-                      ? `rgba(${panel.accentRgb},0.15)`
-                      : "transparent",
-                  }}
+                  style={{ background: isActive ? `rgba(${panel.accentRgb},0.12)` : "transparent" }}
                 >
                   <PIcon
                     className="h-3.5 w-3.5"
                     style={{
                       color: isActive
                         ? `rgba(${panel.accentRgb},1)`
-                        : "rgba(255,255,255,0.18)",
+                        : "hsl(var(--muted-foreground))",
                     }}
                   />
                 </div>
@@ -178,13 +93,16 @@ function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
           </div>
 
           {/* Main content */}
-          <div className="flex-1 p-4 flex flex-col gap-3">
+          <div className="flex-1 p-4 flex flex-col gap-3 bg-background/80">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Icon className="h-4 w-4" style={{ color: panel.accent }} />
+                <Icon
+                  className="h-4 w-4"
+                  style={{ color: `rgba(${panel.accentRgb},1)` }}
+                />
                 <span
                   className="text-xs font-semibold"
-                  style={{ color: panel.accent }}
+                  style={{ color: `rgba(${panel.accentRgb},1)` }}
                 >
                   {panel.label}
                 </span>
@@ -193,11 +111,11 @@ function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
                 {panel.stats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="px-2 py-1 rounded text-[9px] font-mono border border-[rgba(255,255,255,0.07)]"
-                    style={{ color: "rgba(255,255,255,0.45)" }}
+                    className="px-2 py-1 rounded text-[9px] font-mono border border-border"
+                    style={{ color: "hsl(var(--muted-foreground))" }}
                   >
                     {stat.label}:{" "}
-                    <span style={{ color: panel.accent }}>{stat.value}</span>
+                    <span style={{ color: `rgba(${panel.accentRgb},1)` }}>{stat.value}</span>
                   </div>
                 ))}
               </div>
@@ -207,23 +125,20 @@ function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
               {Array.from({ length: 7 }).map((_, i) => (
                 <div
                   key={i}
-                  className="h-6 rounded-md"
-                  style={{
-                    background: `rgba(255,255,255,${0.04 - i * 0.003})`,
-                    width: `${90 - i * 5}%`,
-                  }}
+                  className="h-6 rounded-md bg-secondary"
+                  style={{ width: `${90 - i * 5}%`, opacity: 1 - i * 0.08 }}
                 />
               ))}
             </div>
 
-            <div className="h-20 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] flex items-end px-3 pb-3 gap-1">
+            <div className="h-20 rounded-lg bg-secondary border border-border flex items-end px-3 pb-3 gap-1">
               {chartHeights.map((h, i) => (
                 <div
                   key={i}
                   className="flex-1 rounded-sm"
                   style={{
                     height: `${h}%`,
-                    background: `rgba(${panel.accentRgb},${(0.4 + i * 0.03).toFixed(2)})`,
+                    background: `rgba(${panel.accentRgb},${(0.3 + i * 0.025).toFixed(2)})`,
                   }}
                 />
               ))}
@@ -236,6 +151,10 @@ function MockPanel({ panel }: { panel: (typeof panels)[0] }) {
 }
 
 export function DashboardPreview() {
+  const t = useTranslations("dashboard");
+  const rawPanels = t.raw("panels") as PanelTranslation[];
+  const panels = PANEL_VISUAL.map((vis, i) => ({ ...vis, ...rawPanels[i] }));
+
   const [activePanel, setActivePanel] = useState("inbox");
   const sectionRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
@@ -254,14 +173,14 @@ export function DashboardPreview() {
       <Container size="lg">
         <FadeIn>
           <SectionHeader
-            overline="Mission Control"
+            overline={t("overline")}
             title={
               <>
-                Six panels.{" "}
-                <span className="gradient-ember">Total visibility.</span>
+                {t("title")}{" "}
+                <em className="not-italic text-accent">{t("titleEmphasis")}</em>
               </>
             }
-            description="Your operator dashboard puts every brand, every conversation, and every AI decision on one screen. Real-time. Fully audited."
+            description={t("description")}
             center
           />
         </FadeIn>
@@ -283,14 +202,8 @@ export function DashboardPreview() {
                 </TabsList>
               </div>
 
-              {/* Perspective scroll container */}
               <motion.div
-                style={{
-                  perspective: "1200px",
-                  rotateX,
-                  opacity,
-                  translateY,
-                }}
+                style={{ perspective: "1200px", rotateX, opacity, translateY }}
                 className="will-change-transform"
               >
                 {panels.map((panel) => (
@@ -303,17 +216,16 @@ export function DashboardPreview() {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.25 }}
                       >
-                        {/* Glass browser chrome wrapper */}
-                        <div className="glass rounded-2xl p-1 overflow-hidden">
-                          <MockPanel panel={panel} />
+                        <div className="surface-card p-1 overflow-hidden">
+                          <MockPanel panel={panel} allIcons={PANEL_VISUAL} />
                         </div>
 
                         <div className="mt-5 flex flex-col sm:flex-row sm:items-center gap-4">
                           <div className="flex-1">
-                            <h3 className="text-base font-semibold text-[var(--color-neutral-100)] mb-1">
-                              {panel.label} Panel
+                            <h3 className="text-base font-semibold text-foreground mb-1">
+                              {panel.label}
                             </h3>
-                            <p className="text-sm text-[var(--color-neutral-400)] leading-relaxed">
+                            <p className="text-sm text-muted-foreground leading-relaxed">
                               {panel.description}
                             </p>
                           </div>
@@ -322,11 +234,11 @@ export function DashboardPreview() {
                               <div key={stat.label} className="text-center">
                                 <div
                                   className="text-lg font-bold"
-                                  style={{ color: panel.accent }}
+                                  style={{ color: `rgba(${panel.accentRgb},1)` }}
                                 >
                                   {stat.value}
                                 </div>
-                                <div className="text-[10px] text-[var(--color-neutral-500)] mt-0.5">
+                                <div className="text-[10px] text-muted-foreground mt-0.5">
                                   {stat.label}
                                 </div>
                               </div>

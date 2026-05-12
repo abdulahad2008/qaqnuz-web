@@ -14,8 +14,8 @@ export function Section({ children, className, id, variant = "default" }: Sectio
       id={id}
       className={cn(
         "py-24 lg:py-32",
-        variant === "surface" && "bg-[var(--color-bg-surface)]",
-        variant === "elevated" && "bg-[var(--color-bg-elevated)]",
+        variant === "surface" && "bg-secondary",
+        variant === "elevated" && "bg-muted",
         className
       )}
     >
@@ -65,11 +65,11 @@ export function SectionHeader({
   return (
     <div className={cn("mb-16", center && "text-center", className)}>
       {overline && <p className="text-overline mb-4">{overline}</p>}
-      <h2 className="text-4xl lg:text-5xl font-bold text-[var(--color-neutral-50)] leading-tight mb-4">
+      <h2 className="font-display text-4xl lg:text-5xl text-foreground leading-tight tracking-tight mb-4">
         {title}
       </h2>
       {description && (
-        <p className="text-lg text-[var(--color-neutral-400)] max-w-2xl leading-relaxed">
+        <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
           {description}
         </p>
       )}

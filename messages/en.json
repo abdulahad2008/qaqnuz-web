@@ -1,5 +1,6 @@
 {
   "nav": {
+    "home": "Home",
     "product": "Product",
     "pricing": "Pricing",
     "caseStudies": "Case Studies",
@@ -9,12 +10,43 @@
     "bookDemo": "Book a demo"
   },
   "hero": {
-    "badge": "AI-native Instagram automation · Built for Uzbekistan",
-    "headline1": "Instagram automation",
-    "headline2": "that actually thinks.",
+    "badge": "Powered by Claude Opus 4.7 ✨",
+    "headlinePart1": "Instagram automation that actually",
+    "headlineEmphasis": "thinks.",
+    "headlinePart2": "",
     "sub": "Qaqnuz runs your DMs, comments, and story replies through a 7-stage AI pipeline with human oversight at every step. Built for Uzbekistan's top brands.",
     "cta1": "Book a demo",
     "cta2": "See it in action",
+    "videoTitle": "Qaqnuz product demo",
+    "videoPlaceholder": "Demo video — coming soon",
+    "dashboardGreeting": "Welcome, {name}",
+    "dashboardActions": {
+      "sendReply": "Send Reply",
+      "takeOver": "Take Over",
+      "pauseAI": "Pause AI",
+      "bulkApprove": "Bulk Approve",
+      "trainBrand": "Train Brand",
+      "newCampaign": "New Campaign",
+      "customize": "Customize"
+    },
+    "pipelineHealth": "Pipeline Health",
+    "uptime": "uptime",
+    "last24h": "Last 24h",
+    "replies": "+4,287 replies",
+    "blocked": "-12 blocked",
+    "activeBrands": "Active Brands",
+    "recentConversations": "Recent Conversations",
+    "tableHeaders": {
+      "time": "Time",
+      "customer": "Customer",
+      "brand": "Brand",
+      "status": "Status"
+    },
+    "statuses": {
+      "autoReplied": "Auto-replied",
+      "pendingReview": "Pending review",
+      "escalated": "Escalated"
+    },
     "stats": {
       "pipeline": "7-stage",
       "pipelineLabel": "AI pipeline",
@@ -24,59 +56,422 @@
       "coverageLabel": "autonomous coverage"
     }
   },
+  "logoStrip": {
+    "tagline": "Trusted by Uzbekistan's fastest-growing brands"
+  },
   "pipeline": {
     "overline": "The AI Pipeline",
-    "title1": "Eight stages.",
-    "title2": "Zero compromises.",
-    "description": "Every message your brand receives passes through a fully audited AI pipeline before a single word is published."
+    "title": "Eight stages.",
+    "titleEmphasis": "Zero compromises.",
+    "description": "Every message your brand receives passes through a fully audited AI pipeline before a single word is published. Scroll to walk through each stage.",
+    "detailHoverHint": "Scroll to walk through each stage.",
+    "stages": [
+      {
+        "label": "Qualify",
+        "detail": "Score ≥ 0.6 required to advance",
+        "description": "Determines whether AI should respond. Filters spam, bot activity, and out-of-scope interactions before spending any LLM tokens."
+      },
+      {
+        "label": "Classify",
+        "detail": "Intent · Sentiment · Language · Priority",
+        "description": "amt-intel detects purchase intent, sentiment, language, and interaction type with fine-grained confidence scoring."
+      },
+      {
+        "label": "Retrieve",
+        "detail": "RAG · pgvector · Semantic search",
+        "description": "amt-rag performs semantic vector search over your brand knowledge base using pgvector embeddings."
+      },
+      {
+        "label": "Compose",
+        "detail": "Brand voice · Multilingual · Context-grounded",
+        "description": "LLM provider generates a brand-voice reply grounded in retrieved context and brand persona configuration."
+      },
+      {
+        "label": "Guard",
+        "detail": "9 safety checks · Zero-tolerance on PII",
+        "description": "amt-guard runs 9 parallel safety checks: PII, price validation, toxicity, duplicates, leak prevention, and more."
+      },
+      {
+        "label": "Evaluate",
+        "detail": "Quality score 0–100 · Re-queue on fail",
+        "description": "amt-eval scores response quality 0–100 across coherence, tone match, helpfulness, and accuracy."
+      },
+      {
+        "label": "Trust Gate",
+        "detail": "L1 Full Review → L4 Full Auto",
+        "description": "amt-trust applies your brand's trust level (L1–L4) to decide: auto-publish, queue for review, or reject."
+      },
+      {
+        "label": "Publish",
+        "detail": "Instagram API · Full audit trail",
+        "description": "amt-comms publishes to Instagram via the official API with full audit trail and pipeline trace."
+      }
+    ]
   },
   "trustRamp": {
     "overline": "Trust Ramp",
-    "title1": "Start careful.",
-    "title2": "Scale confident.",
-    "description": "Qaqnuz grows into autonomy alongside your brand. The trust ramp means you're never forced to give up control — you earn it, level by level."
+    "title": "Start careful.",
+    "titleEmphasis": "Scale confident.",
+    "description": "Qaqnuz grows into autonomy alongside your brand. The trust ramp means you're never forced to give up control — you earn it, level by level.",
+    "autoPublishRate": "Auto-publish rate",
+    "autoPublishLabel": "auto-publish",
+    "levels": [
+      {
+        "level": "L1",
+        "name": "Full Review",
+        "autoRate": 0,
+        "description": "Every AI-composed reply sits in the approval queue. Your operator reviews and edits before anything reaches the customer. Zero risk — ideal for brand onboarding.",
+        "features": [
+          "100% human approval required",
+          "Full edit capability before publish",
+          "No LLM responses published without sign-off",
+          "Ideal for first 7–14 days"
+        ]
+      },
+      {
+        "level": "L2",
+        "name": "Guided Auto",
+        "autoRate": 40,
+        "description": "High-confidence, low-risk replies (FAQs, hours, location queries) publish automatically. Anything with purchase intent, pricing, or complaint signals queues for review.",
+        "features": [
+          "≈40% auto-publish rate",
+          "Purchase-intent replies always reviewed",
+          "Pricing & complaint messages → queue",
+          "Unlocks after 50+ approved replies"
+        ]
+      },
+      {
+        "level": "L3",
+        "name": "Smart Auto",
+        "autoRate": 80,
+        "description": "The AI handles most interactions autonomously, including sales conversations. Only escalations and edge cases route to your team. Full guardrails remain active.",
+        "features": [
+          "≈80% auto-publish rate",
+          "Sales conversations automated",
+          "Escalations & edge cases → human",
+          "Unlocks after 200+ approved replies"
+        ]
+      },
+      {
+        "level": "L4",
+        "name": "Full Auto",
+        "autoRate": 98,
+        "description": "Near-complete autonomy for established brands. The AI runs your DMs 24/7. Human oversight is available on-demand, not in the critical path. 9-point guardrails never sleep.",
+        "features": [
+          "≈98% auto-publish rate",
+          "24/7 autonomous operation",
+          "Human always one click away",
+          "Unlocks after sustained quality scores"
+        ]
+      }
+    ]
   },
   "guardrails": {
     "overline": "Safety First",
-    "title1": "9 guardrails.",
-    "title2": "Every response.",
-    "description": "Before any AI reply reaches your customer, it must pass nine parallel safety checks."
+    "title": "9 guardrails.",
+    "titleEmphasis": "Every response.",
+    "description": "Before any AI reply reaches your customer, it must pass nine parallel safety checks. All nine. Every time. There are no exceptions — the guardrails run even in full-auto mode.",
+    "bottomNote": "All 9 checks run in parallel via amt-guard — adding zero latency to the pipeline.",
+    "items": [
+      {
+        "title": "PII Detection",
+        "description": "Automatically detects and redacts personal information — phone numbers, addresses, national IDs — before any response is composed or published."
+      },
+      {
+        "title": "Price Validation",
+        "description": "Cross-references quoted prices against your live product catalog. Prevents AI from promising incorrect discounts or out-of-date pricing."
+      },
+      {
+        "title": "Toxicity Filter",
+        "description": "Multi-lingual toxicity detection (Uzbek + Russian + English). Ensures AI responses remain professional even when customers don't."
+      },
+      {
+        "title": "Duplicate Detection",
+        "description": "Identifies repeated messages and near-duplicate responses to prevent spam, reply loops, and the uncanny feeling of talking to a broken bot."
+      },
+      {
+        "title": "Leak Prevention",
+        "description": "Stops the AI from disclosing internal pricing strategies, supplier details, unreleased products, or any information flagged as confidential."
+      },
+      {
+        "title": "Competitor Mention",
+        "description": "Detects references to competitor brands and either deflects gracefully or escalates to a human — no accidental competitor endorsements."
+      },
+      {
+        "title": "Off-Topic Guard",
+        "description": "Keeps the AI on-brand and on-topic. Rejects responses that drift outside your configured business scope, preventing hallucinations from leaking through."
+      },
+      {
+        "title": "Length Validation",
+        "description": "Enforces configurable character limits. No response too terse to be useful, and no wall-of-text that kills the conversation."
+      },
+      {
+        "title": "Compliance Check",
+        "description": "Flags responses that could expose the brand to regulatory issues — false advertising, unverifiable guarantees, or legally sensitive language."
+      }
+    ]
   },
   "dashboard": {
     "overline": "Mission Control",
-    "title1": "Six panels.",
-    "title2": "Total visibility.",
-    "description": "Your operator dashboard puts every brand, every conversation, and every AI decision on one screen."
+    "title": "Six panels.",
+    "titleEmphasis": "Total visibility.",
+    "description": "Your operator dashboard puts every brand, every conversation, and every AI decision on one screen. Real-time. Fully audited.",
+    "panels": [
+      {
+        "label": "Inbox",
+        "description": "Unified 3-tab conversation view across DMs, Comments, and Story mentions. Each thread shows pipeline status, trust level, and response queue.",
+        "stats": [
+          { "label": "DMs", "value": "247" },
+          { "label": "Comments", "value": "1.2k" },
+          { "label": "Stories", "value": "89" }
+        ]
+      },
+      {
+        "label": "Brands",
+        "description": "11-tab brand profile editor: identity, voice, products, campaigns, payments, delivery, FAQs, guardrails, escalation, hours, and compliance settings.",
+        "stats": [
+          { "label": "Brands", "value": "12" },
+          { "label": "Profiles", "value": "11 tabs" },
+          { "label": "Active", "value": "9" }
+        ]
+      },
+      {
+        "label": "Monitor",
+        "description": "Real-time pipeline health metrics. Service status for all 7 AMT microservices, queue depth, error rates, and LLM latency — all in one view.",
+        "stats": [
+          { "label": "Services", "value": "7/7" },
+          { "label": "Queue", "value": "Live" },
+          { "label": "Uptime", "value": "99.9%" }
+        ]
+      },
+      {
+        "label": "Queue",
+        "description": "Proactive action approval queue. Review, edit, approve, or reject AI-generated responses. One-click publish or send back for recomposition.",
+        "stats": [
+          { "label": "Pending", "value": "14" },
+          { "label": "Approved/hr", "value": "38" },
+          { "label": "Avg review", "value": "12s" }
+        ]
+      },
+      {
+        "label": "Analytics",
+        "description": "Interactive charts: response volume, sentiment trends, pipeline funnel, cost per conversation, and per-brand LLM spend breakdown.",
+        "stats": [
+          { "label": "Cost/conv", "value": "$0.04" },
+          { "label": "Sentiment", "value": "+87%" },
+          { "label": "Response rate", "value": "98%" }
+        ]
+      },
+      {
+        "label": "Metrics",
+        "description": "Conversation volumes and status tracking. Daily/weekly/monthly breakdowns, trust level distribution, and operator performance scorecards.",
+        "stats": [
+          { "label": "Total convs", "value": "18.4k" },
+          { "label": "Auto rate", "value": "76%" },
+          { "label": "CSAT", "value": "4.8/5" }
+        ]
+      }
+    ]
+  },
+  "multiBrand": {
+    "overline": "Multi-Brand",
+    "title": "One operator.",
+    "titleEmphasis": "Unlimited brands.",
+    "description": "Qaqnuz is built for agencies, holding companies, and operators managing multiple Instagram presences. Each brand gets its own voice, guardrails, trust level, and analytics — all from a single Mission Control dashboard.",
+    "unifiedInbox": "Unified Inbox",
+    "allBrandsLabel": "All Brands · {count} messages",
+    "liveLabel": "Live",
+    "features": [
+      {
+        "title": "Isolated brand contexts",
+        "description": "Each brand has its own product catalog, FAQ database, persona, and compliance rules. They never bleed into each other."
+      },
+      {
+        "title": "Unified operator queue",
+        "description": "Review and approve responses across all brands from a single queue. Filter by brand, channel, trust level, or urgency."
+      }
+    ]
   },
   "results": {
     "overline": "Example Results",
-    "title1": "What brands achieve",
-    "title2": "with Qaqnuz.",
-    "disclaimer": "These are illustrative examples. Your results will depend on brand size, message volume, and configuration."
+    "title": "What brands achieve",
+    "titleEmphasis": "with Qaqnuz.",
+    "disclaimer": "These are illustrative examples. Your results will depend on brand size, message volume, and configuration.",
+    "exampleNote": "Example result — individual outcomes will vary.",
+    "items": [
+      {
+        "category": "Engagement",
+        "metric": "3×",
+        "numericTarget": 3,
+        "numericSuffix": "×",
+        "label": "Response rate",
+        "description": "After switching to Qaqnuz, a Tashkent fashion brand tripled their Instagram DM response rate — from 31% to 94% — within the first two weeks of deployment."
+      },
+      {
+        "category": "Operations",
+        "metric": "24/7",
+        "numericTarget": null,
+        "numericSuffix": "",
+        "label": "Always-on coverage",
+        "description": "A cosmetics brand eliminated response delays during off-hours and weekends. AI now handles 78% of inquiries autonomously with no degradation in customer satisfaction."
+      },
+      {
+        "category": "Cost",
+        "metric": "60%",
+        "numericTarget": 60,
+        "numericSuffix": "%",
+        "label": "Lower cost per conversation",
+        "description": "An electronics retailer reduced per-conversation support cost by 60% by automating routine inquiries, price checks, and delivery queries through the AI pipeline."
+      }
+    ]
   },
   "uzbekistan": {
     "overline": "Built for Uzbekistan",
-    "title1": "Designed for where",
-    "title2": "you actually operate.",
-    "description": "Qaqnuz isn't a Western tool adapted for Uzbekistan — it's built from the ground up for Uzbekistan's Instagram commerce ecosystem."
+    "title": "Designed for where",
+    "titleEmphasis": "you actually operate.",
+    "description": "Qaqnuz isn't a Western tool adapted for Uzbekistan — it's built from the ground up for Uzbekistan's Instagram commerce ecosystem.",
+    "features": [
+      {
+        "title": "Native trilingual AI",
+        "description": "AI composes and understands messages in Uzbek (Latin script), Russian, and English — natively, not via translation. Context is preserved across language switches mid-conversation."
+      },
+      {
+        "title": "Local payment ecosystem",
+        "description": "Click, Payme, Uzum, and Humo payment links, instructions, and confirmation flows are built into the AI knowledge base. The bot handles payment questions with precision."
+      },
+      {
+        "title": "Uzbekistan compliance",
+        "description": "Designed for Uzbekistan's commerce environment: GDPR-adjacent data handling, opt-out via STOP keyword, and configurable data retention policies."
+      }
+    ]
   },
   "pricing": {
     "overline": "Pricing",
-    "title1": "Simple tiers.",
-    "title2": "No surprises.",
-    "description": "All plans include the full 8-stage AI pipeline and 9 safety guardrails."
+    "title": "Simple tiers.",
+    "titleEmphasis": "No surprises.",
+    "description": "All plans include the full 8-stage AI pipeline and 9 safety guardrails. You pay for volume, not features.",
+    "viewFull": "View full pricing & comparison table",
+    "contactUs": "Contact us",
+    "custom": "Custom",
+    "mostPopular": "Most popular",
+    "tiers": [
+      {
+        "name": "Starter",
+        "description": "For single brands getting started with AI automation.",
+        "cta": "Book a demo",
+        "features": [
+          "1 Instagram account",
+          "Up to 1,000 DMs / month",
+          "Full AI pipeline (all 8 stages)",
+          "9 safety guardrails",
+          "L1–L2 trust ramp",
+          "Email support"
+        ]
+      },
+      {
+        "name": "Growth",
+        "description": "For brands scaling their Instagram commerce operations.",
+        "cta": "Book a demo",
+        "features": [
+          "Up to 5 Instagram accounts",
+          "Up to 10,000 DMs / month",
+          "Full AI pipeline + proactive DM campaigns",
+          "Cost governance & per-brand budgets",
+          "L1–L4 trust ramp",
+          "Multi-language support (UZ/RU/EN)",
+          "Priority support"
+        ]
+      },
+      {
+        "name": "Enterprise",
+        "description": "For agencies and multi-brand operators at scale.",
+        "cta": "Talk to sales",
+        "features": [
+          "Unlimited brands",
+          "Unlimited message volume",
+          "Full Mission Control dashboard",
+          "Custom LLM configuration",
+          "SLA + dedicated support",
+          "Custom integrations & audit trail export",
+          "On-premises deployment available"
+        ]
+      }
+    ]
   },
   "faq": {
     "overline": "FAQ",
     "title": "Common questions.",
-    "description": "Everything you need to know before booking a demo."
+    "description": "Everything you need to know before booking a demo.",
+    "items": [
+      {
+        "q": "What exactly is Qaqnuz?",
+        "a": "Qaqnuz is an AI-native automation platform that manages Instagram DMs, comments, and story mentions for Uzbekistan-based brands. It runs every incoming message through an 8-stage AI pipeline — qualify, classify, retrieve, compose, guard, evaluate, trust gate, publish — with 9 safety checks on every response. Operators retain full control through the Mission Control dashboard, with human override always one click away."
+      },
+      {
+        "q": "How long does setup take?",
+        "a": "Most brands are live within 1–3 business days. The setup process involves connecting your Instagram Business account, configuring your brand profile (voice, products, FAQs, guardrails), and starting at Trust Level L1 where every response is reviewed before publishing. Your customer success manager guides you through onboarding."
+      },
+      {
+        "q": "Which languages does Qaqnuz support?",
+        "a": "Qaqnuz natively supports Uzbek (Latin script), Russian, and English. The AI classifies the language of each incoming message and responds in the same language. Mid-conversation language switches are handled automatically. There is no translation step — the AI works natively in all three languages."
+      },
+      {
+        "q": "How is Qaqnuz priced?",
+        "a": "Pricing is based on the number of Instagram accounts and monthly message volume. All plans include the full 8-stage pipeline and 9 safety guardrails — you pay for scale, not for features. Contact us for a customized quote. We do not charge per API call or per LLM token — cost governance is handled internally with configurable per-brand budgets."
+      },
+      {
+        "q": "How does Qaqnuz handle customer data and privacy?",
+        "a": "Customer messages are processed in real-time and not stored beyond your configured retention period. PII is detected and handled according to your compliance settings. Customers can opt out of AI responses at any time by sending the STOP keyword — their account is flagged immediately and all future messages route to a human operator. We do not use customer data to train models."
+      },
+      {
+        "q": "Is the AI transparent with customers — do they know they're talking to AI?",
+        "a": "AI disclosure is configurable per brand. You can set Qaqnuz to include a disclosure message in its first reply, add a note in the brand bio, or operate without disclosure (where local regulations permit). We recommend transparency and provide templated disclosure language in Uzbek, Russian, and English."
+      },
+      {
+        "q": "What integrations does Qaqnuz support?",
+        "a": "Qaqnuz integrates with Instagram Business API (DMs, comments, story mentions), Click, Payme, Uzum, and Humo payment systems, and Telegram for operator notifications. The platform is designed as a standalone system — it does not require third-party CRM integration to function, though export APIs are available in the Enterprise tier."
+      },
+      {
+        "q": "What kind of support does Qaqnuz offer?",
+        "a": "All plans include onboarding assistance and documentation. Growth plans include priority email/chat support with a dedicated customer success manager. Enterprise plans include an SLA, named account support, and a dedicated Slack or Telegram channel with your team."
+      }
+    ]
   },
   "cta": {
-    "headline1": "Ready to put your DMs",
-    "headline2": "on autopilot?",
-    "sub": "Book a 30-minute demo and see the full AI pipeline in action — with your own Instagram account.",
+    "headline": "Ready to put your DMs",
+    "headlineEmphasis": "on autopilot?",
+    "sub": "Book a 30-minute demo and see the full AI pipeline in action — with your own Instagram account, your own messages, and your own brand voice.",
     "primary": "Book a demo",
     "secondary": "See how it works",
     "note": "No commitment. No credit card. Setup in 48 hours."
+  },
+  "footer": {
+    "tagline": "AI-native Instagram automation for Uzbekistan's top brands.",
+    "copyright": "© {year} Qaqnuz. All rights reserved.",
+    "language": "Language:",
+    "sections": {
+      "product": "Product",
+      "pricing": "Pricing",
+      "resources": "Resources",
+      "legal": "Legal"
+    },
+    "links": {
+      "howItWorks": "How it works",
+      "pipeline": "The AI Pipeline",
+      "missionControl": "Mission Control",
+      "security": "Security",
+      "pricingPage": "Pricing",
+      "starter": "Starter",
+      "growth": "Growth",
+      "enterprise": "Enterprise",
+      "caseStudies": "Case Studies",
+      "docs": "Documentation",
+      "bookDemo": "Book a Demo",
+      "blog": "Blog",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "aiDisclosure": "AI Disclosure",
+      "dataRetention": "Data Retention"
+    }
   }
 }

@@ -3,108 +3,29 @@
 import { useRef } from "react";
 import { motion, useMotionValue, useTransform, useReducedMotion } from "framer-motion";
 import {
-  UserX,
-  DollarSign,
-  Flame,
-  Copy,
-  Lock,
-  Users,
-  Compass,
-  AlignLeft,
-  Scale,
+  UserX, DollarSign, Flame, Copy, Lock, Users, Compass, AlignLeft, Scale,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Section, Container, SectionHeader } from "@/components/ui/section";
 import { FadeIn, FadeInStagger, FadeInChild } from "@/components/motion/fade-in";
 
-const guardrails = [
-  {
-    icon: UserX,
-    title: "PII Detection",
-    description:
-      "Automatically detects and redacts personal information — phone numbers, addresses, national IDs — before any response is composed or published.",
-    color: "var(--color-trust-400)",
-    rgb: "29,184,161",
-    bg: "rgba(29,184,161,0.08)",
-  },
-  {
-    icon: DollarSign,
-    title: "Price Validation",
-    description:
-      "Cross-references quoted prices against your live product catalog. Prevents AI from promising incorrect discounts or out-of-date pricing.",
-    color: "var(--color-ember-300)",
-    rgb: "255,188,77",
-    bg: "rgba(255,188,77,0.08)",
-  },
-  {
-    icon: Flame,
-    title: "Toxicity Filter",
-    description:
-      "Multi-lingual toxicity detection (Uzbek + Russian + English). Ensures AI responses remain professional even when customers don't.",
-    color: "#f87171",
-    rgb: "248,113,113",
-    bg: "rgba(248,113,113,0.08)",
-  },
-  {
-    icon: Copy,
-    title: "Duplicate Detection",
-    description:
-      "Identifies repeated messages and near-duplicate responses to prevent spam, reply loops, and the uncanny feeling of talking to a broken bot.",
-    color: "var(--color-ember-400)",
-    rgb: "255,157,26",
-    bg: "rgba(255,157,26,0.08)",
-  },
-  {
-    icon: Lock,
-    title: "Leak Prevention",
-    description:
-      "Stops the AI from disclosing internal pricing strategies, supplier details, unreleased products, or any information flagged as confidential.",
-    color: "var(--color-trust-300)",
-    rgb: "79,209,189",
-    bg: "rgba(79,209,189,0.08)",
-  },
-  {
-    icon: Users,
-    title: "Competitor Mention",
-    description:
-      "Detects references to competitor brands and either deflects gracefully or escalates to a human — no accidental competitor endorsements.",
-    color: "#c084fc",
-    rgb: "192,132,252",
-    bg: "rgba(192,132,252,0.08)",
-  },
-  {
-    icon: Compass,
-    title: "Off-Topic Guard",
-    description:
-      "Keeps the AI on-brand and on-topic. Rejects responses that drift outside your configured business scope, preventing hallucinations from leaking through.",
-    color: "var(--color-ember-500)",
-    rgb: "240,125,0",
-    bg: "rgba(240,125,0,0.08)",
-  },
-  {
-    icon: AlignLeft,
-    title: "Length Validation",
-    description:
-      "Enforces configurable character limits. No response too terse to be useful, and no wall-of-text that kills the conversation.",
-    color: "var(--color-neutral-400)",
-    rgb: "161,161,170",
-    bg: "rgba(161,161,170,0.08)",
-  },
-  {
-    icon: Scale,
-    title: "Compliance Check",
-    description:
-      "Flags responses that could expose the brand to regulatory issues — false advertising, unverifiable guarantees, or legally sensitive language.",
-    color: "var(--color-trust-500)",
-    rgb: "13,158,137",
-    bg: "rgba(13,158,137,0.08)",
-  },
-];
+const GUARDRAIL_VISUAL = [
+  { icon: UserX,    color: "#1db8a1", rgb: "29,184,161",   bg: "rgba(29,184,161,0.08)" },
+  { icon: DollarSign,color:"#ffbc4d", rgb: "255,188,77",   bg: "rgba(255,188,77,0.08)" },
+  { icon: Flame,    color: "#f87171", rgb: "248,113,113",  bg: "rgba(248,113,113,0.08)" },
+  { icon: Copy,     color: "#ff9d1a", rgb: "255,157,26",   bg: "rgba(255,157,26,0.08)" },
+  { icon: Lock,     color: "#4fd1bd", rgb: "79,209,189",   bg: "rgba(79,209,189,0.08)" },
+  { icon: Users,    color: "#c084fc", rgb: "192,132,252",  bg: "rgba(192,132,252,0.08)" },
+  { icon: Compass,  color: "#f07d00", rgb: "240,125,0",    bg: "rgba(240,125,0,0.08)" },
+  { icon: AlignLeft,color: "#a1a1aa", rgb: "161,161,170",  bg: "rgba(161,161,170,0.08)" },
+  { icon: Scale,    color: "#0d9e89", rgb: "13,158,137",   bg: "rgba(13,158,137,0.08)" },
+] as const;
 
 function TiltCard({
   guardrail,
   idx,
 }: {
-  guardrail: (typeof guardrails)[0];
+  guardrail: (typeof GUARDRAIL_VISUAL)[number] & { title: string; description: string };
   idx: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -129,8 +50,8 @@ function TiltCard({
   }
 
   const tiltStyle = reduced
-    ? { perspective: "1000px", borderColor: `rgba(${guardrail.rgb},0.15)` }
-    : { perspective: "1000px", rotateX, rotateY, borderColor: `rgba(${guardrail.rgb},0.15)` };
+    ? { perspective: "1000px", borderColor: `rgba(${guardrail.rgb},0.2)` }
+    : { perspective: "1000px", rotateX, rotateY, borderColor: `rgba(${guardrail.rgb},0.2)` };
 
   return (
     <motion.div
@@ -138,9 +59,9 @@ function TiltCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={tiltStyle}
-      whileHover={{ scale: 1.02 }}
+      whileHover={reduced ? {} : { scale: 1.02 }}
       transition={{ duration: 0.2 }}
-      className="glass rounded-2xl p-5 h-full group cursor-default will-change-transform"
+      className="surface-card p-5 h-full group cursor-default will-change-transform"
     >
       <div className="flex items-start gap-4">
         <div
@@ -151,9 +72,7 @@ function TiltCard({
         </div>
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <h3 className="text-sm font-semibold text-[var(--color-neutral-100)]">
-              {guardrail.title}
-            </h3>
+            <h3 className="text-sm font-semibold text-foreground">{guardrail.title}</h3>
             <span
               className="text-[10px] font-bold font-mono opacity-50"
               style={{ color: guardrail.color }}
@@ -161,9 +80,7 @@ function TiltCard({
               G{idx + 1}
             </span>
           </div>
-          <p className="text-xs text-[var(--color-neutral-500)] leading-relaxed">
-            {guardrail.description}
-          </p>
+          <p className="text-xs text-muted-foreground leading-relaxed">{guardrail.description}</p>
         </div>
       </div>
     </motion.div>
@@ -171,27 +88,28 @@ function TiltCard({
 }
 
 export function Guardrails() {
+  const t = useTranslations("guardrails");
+  const rawItems = t.raw("items") as Array<{ title: string; description: string }>;
+  const guardrails = GUARDRAIL_VISUAL.map((vis, i) => ({ ...vis, ...rawItems[i] }));
+
   return (
     <Section id="guardrails" variant="surface">
       <Container>
         <FadeIn>
           <SectionHeader
-            overline="Safety First"
+            overline={t("overline")}
             title={
               <>
-                9 guardrails.{" "}
-                <span className="gradient-ember">Every response.</span>
+                {t("title")}{" "}
+                <em className="not-italic text-accent">{t("titleEmphasis")}</em>
               </>
             }
-            description="Before any AI reply reaches your customer, it must pass nine parallel safety checks. All nine. Every time. There are no exceptions — the guardrails run even in full-auto mode."
+            description={t("description")}
             center
           />
         </FadeIn>
 
-        <FadeInStagger
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
-          stagger={0.06}
-        >
+        <FadeInStagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" stagger={0.06}>
           {guardrails.map((guardrail, idx) => (
             <FadeInChild key={guardrail.title}>
               <TiltCard guardrail={guardrail} idx={idx} />
@@ -201,11 +119,7 @@ export function Guardrails() {
 
         <FadeIn delay={0.3}>
           <div className="mt-12 text-center">
-            <p className="text-sm text-[var(--color-neutral-500)]">
-              All 9 checks run in parallel via{" "}
-              <span className="font-mono text-[var(--color-neutral-400)]">amt-guard</span>
-              {" "}— adding zero latency to the pipeline.
-            </p>
+            <p className="text-sm text-muted-foreground">{t("bottomNote")}</p>
           </div>
         </FadeIn>
       </Container>

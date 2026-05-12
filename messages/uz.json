@@ -1,28 +1,477 @@
 {
-  "_TODO": "Translate all English values to Uzbek (Latin script). Keys must match en.json exactly.",
   "nav": {
+    "home": "Bosh sahifa",
     "product": "Mahsulot",
     "pricing": "Narxlar",
     "caseStudies": "Misollar",
     "security": "Xavfsizlik",
     "docs": "Hujjatlar",
     "signIn": "Kirish",
-    "bookDemo": "Demo buyurtma qiling"
+    "bookDemo": "Demo buyurtma"
   },
   "hero": {
-    "badge": "Sun'iy intellekt bilan Instagram avtomatlashtirish · O'zbekiston uchun",
-    "headline1": "Instagram avtomatlashtirish",
-    "headline2": "haqiqatda o'ylaydi.",
-    "sub": "Qaqnuz sizning DM, izoh va story javoblaringizni 7 bosqichli sun'iy intellekt quvuri orqali o'tkazadi — har bir qadamda inson nazorati bilan. O'zbekistonning yetakchi brendlari uchun.",
-    "cta1": "Demo buyurtma qiling",
+    "badge": "Claude Opus 4.7 bilan ishlamoqda ✨",
+    "headlinePart1": "Haqiqatan ham",
+    "headlineEmphasis": "o'ylaydigan",
+    "headlinePart2": "Instagram avtomatlashtirish.",
+    "sub": "Qaqnuz DM, izoh va story javoblaringizni 7 bosqichli sun'iy intellekt quvuri orqali o'tkazadi — har bir qadamda inson nazorati bilan. O'zbekistonning yetakchi brendlari uchun.",
+    "cta1": "Demo buyurtma",
     "cta2": "Amaldagi ko'ring",
+    "videoTitle": "Qaqnuz mahsulot demosi",
+    "videoPlaceholder": "Demo video — tez orada",
+    "dashboardGreeting": "Xush kelibsiz, {name}",
+    "dashboardActions": {
+      "sendReply": "Javob yuborish",
+      "takeOver": "O'z qo'limga olish",
+      "pauseAI": "AIni to'xtatish",
+      "bulkApprove": "Ommaviy tasdiqlash",
+      "trainBrand": "Brendni o'rgatish",
+      "newCampaign": "Yangi kampaniya",
+      "customize": "Sozlash"
+    },
+    "pipelineHealth": "Quvur holati",
+    "uptime": "ishlash vaqti",
+    "last24h": "So'nggi 24 soat",
+    "replies": "+4 287 javob",
+    "blocked": "-12 bloklangan",
+    "activeBrands": "Faol brendlar",
+    "recentConversations": "So'nggi suhbatlar",
+    "tableHeaders": {
+      "time": "Vaqt",
+      "customer": "Mijoz",
+      "brand": "Brend",
+      "status": "Holat"
+    },
+    "statuses": {
+      "autoReplied": "Avtomatik javob",
+      "pendingReview": "Ko'rib chiqilmoqda",
+      "escalated": "Yuqoriga yo'naltirildi"
+    },
     "stats": {
       "pipeline": "7-bosqich",
       "pipelineLabel": "Sun'iy intellekt quvuri",
       "guardrails": "9-nuqta",
-      "guardrailsLabel": "xavfsizlik qoidalari",
+      "guardrailsLabel": "xavfsizlik filtrlari",
       "coverage": "24/7",
       "coverageLabel": "avtonom qamrov"
+    }
+  },
+  "logoStrip": {
+    "tagline": "O'zbekistonning eng tez o'suvchi brendlari ishonadi"
+  },
+  "pipeline": {
+    "overline": "Sun'iy Intellekt Quvuri",
+    "title": "Sakkiz bosqich.",
+    "titleEmphasis": "Murosasiz.",
+    "description": "Brendingiz oladigan har bir xabar bitta so'z nashr etilishidan oldin to'liq tekshirilgan AI quvuri orqali o'tadi. Har bir bosqichni ko'rish uchun aylantiring.",
+    "detailHoverHint": "Har bir bosqichni ko'rish uchun aylantiring.",
+    "stages": [
+      {
+        "label": "Filtrlash",
+        "detail": "Ball ≥ 0,6 talab etiladi",
+        "description": "AIning javob berishi kerakligini aniqlaydi. Spam, bot faoliyati va mavzudan tashqari muloqotlarni LLM tokenlarini sarflashdan oldin filtrlaydi."
+      },
+      {
+        "label": "Tasniflash",
+        "detail": "Niyat · Kayfiyat · Til · Ustuvorlik",
+        "description": "amt-intel xarid niyati, kayfiyat, til va muloqot turini nozik ishonch baholash bilan aniqlaydi."
+      },
+      {
+        "label": "Qidirish",
+        "detail": "RAG · pgvector · Semantik qidiruv",
+        "description": "amt-rag pgvector embeddinglaridan foydalanib brend bilim bazangiz bo'yicha semantik vektor qidiruv o'tkazadi."
+      },
+      {
+        "label": "Yozish",
+        "detail": "Brend ovozi · Ko'p tilli · Kontekstga asoslangan",
+        "description": "LLM provayderi olingan kontekst va brend persona konfiguratsiyasiga asoslangan brend ovozidagi javob yaratadi."
+      },
+      {
+        "label": "Himoya",
+        "detail": "9 xavfsizlik tekshiruvi · Shaxsiy ma'lumotlarga nol toqeranlik",
+        "description": "amt-guard 9 ta parallel xavfsizlik tekshiruvini o'tkazadi: shaxsiy ma'lumotlar, narx tekshiruvi, toksiklik, takroriylik, sizib chiqishni oldini olish va boshqalar."
+      },
+      {
+        "label": "Baholash",
+        "detail": "Sifat balli 0–100 · Muvaffaqiyatsiz bo'lsa qayta navbat",
+        "description": "amt-eval javob sifatini izchillik, ton mosligi, foydalilik va aniqlik bo'yicha 0–100 ball bilan baholaydi."
+      },
+      {
+        "label": "Ishonch Sathi",
+        "detail": "L1 To'liq Ko'rib Chiqish → L4 To'liq Avto",
+        "description": "amt-trust brendingizning ishonch darajasini (L1–L4) qo'llaydi: avtomatik nashr, ko'rib chiqish navbati yoki rad etish."
+      },
+      {
+        "label": "Nashr",
+        "detail": "Instagram API · To'liq audit izi",
+        "description": "amt-comms to'liq audit izi va quvur izi bilan rasmiy API orqali Instagram'ga nashr qiladi."
+      }
+    ]
+  },
+  "trustRamp": {
+    "overline": "Ishonch Rampa",
+    "title": "Ehtiyotkorlik bilan boshlang.",
+    "titleEmphasis": "Ishonch bilan kengaying.",
+    "description": "Qaqnuz brendingiz bilan birga avtonomiyaga o'sib boradi. Ishonch rampa nazoratdan voz kechishga majburlamasligini anglatadi — uni daraja-daraja oshirasiz.",
+    "autoPublishRate": "Avtomatik nashr darajasi",
+    "autoPublishLabel": "avtomatik nashr",
+    "levels": [
+      {
+        "level": "L1",
+        "name": "To'liq Ko'rib Chiqish",
+        "autoRate": 0,
+        "description": "Har bir AI tomonidan tuzilgan javob tasdiqlash navbatida turadi. Operatoringiz mijozga yetib borishdan oldin ko'rib chiqadi va tahrirlaydi. Nol xavf — brend onboarding uchun ideal.",
+        "features": [
+          "100% inson tasdiqi talab etiladi",
+          "Nashrdan oldin to'liq tahrirlash imkoniyati",
+          "Imzosiz birorta ham LLM javobi nashr etilmaydi",
+          "Dastlabki 7–14 kun uchun ideal"
+        ]
+      },
+      {
+        "level": "L2",
+        "name": "Yo'naltirilgan Avto",
+        "autoRate": 40,
+        "description": "Yuqori ishonchli, past xavfli javoblar (FAQ, ish vaqtlari, manzil so'rovlari) avtomatik nashr etiladi. Xarid niyati, narxlash yoki shikoyat signallari bo'lgan har qanday narsa ko'rib chiqishga navbatga qo'yiladi.",
+        "features": [
+          "≈40% avtomatik nashr darajasi",
+          "Xarid niyatidagi javoblar doim ko'rib chiqiladi",
+          "Narxlash va shikoyat xabarlari → navbat",
+          "50+ tasdiqlangan javobdan keyin ochiladi"
+        ]
+      },
+      {
+        "level": "L3",
+        "name": "Aqlli Avto",
+        "autoRate": 80,
+        "description": "AI savdo suhbatlari ham jumladan ko'pchilik muloqotlarni mustaqil boshqaradi. Faqat eskalatsiya va chekka holatlar jamoangizga yo'naltiriladi. To'liq himoya filtrlari faol qoladi.",
+        "features": [
+          "≈80% avtomatik nashr darajasi",
+          "Savdo suhbatlari avtomatlashtirilgan",
+          "Eskalatsiya va chekka holatlar → inson",
+          "200+ tasdiqlangan javobdan keyin ochiladi"
+        ]
+      },
+      {
+        "level": "L4",
+        "name": "To'liq Avto",
+        "autoRate": 98,
+        "description": "Tashkil etilgan brendlar uchun deyarli to'liq avtonomiya. AI DMlaringizni 24/7 boshqaradi. Inson nazorati talab bo'lganda mavjud, tanqidiy yo'lda emas. 9 ta himoya filtri hech qachon uxlamaydi.",
+        "features": [
+          "≈98% avtomatik nashr darajasi",
+          "24/7 avtonom ish",
+          "Inson doim bir bosishda",
+          "Doimiy sifat ball ko'rsatkichlaridan keyin ochiladi"
+        ]
+      }
+    ]
+  },
+  "guardrails": {
+    "overline": "Avvalo Xavfsizlik",
+    "title": "9 ta himoya.",
+    "titleEmphasis": "Har bir javobda.",
+    "description": "Har qanday AI javobi mijozingizga yetib borishdan oldin to'qqiz ta parallel xavfsizlik tekshiruvidan o'tishi shart. To'qqiztasi. Har doim. Istisnolar yo'q — himoya filtrlari to'liq avto rejimida ham ishlaydi.",
+    "bottomNote": "9 ta tekshiruv amt-guard orqali parallel ravishda o'tadi — quvurga hech qanday kechikish qo'shmaydi.",
+    "items": [
+      {
+        "title": "Shaxsiy Ma'lumotlarni Aniqlash",
+        "description": "Telefon raqamlari, manzillar, milliy ID'lar kabi shaxsiy ma'lumotlarni har qanday javob tuzilishi yoki nashr etilishidan oldin avtomatik aniqlaydi va o'chiradi."
+      },
+      {
+        "title": "Narxni Tekshirish",
+        "description": "Keltirilgan narxlarni jonli mahsulot katalogingiz bilan solishtirib tekshiradi. AIning noto'g'ri chegirmalar yoki eskirgan narxlarni va'da qilishini oldini oladi."
+      },
+      {
+        "title": "Toksiklik Filtri",
+        "description": "Ko'p tilli toksiklik aniqlash (o'zbek + rus + ingliz). Mijozlar shunday qilmasa ham, AI javoblari professional qolishini ta'minlaydi."
+      },
+      {
+        "title": "Takroriy Aniqlash",
+        "description": "Spam, javob halqalari va buzilgan bot bilan suhbat hissini oldini olish uchun takrorlangan xabarlar va deyarli bir xil javoblarni aniqlaydi."
+      },
+      {
+        "title": "Sizib Chiqishni Oldini Olish",
+        "description": "AIning ichki narx strategiyalari, etkazib beruvchi ma'lumotlari, noma'lum mahsulotlar yoki maxfiy deb belgilangan har qanday ma'lumotni oshkor qilishini to'xtatadi."
+      },
+      {
+        "title": "Raqobatchi Eslatmasi",
+        "description": "Raqobatchi brendlarga murojaat etishni aniqlaydi va muloyimlik bilan yo'naltiradi yoki insonga eskalatsiya qiladi — tasodifiy raqobatchi tavsiyalarisiz."
+      },
+      {
+        "title": "Mavzudan Chetga Chiqishni Bloklash",
+        "description": "AI'ni brendga mos va mavzuda ushlab turadi. Sozlangan biznes doirangizdan tashqariga chiqadigan javoblarni rad etadi, gallyutsinatsiyalarning sizib chiqishini oldini oladi."
+      },
+      {
+        "title": "Uzunlik Tekshiruvi",
+        "description": "Sozlanuvchi belgi chegaralarini qo'llaydi. Foydali bo'lish uchun juda qisqa javob ham, suhbatni o'ldiradigan matn devori ham yo'q."
+      },
+      {
+        "title": "Muvofiqlik Tekshiruvi",
+        "description": "Brendni tartibga solish muammolariga duchor qilishi mumkin bo'lgan javoblarni — noto'g'ri reklama, tasdiqlanmayan kafolatlar yoki huquqiy jihatdan sezgir tilni — belgilaydi."
+      }
+    ]
+  },
+  "dashboard": {
+    "overline": "Mission Control",
+    "title": "Olti panel.",
+    "titleEmphasis": "To'liq ko'rinish.",
+    "description": "Operator paneli har bir brend, har bir suhbat va har bir AI qarorini bir ekranda ko'rsatadi. Real vaqt rejimida. To'liq tekshirilgan.",
+    "panels": [
+      {
+        "label": "Kirish qutisi",
+        "description": "DMlar, Izohlar va Story eslatmalari bo'yicha birlashtirilgan 3-tab suhbat ko'rinishi. Har bir ip quvur holati, ishonch darajasi va javob navbatini ko'rsatadi.",
+        "stats": [
+          { "label": "DMlar", "value": "247" },
+          { "label": "Izohlar", "value": "1,2k" },
+          { "label": "Story", "value": "89" }
+        ]
+      },
+      {
+        "label": "Brendlar",
+        "description": "11-tab brend profil muharriri: identifikatsiya, ovoz, mahsulotlar, kampaniyalar, to'lovlar, etkazib berish, FAQ, himoya, eskalatsiya, ish vaqtlari va muvofiqlik sozlamalari.",
+        "stats": [
+          { "label": "Brendlar", "value": "12" },
+          { "label": "Profillar", "value": "11 tab" },
+          { "label": "Faol", "value": "9" }
+        ]
+      },
+      {
+        "label": "Monitor",
+        "description": "Real vaqtli quvur holati ko'rsatkichlari. Barcha 7 AMT mikroxizmat, navbat chuqurligi, xato darajalari va LLM kechikishi uchun xizmat holati — barchasi bir ko'rinishda.",
+        "stats": [
+          { "label": "Xizmatlar", "value": "7/7" },
+          { "label": "Navbat", "value": "Jonli" },
+          { "label": "Ishlash vaqti", "value": "99,9%" }
+        ]
+      },
+      {
+        "label": "Navbat",
+        "description": "Faol tasdiqlash navbati. AI tomonidan yaratilgan javoblarni ko'rib chiqish, tahrirlash, tasdiqlash yoki rad etish. Bir bosishda nashr yoki qayta tuzish uchun qaytarish.",
+        "stats": [
+          { "label": "Kutmoqda", "value": "14" },
+          { "label": "Tasdiq/soat", "value": "38" },
+          { "label": "O'rtacha ko'rib chiqish", "value": "12s" }
+        ]
+      },
+      {
+        "label": "Tahlil",
+        "description": "Interaktiv grafiklar: javob hajmi, kayfiyat tendentsiyalari, quvur voronkasi, suhbat boshiga xarajat va brendga ko'ra LLM xarajatlarining taqsimlanishi.",
+        "stats": [
+          { "label": "Suhbat xarajati", "value": "$0.04" },
+          { "label": "Kayfiyat", "value": "+87%" },
+          { "label": "Javob darajasi", "value": "98%" }
+        ]
+      },
+      {
+        "label": "Metrikalar",
+        "description": "Suhbat hajmi va holat kuzatuvi. Kunlik/haftalik/oylik taqsimotlar, ishonch darajasi taqsimoti va operator ishlash ko'rsatmalari.",
+        "stats": [
+          { "label": "Jami suhbatlar", "value": "18,4k" },
+          { "label": "Avto darajasi", "value": "76%" },
+          { "label": "CSAT", "value": "4.8/5" }
+        ]
+      }
+    ]
+  },
+  "multiBrand": {
+    "overline": "Ko'p Brend",
+    "title": "Bitta operator.",
+    "titleEmphasis": "Cheksiz brendlar.",
+    "description": "Qaqnuz agentliklar, holding kompaniyalar va bir nechta Instagram mavjudligini boshqaruvchi operatorlar uchun qurilgan. Har bir brend o'zining ovozi, himoyasi, ishonch darajasi va tahlillariga ega — barchasi bitta Mission Control panelidan.",
+    "unifiedInbox": "Birlashtirilgan Kirish Qutisi",
+    "allBrandsLabel": "Barcha Brendlar · {count} xabar",
+    "liveLabel": "Jonli",
+    "features": [
+      {
+        "title": "Ajratilgan brend kontekstlari",
+        "description": "Har bir brendning o'z mahsulot katalogi, FAQ ma'lumotlar bazasi, personi va muvofiqlik qoidalari bor. Ular bir-biriga hech qachon aralashmaydi."
+      },
+      {
+        "title": "Birlashtirilgan operator navbati",
+        "description": "Barcha brendlardagi javoblarni bitta navbatdan ko'rib chiqing va tasdiqlang. Brend, kanal, ishonch darajasi yoki shoshilinchlik bo'yicha filtrlang."
+      }
+    ]
+  },
+  "results": {
+    "overline": "Misol Natijalar",
+    "title": "Brendlar nimaga erishadilar",
+    "titleEmphasis": "Qaqnuz bilan.",
+    "disclaimer": "Bular ko'rsatma misollar. Natijalaringiz brend hajmi, xabar hajmi va konfiguratsiyaga bog'liq bo'ladi.",
+    "exampleNote": "Misol natija — individual natijalar farq qiladi.",
+    "items": [
+      {
+        "category": "Jalb etish",
+        "metric": "3×",
+        "numericTarget": 3,
+        "numericSuffix": "×",
+        "label": "Javob darajasi",
+        "description": "Qaqnuzga o'tgandan so'ng Toshkentdagi moda brendi Instagram DM javob darajasini ikki hafta ichida 31% dan 94% gacha uch baravar oshirdi."
+      },
+      {
+        "category": "Operatsiyalar",
+        "metric": "24/7",
+        "numericTarget": null,
+        "numericSuffix": "",
+        "label": "Doim faol qamrov",
+        "description": "Kosmetika brendi ish vaqtidan tashqari va dam olish kunlaridagi kechikishlarni bartaraf etdi. AI hozir mijoz qoniqishiga zarar yetkazmasdan so'rovlarning 78% ni mustaqil hal qilmoqda."
+      },
+      {
+        "category": "Xarajat",
+        "metric": "60%",
+        "numericTarget": 60,
+        "numericSuffix": "%",
+        "label": "Suhbat xarajati kamaydi",
+        "description": "Elektronika savdogari AI quvuri orqali odatiy so'rovlar, narx tekshiruvlari va yetkazib berish so'rovlarini avtomatlashtirib suhbat boshiga xarajatni 60% ga kamaytirdi."
+      }
+    ]
+  },
+  "uzbekistan": {
+    "overline": "O'zbekiston Uchun Qurilgan",
+    "title": "Siz haqiqatan ham ishlayotgan joyga",
+    "titleEmphasis": "mo'ljallangan.",
+    "description": "Qaqnuz O'zbekistonga moslashtirilgan G'arb vositasi emas — u O'zbekistonning Instagram tijorat ekotizimi uchun noldan qurilgan.",
+    "features": [
+      {
+        "title": "Nativ uch tilli AI",
+        "description": "AI xabarlarni o'zbek (lotin yozuvi), rus va ingliz tillarida nativ tarzda tuzadi va tushunadi — tarjima orqali emas. Kontekst suhbat davomidagi til o'zgarishlari bo'ylab saqlanadi."
+      },
+      {
+        "title": "Mahalliy to'lov ekotizimi",
+        "description": "Click, Payme, Uzum va Humo to'lov havolalari, ko'rsatmalari va tasdiq oqimlari AI bilim bazasiga o'rnatilgan. Bot to'lov savollarini aniqlik bilan hal qiladi."
+      },
+      {
+        "title": "O'zbekiston muvofiqligi",
+        "description": "O'zbekistonning tijorat muhiti uchun mo'ljallangan: GDPR ga yaqin ma'lumotlarni boshqarish, STOP kalit so'zi orqali rad etish va sozlanuvchi ma'lumotlarni saqlash siyosatlari."
+      }
+    ]
+  },
+  "pricing": {
+    "overline": "Narxlar",
+    "title": "Oddiy tariflar.",
+    "titleEmphasis": "Kutilmagan narxlarsiz.",
+    "description": "Barcha tariflar to'liq 8 bosqichli AI quvuri va 9 ta xavfsizlik filtriga kiradi. Hajm uchun to'laysiz, xususiyatlar uchun emas.",
+    "viewFull": "To'liq narxlar va taqqoslash jadvalini ko'ring",
+    "contactUs": "Biz bilan bog'laning",
+    "custom": "Maxsus",
+    "mostPopular": "Eng mashhur",
+    "tiers": [
+      {
+        "name": "Starter",
+        "description": "AI avtomatlashtirish bilan boshlayotgan yagona brendlar uchun.",
+        "cta": "Demo buyurtma",
+        "features": [
+          "1 ta Instagram hisobi",
+          "Oyiga 1 000 tagacha DM",
+          "To'liq AI quvuri (8 bosqichning barchasi)",
+          "9 ta xavfsizlik filtri",
+          "L1–L2 ishonch rampa",
+          "Email qo'llab-quvvatlash"
+        ]
+      },
+      {
+        "name": "Growth",
+        "description": "Instagram tijorat operatsiyalarini kengaytirayotgan brendlar uchun.",
+        "cta": "Demo buyurtma",
+        "features": [
+          "5 tagacha Instagram hisobi",
+          "Oyiga 10 000 tagacha DM",
+          "To'liq AI quvuri + faol DM kampaniyalari",
+          "Xarajat boshqaruvi va brend byudjetlari",
+          "L1–L4 ishonch rampa",
+          "Ko'p til qo'llab-quvvatlash (UZ/RU/EN)",
+          "Ustuvor qo'llab-quvvatlash"
+        ]
+      },
+      {
+        "name": "Enterprise",
+        "description": "Miqyosli agentliklar va ko'p brendli operatorlar uchun.",
+        "cta": "Sotuv bilan gaplashing",
+        "features": [
+          "Cheksiz brendlar",
+          "Cheksiz xabar hajmi",
+          "To'liq Mission Control paneli",
+          "Maxsus LLM konfiguratsiyasi",
+          "SLA + maxsus qo'llab-quvvatlash",
+          "Maxsus integratsiyalar va audit izi eksporti",
+          "On-premises joylashtirilishi mavjud"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "overline": "Ko'p So'raladigan Savollar",
+    "title": "Umumiy savollar.",
+    "description": "Demo buyurtma qilishdan oldin bilishingiz kerak bo'lgan hamma narsa.",
+    "items": [
+      {
+        "q": "Qaqnuz nima?",
+        "a": "Qaqnuz — O'zbekistondagi brendlar uchun Instagram DMlar, izohlar va story eslatmalarini boshqaruvchi sun'iy intellekt platformasi. Har bir kiruvchi xabar 8 bosqichli AI quvuri orqali o'tadi: filtrlash, tasniflash, qidirish, yozish, himoya, baholash, ishonch sathi, nashr — har bir javobda 9 xavfsizlik tekshiruvi bilan. Operatorlar Mission Control paneli orqali to'liq nazoratni qo'llarida ushlab turishadi, inson muomalasi doim bir bosishda."
+      },
+      {
+        "q": "O'rnatish qancha vaqt oladi?",
+        "a": "Ko'pchilik brendlar 1–3 ish kuni ichida ishga tushadi. O'rnatish jarayoni Instagram Business hisobingizni ulash, brend profilingizni sozlash (ovoz, mahsulotlar, FAQ, himoya) va barcha javoblar nashrdan oldin ko'rib chiqiladigan L1 Ishonch Darajasida boshlashni o'z ichiga oladi. Sizning mijozlar muvaffaqiyati bo'yicha menejeringiz onboarding davomida yo'l ko'rsatadi."
+      },
+      {
+        "q": "Qaqnuz qaysi tillarni qo'llab-quvvatlaydi?",
+        "a": "Qaqnuz o'zbek tili (lotin yozuvi), rus tili va ingliz tilini nativ tarzda qo'llab-quvvatlaydi. AI har bir kiruvchi xabar tilini aniqlaydi va xuddi shu tilda javob beradi. Suhbat davomidagi til o'zgarishi avtomatik boshqariladi. Tarjima qadami yo'q — AI uchala tilda nativ ishlaydi."
+      },
+      {
+        "q": "Qaqnuz narxi qancha?",
+        "a": "Narx Instagram hisoblari soni va oylik xabar hajmiga qarab belgilanadi. Barcha tariflar to'liq 8 bosqichli AI quvuri va 9 ta xavfsizlik filtriga kiradi — hajm uchun to'laysiz, xususiyatlar uchun emas. Maxsus taklif uchun biz bilan bog'laning. API chaqiruvi yoki LLM token uchun alohida haq yo'q — xarajatlarni boshqarish har bir brend uchun sozlanuvchi byudjetlar orqali ichki amalga oshiriladi."
+      },
+      {
+        "q": "Qaqnuz mijozlar ma'lumotlari va maxfiylikni qanday boshqaradi?",
+        "a": "Mijozlar xabarlari real vaqt rejimida qayta ishlanadi va sizning sozlangan saqlash muddatingizdan tashqari saqlanmaydi. Shaxsiy ma'lumotlar aniqlangan va muvofiqlik sozlamalaringizga ko'ra boshqariladi. Mijozlar istalgan vaqtda STOP kalit so'zini yuborish orqali AI javoblaridan voz kecha oladi — ularning hisobi darhol belgilanadi va barcha keyingi xabarlar inson operatoriga yo'naltiriladi. Biz modellarni o'rgatish uchun mijozlar ma'lumotlaridan foydalanmaymiz."
+      },
+      {
+        "q": "AI mijozlar bilan shaffofmi — ular AI bilan gaplashayotganini bilishadimi?",
+        "a": "AI oshkorligi har bir brend uchun alohida sozlanadi. Qaqnuzni birinchi javobiga oshkorlash xabarini qo'shish, brend bioda eslatma qo'yish yoki oshkorlashsiz ishlash uchun (mahalliy qonunlar ruxsat bergan joyda) sozlashingiz mumkin. Biz shaffoflikni tavsiya qilamiz va o'zbek, rus va ingliz tillarida oshkorlash uchun tayyor matn shablonlarini taqdim etamiz."
+      },
+      {
+        "q": "Qaqnuz qanday integratsiyalarni qo'llab-quvvatlaydi?",
+        "a": "Qaqnuz Instagram Business API (DMlar, izohlar, story eslatmalari), Click, Payme, Uzum va Humo to'lov tizimlari va operator bildirishnomalari uchun Telegram bilan integratsiya qiladi. Platforma mustaqil tizim sifatida ishlab chiqilgan — ishlashi uchun uchinchi tomon CRM integratsiyasi talab qilinmaydi, ammo eksport API'lar Enterprise tarifida mavjud."
+      },
+      {
+        "q": "Qaqnuz qanday qo'llab-quvvatlash taklif etadi?",
+        "a": "Barcha tariflar onboarding yordami va hujjatlarni o'z ichiga oladi. Growth tariflari maxsus mijoz muvaffaqiyati menejeri bilan ustuvor email/chat qo'llab-quvvatlashni o'z ichiga oladi. Enterprise tariflari SLA, belgilangan hisob qo'llab-quvvatlashi va jamoangiz bilan maxsus Slack yoki Telegram kanalini o'z ichiga oladi."
+      }
+    ]
+  },
+  "cta": {
+    "headline": "DMlaringizni avtopilotga",
+    "headlineEmphasis": "o'tkazishga tayyormisiz?",
+    "sub": "30 daqiqalik demo buyurtma qiling va to'liq AI quvurini amalda ko'ring — o'z Instagram hisobingiz, o'z xabarlaringiz va o'z brend ovozingiz bilan.",
+    "primary": "Demo buyurtma",
+    "secondary": "Qanday ishlashini ko'ring",
+    "note": "Majburiyat yo'q. Kredit karta yo'q. 48 soatda sozlash."
+  },
+  "footer": {
+    "tagline": "O'zbekistonning yetakchi brendlari uchun sun'iy intellekt bilan Instagram avtomatlashtirish.",
+    "copyright": "© {year} Qaqnuz. Barcha huquqlar himoyalangan.",
+    "language": "Til:",
+    "sections": {
+      "product": "Mahsulot",
+      "pricing": "Narxlar",
+      "resources": "Resurslar",
+      "legal": "Huquqiy"
+    },
+    "links": {
+      "howItWorks": "Qanday ishlaydi",
+      "pipeline": "AI quvuri",
+      "missionControl": "Mission Control",
+      "security": "Xavfsizlik",
+      "pricingPage": "Narxlar",
+      "starter": "Starter",
+      "growth": "Growth",
+      "enterprise": "Enterprise",
+      "caseStudies": "Misollar",
+      "docs": "Hujjatlar",
+      "bookDemo": "Demo buyurtma",
+      "blog": "Blog",
+      "privacy": "Maxfiylik siyosati",
+      "terms": "Foydalanish shartlari",
+      "aiDisclosure": "AI oshkorligi",
+      "dataRetention": "Ma'lumotlarni saqlash"
     }
   }
 }

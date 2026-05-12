@@ -1,4 +1,81 @@
-# Cinematic UI Overhaul — Change Log
+# Nexora Redesign + Full i18n — Change Log
+
+## Summary (2026-05-12)
+
+Switched from dark cinematic theme to light Nexora-style design system. Added full
+UZ/RU/EN i18n with path-based routing, locale switcher, and hreflang tags. Replaced
+all hardcoded strings across 14 components with `useTranslations()` calls. Build
+passes clean at 31 pages with zero TypeScript errors.
+
+**Key numbers:** 247+ translation keys per locale · 3 locales (uz default, ru, en) ·
+14 components updated · 1 new navigation helper · 2 new UI components
+
+---
+
+## Design System
+
+- **Light theme**: `:root` semantic HSL tokens (`--accent: 239 84% 67%` indigo,
+  `--background: 0 0% 100%`, `--foreground: 210 14% 17%`, etc.)
+- **`@theme` → Tailwind utilities**: `bg-background`, `text-foreground`,
+  `text-muted-foreground`, `bg-accent`, `text-accent`, `border-border`
+- **Font stack**: Instrument Serif (Latin/Uzbek) + EB Garamond (Cyrillic fallback
+  for Russian) + Inter body. Google Fonts loaded in locale layout.
+- **Glass cards**: `.glass` updated to white translucent (`rgba(255,255,255,0.55)`) with
+  `var(--shadow-dashboard)`. `.surface-card` → white with `border-border`.
+- **Ember retained as secondary accent** — all ember/trust/neutral palette preserved
+  in `@theme` for secondary color usage.
+- **`.text-overline`**: changed from ember-400 to `hsl(var(--accent))` indigo.
+
+---
+
+## i18n Architecture
+
+- **`lib/navigation.ts`** (new): `createNavigation(routing)` exports — locale-aware
+  `Link`, `useRouter`, `usePathname`, `redirect`, `getPathname`
+- **`app/layout.tsx`**: simplified to `return children` — html/body moved to locale layout
+- **`app/[locale]/layout.tsx`**: added `<html lang={locale}>`, EB Garamond + Inter
+  Cyrillic Google Fonts link, `generateMetadata` with hreflang `alternates.languages`
+- **`components/ui/locale-switcher.tsx`** (new): UZ · RU · EN toggle using
+  `useLocale()` + `router.replace(pathname, { locale })` from createNavigation
+- **Nav**: now uses locale-aware `Link` from `@/lib/navigation`, `LocaleSwitcher`
+  on the right, `useTranslations("nav")` for all labels
+
+---
+
+## Message Files
+
+- **`messages/en.json`**: expanded from ~80 to 247+ keys — full nested structure
+  including arrays for pipeline stages (8), trust levels (4), guardrail items (9),
+  FAQ Q&A (8), pricing tiers (3), dashboard panels (6), results items (3)
+- **`messages/uz.json`**: complete Uzbek Latin translation — all 247+ keys
+- **`messages/ru.json`**: complete Russian translation — all 247+ keys
+- Italic emphasis words: EN `"thinks."` / UZ `"o'ylaydigan"` / RU `"думает."`
+
+---
+
+## Components Updated
+
+| Component | Changes |
+|-----------|---------|
+| `sections/nav.tsx` | New wordmark `✦ Qaqnuz`, centered nav, LocaleSwitcher, light colors |
+| `ui/section.tsx` | `SectionHeader` h2 → `font-display`, light `text-foreground` |
+| `sections/hero.tsx` | Higgsfield video + light overlay + 3-part translated headline + inline Mission Control dashboard mockup |
+| `sections/logo-strip.tsx` | Light border/bg, `t("tagline")` |
+| `pipeline/pipeline-flow.tsx` | Light trail line, stages from `t.raw("stages")`, `surface-card` detail panel |
+| `sections/trust-ramp.tsx` | Light selector/card colors, levels from `t.raw("levels")` |
+| `sections/guardrails.tsx` | `surface-card` tilt cards, items from `t.raw("items")` |
+| `dashboard-preview/dashboard-preview.tsx` | Light mock panel UI, panels from `t.raw("panels")` |
+| `sections/multi-brand.tsx` | Light brand grid, features from `t.raw("features")` |
+| `sections/results.tsx` | Italic display counters, items from `t.raw("items")` |
+| `sections/built-for-uzbekistan.tsx` | `bg-accent/10` icons, features from `t.raw("features")` |
+| `sections/pricing-teaser.tsx` | Indigo highlighted tier, tiers from `t.raw("tiers")` |
+| `sections/faq.tsx` | `surface-card` accordion, items from `t.raw("items")` |
+| `sections/cta.tsx` | Indigo CTA buttons, all strings from `t("...")` |
+| `sections/footer.tsx` | Light surface, `LocaleSwitcher` in bottom bar, strings from `t("...")` |
+
+---
+
+# Cinematic UI Overhaul — Change Log (2026-05-11)
 
 ## Summary
 
