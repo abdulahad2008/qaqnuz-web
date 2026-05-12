@@ -20,8 +20,8 @@ const SIDEBAR_ICONS = [
 
 const PIPELINE_STAGES = ["Q", "C", "R", "Co", "G", "E", "T", "P"];
 const STAGE_COLORS = [
-  "#6366f1", "#6366f1", "#6366f1", "#6366f1",
-  "#6366f1", "#6366f1", "#f07d00", "#10b981",
+  "#E8541A", "#E8541A", "#E8541A", "#E8541A",
+  "#E8541A", "#E8541A", "#e11d48", "#10b981",
 ];
 
 const SAMPLE_CONVERSATIONS = [
@@ -121,18 +121,6 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8 py-20 lg:py-28">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.05 }}
-          className="flex justify-center mb-8"
-        >
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-1.5 text-xs text-muted-foreground shadow-sm backdrop-blur-sm">
-            {t("badge")}
-          </span>
-        </motion.div>
-
         {/* Headline — 3-part word-blur reveal */}
         <h1 className="text-center text-5xl md:text-6xl lg:text-7xl leading-[1.04] tracking-tight mb-6">
           {words1.length > 0 && (

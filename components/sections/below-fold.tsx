@@ -8,6 +8,10 @@ import dynamic from "next/dynamic";
   dramatically reducing Time-to-Interactive on the home page.
 */
 
+const ChannelsSection = dynamic(
+  () => import("@/components/sections/channels-section").then((m) => m.ChannelsSection),
+  { ssr: false }
+);
 const PipelineFlow = dynamic(
   () => import("@/components/pipeline/pipeline-flow").then((m) => m.PipelineFlow),
   { ssr: false }
@@ -63,6 +67,7 @@ const Footer = dynamic(
 export function BelowFold() {
   return (
     <>
+      <ChannelsSection />
       <PipelineFlow />
       <TrustRamp />
       <Guardrails />

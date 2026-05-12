@@ -474,6 +474,32 @@
       "dataRetention": "Ma'lumotlarni saqlash"
     }
   },
+  "channels": {
+    "overline": "Uch kanal. Bitta quvur.",
+    "title": "Har bir aloqa nuqtasi,",
+    "titleEmphasis": "to'liq avtomatlashtirilgan.",
+    "description": "Qaqnuz Instagram DM, jamoat izohlari va story eslatmalariga javoblarni bir xil 8 bosqichli AI quvuri orqali — har bir javobda bir xil 9 ta xavfsizlik qo'riqlovchisi bilan boshqaradi.",
+    "tabs": [
+      {
+        "key": "dms",
+        "label": "To'g'ridan-to'g'ri xabarlar",
+        "subtitle": "Instagram DM avtomatlashtirish",
+        "description": "Miqyosda bir-bir suhbatlar. AI niyatni tasniflaydi, brend bilimlarini qidiradi, javob tuzadi va nashr etishdan oldin barcha 9 ta xavfsizlik tekshiruvidan o'tkazadi — 30 soniya ichida."
+      },
+      {
+        "key": "comments",
+        "label": "Izohlar",
+        "subtitle": "Instagram izoh avtomatlashtirish",
+        "description": "Har bir mahsulot izohiga avtomatik javob bering. Suhbatlarni DM ga yo'naltiring, narx savollariga javob bering va jamoatingizni qo'lda harakat qilmasdan jalb qiling."
+      },
+      {
+        "key": "stories",
+        "label": "Story eslatmalari",
+        "subtitle": "Story eslatma javob avtomatlashtirish",
+        "description": "Mijoz story da brendingizni eslansa, Qaqnuz soniyalar ichida javob beradi — organik story eslatmalarini savdo suhbatlariga avtomatik ravishda aylantiradi."
+      }
+    ]
+  },
   "bookDemo": {
     "title": "30 daqiqalik",
     "titleEmphasis": "demo buyurtma qiling.",

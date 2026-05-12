@@ -474,6 +474,32 @@
       "dataRetention": "Data Retention"
     }
   },
+  "channels": {
+    "overline": "Three channels. One pipeline.",
+    "title": "Every touchpoint,",
+    "titleEmphasis": "fully automated.",
+    "description": "Qaqnuz handles Instagram DMs, public comments, and story mention replies through the same 8-stage AI pipeline — with the same 9 safety guardrails on every response.",
+    "tabs": [
+      {
+        "key": "dms",
+        "label": "Direct Messages",
+        "subtitle": "Instagram DM automation",
+        "description": "One-on-one conversations at scale. The AI classifies intent, retrieves brand knowledge, composes a reply, and passes all 9 safety checks before publishing — in under 30 seconds."
+      },
+      {
+        "key": "comments",
+        "label": "Comments",
+        "subtitle": "Instagram comment automation",
+        "description": "Respond to every product comment automatically. Drive conversations into DM, answer pricing questions, and keep your community engaged — without manual effort."
+      },
+      {
+        "key": "stories",
+        "label": "Story Mentions",
+        "subtitle": "Story mention reply automation",
+        "description": "When a customer mentions your brand in a story, Qaqnuz replies within seconds — turning organic story mentions into sales conversations automatically."
+      }
+    ]
+  },
   "bookDemo": {
     "title": "Book a",
     "titleEmphasis": "30-minute demo.",
