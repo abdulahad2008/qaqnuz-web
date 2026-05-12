@@ -101,7 +101,7 @@ export default async function ProductPage() {
           <FadeIn>
             <div className="surface-card p-8">
               <h2 className="text-xl font-bold text-foreground mb-4">{t("techTitle")}</h2>
-              <div className="grid grid-cols-2 gap-3 font-mono text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-sm">
                 {techStack.map(([label, value]) => (
                   <div key={label} className="flex flex-col gap-0.5">
                     <span className="text-[10px] text-muted-foreground uppercase tracking-wider">

@@ -8,13 +8,13 @@ const badgeVariants = cva(
     variants: {
       variant: {
         ember:
-          "bg-[rgba(240,125,0,0.15)] text-[var(--color-ember-300)] border border-[rgba(240,125,0,0.25)]",
+          "bg-accent/15 text-accent border border-accent/30",
         trust:
-          "bg-[rgba(13,158,137,0.15)] text-[var(--color-trust-300)] border border-[rgba(13,158,137,0.25)]",
+          "bg-[rgba(13,158,137,0.15)] text-[var(--color-trust-600)] dark:text-[var(--color-trust-400)] border border-[rgba(13,158,137,0.25)]",
         neutral:
-          "bg-[rgba(255,255,255,0.08)] text-[var(--color-neutral-300)] border border-[rgba(255,255,255,0.1)]",
+          "bg-secondary text-muted-foreground border border-border",
         success:
-          "bg-[rgba(34,197,94,0.15)] text-[#4ade80] border border-[rgba(34,197,94,0.25)]",
+          "bg-[rgba(34,197,94,0.15)] text-emerald-700 dark:text-emerald-400 border border-[rgba(34,197,94,0.25)]",
       },
     },
     defaultVariants: { variant: "ember" },

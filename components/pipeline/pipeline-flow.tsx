@@ -103,7 +103,7 @@ export function PipelineFlow() {
                           ? `rgba(${stage.rgb},0.45)`
                           : "hsl(var(--border))",
                         background: isActive
-                          ? `radial-gradient(circle at center, rgba(${stage.rgb},0.10) 0%, rgba(255,255,255,0.9) 100%)`
+                          ? `radial-gradient(circle at center, rgba(${stage.rgb},0.12) 0%, hsl(var(--background)) 100%)`
                           : undefined,
                       }}
                     >

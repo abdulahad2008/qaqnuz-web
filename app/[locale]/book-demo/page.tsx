@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { ArrowRight, Check, MessageSquare, Users, BarChart3 } from "lucide-react";
+import { ArrowRight, Check, MessageSquare, Users, BarChart3, CalendarDays, ExternalLink } from "lucide-react";
 import { Section, Container } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/motion/fade-in";
@@ -11,6 +11,52 @@ import { Footer } from "@/components/sections/footer";
 import { QaqnuzMark } from "@/components/ui/qaqnuz-logo";
 import { Link } from "@/lib/navigation";
 import { supabase } from "@/lib/supabase/client";
+
+const CAL_URL = process.env.NEXT_PUBLIC_CAL_URL;
+
+function CalendarEmbed({ placeholder }: { placeholder: string }) {
+  if (CAL_URL) {
+    return (
+      <div className="rounded-xl overflow-hidden border border-border" style={{ height: 600 }}>
+        <iframe
+          src={CAL_URL}
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          title="Schedule a demo"
+          style={{ border: "none" }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-xl bg-secondary border border-border p-8 flex flex-col items-center justify-center text-center gap-4" style={{ minHeight: 200 }}>
+      <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+        <CalendarDays className="h-6 w-6 text-accent" />
+      </div>
+      <div>
+        <p className="text-sm font-semibold text-foreground mb-1">{placeholder}</p>
+        <p className="text-xs text-muted-foreground">
+          Send us a message at{" "}
+          <a href="mailto:demo@qaqnuz.uz" className="text-accent hover:underline">
+            demo@qaqnuz.uz
+          </a>
+          {" "}and we'll schedule your demo call.
+        </p>
+      </div>
+      <a
+        href="https://t.me/qaqnuz"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 text-xs text-accent hover:text-accent/80 transition-colors font-medium"
+      >
+        Or message us on Telegram
+        <ExternalLink className="h-3 w-3" />
+      </a>
+    </div>
+  );
+}
 
 const FEATURE_ICONS = [MessageSquare, Users, BarChart3];
 
@@ -84,14 +130,10 @@ export default function BookDemoPage() {
                   })}
                 </div>
 
-                {/* Calendar embed placeholder */}
+                {/* Calendar embed */}
                 <div className="mt-10 surface-card p-6">
                   <p className="text-sm font-semibold text-muted-foreground mb-2">{t("calendarLabel")}</p>
-                  <div className="aspect-[4/3] bg-secondary rounded-xl flex items-center justify-center border border-border">
-                    <p className="text-sm text-muted-foreground text-center px-4">
-                      {t("calendarPlaceholder")}
-                    </p>
-                  </div>
+                  <CalendarEmbed placeholder={t("calendarPlaceholder")} />
                 </div>
               </div>
             </FadeIn>

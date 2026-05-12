@@ -18,6 +18,23 @@
   --shadow-dashboard: 0 25px 80px -12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.06);
 }
 
+/* ─── Dark Mode Tokens ─────────────────────────────────────── */
+.dark {
+  --background: 222 14% 9%;
+  --foreground: 210 14% 93%;
+  --primary: 210 14% 93%;
+  --primary-foreground: 222 14% 9%;
+  --secondary: 222 14% 14%;
+  --secondary-foreground: 210 14% 93%;
+  --muted: 222 14% 14%;
+  --muted-foreground: 215 14% 62%;
+  --accent: 17 82% 54%;
+  --accent-foreground: 0 0% 100%;
+  --border: 220 13% 20%;
+  --ring: 17 82% 54%;
+  --shadow-dashboard: 0 25px 80px -12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04);
+}
+
 /* ─── Tailwind v4 Theme ────────────────────────────────────── */
 @theme {
   /* Semantic tokens → bg-background, text-foreground, etc. */
@@ -169,10 +186,14 @@ body {
 
 /* ─── Surface Utilities ────────────────────────────────────── */
 .surface-card {
-  background: #ffffff;
+  background: hsl(var(--background));
   border: 1px solid hsl(var(--border));
   border-radius: var(--radius-lg);
   box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03);
+}
+
+.dark .surface-card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.04);
 }
 
 .surface-elevated {
@@ -189,13 +210,18 @@ body {
   box-shadow: 0 0 40px -8px rgba(13, 158, 137, 0.20);
 }
 
-/* ─── Glass Utilities (light theme) ───────────────────────── */
+/* ─── Glass Utilities ──────────────────────────────────────── */
 .glass {
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.7);
   box-shadow: var(--shadow-dashboard);
+}
+
+.dark .glass {
+  background: rgba(20, 22, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-ember {
@@ -235,6 +261,10 @@ body {
   background: radial-gradient(ellipse at center, transparent 55%, rgba(255,255,255,0.45) 100%);
 }
 
+.dark .vignette::after {
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(14,16,23,0.6) 100%);
+}
+
 /* ─── Scrollbar ────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: hsl(var(--background)); }
@@ -248,6 +278,14 @@ body {
   outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
   border-radius: var(--radius-sm);
+}
+
+/* ─── Hero Video Overlay ────────────────────────────────────── */
+.hero-overlay {
+  background: linear-gradient(180deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.90) 60%, rgba(255,255,255,0.96) 100%);
+}
+.dark .hero-overlay {
+  background: linear-gradient(180deg, rgba(14,16,23,0.90) 0%, rgba(14,16,23,0.86) 60%, rgba(14,16,23,0.94) 100%);
 }
 
 /* ─── Reduced Motion ───────────────────────────────────────── */

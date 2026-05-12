@@ -787,5 +787,39 @@
       "resultsText": "The brand now responds to 78% of DMs automatically, 24 hours a day. The operator reviews the queue each morning, handling only the 22% of conversations that require human judgment.",
       "ctaButton": "See how it works for your brand"
     }
+  },
+  "signIn": {
+    "title": "Welcome back",
+    "titleEmphasis": "to Qaqnuz",
+    "description": "Sign in to access your Mission Control dashboard and manage your brand's AI automation.",
+    "form": {
+      "title": "Sign in to your account",
+      "email": "Email address",
+      "emailPlaceholder": "you@brand.uz",
+      "password": "Password",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Sign in",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "requestAccess": "Request access"
+    },
+    "earlyAccess": {
+      "badge": "Early access",
+      "note": "Qaqnuz is currently in early access. Accounts are provisioned manually after your demo call."
+    },
+    "features": [
+      {
+        "title": "Mission Control dashboard",
+        "description": "Review queued replies, approve or edit AI drafts, and monitor your pipeline health."
+      },
+      {
+        "title": "Multi-brand management",
+        "description": "Manage all your Instagram accounts from a single workspace."
+      },
+      {
+        "title": "Analytics & insights",
+        "description": "Track automation rate, response time, CSAT, and revenue impact."
+      }
+    ]
   }
 }

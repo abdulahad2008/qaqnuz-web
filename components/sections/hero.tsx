@@ -96,15 +96,8 @@ export function Hero() {
       {/* Video background — very subtle under light overlay */}
       <VideoBackground src={HIGGSFIELD_VIDEO} opacity={0.12} />
 
-      {/* Light overlay — keeps theme bright */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.90) 60%, rgba(255,255,255,0.96) 100%)",
-        }}
-      />
+      {/* Theme overlay */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none hero-overlay" />
 
       {/* Subtle indigo radial accent */}
       <div
@@ -189,7 +182,7 @@ export function Hero() {
           style={{ perspective: 1200 }}
         >
           {/* Browser chrome */}
-          <div className="rounded-2xl border border-border shadow-[var(--shadow-dashboard)] overflow-hidden bg-white">
+          <div className="rounded-2xl border border-border shadow-[var(--shadow-dashboard)] overflow-hidden bg-background">
             {/* Top bar */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-border bg-secondary/50">
               <div className="flex gap-1.5">

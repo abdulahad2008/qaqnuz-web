@@ -787,5 +787,39 @@
       "resultsText": "Brend endi DMlarning 78% iga avtomatik ravishda, 24 soat davomida javob beradi.",
       "ctaButton": "Brendingiz uchun qanday ishlashini ko'ring"
     }
+  },
+  "signIn": {
+    "title": "Xush kelibsiz",
+    "titleEmphasis": "Qaqnuzga",
+    "description": "Mission Control boshqaruv panelingizga kirish uchun tizimga kiring va brendingizning AI avtomatizatsiyasini boshqaring.",
+    "form": {
+      "title": "Hisobingizga kiring",
+      "email": "Email manzil",
+      "emailPlaceholder": "siz@brend.uz",
+      "password": "Parol",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Kirish",
+      "forgotPassword": "Parolni unutdingizmi?",
+      "noAccount": "Hisobingiz yo'qmi?",
+      "requestAccess": "Kirish so'rash"
+    },
+    "earlyAccess": {
+      "badge": "Erta kirish",
+      "note": "Qaqnuz hozirda erta kirish bosqichida. Hisoblar demo qo'ng'irog'idan keyin qo'lda taqdim etiladi."
+    },
+    "features": [
+      {
+        "title": "Mission Control paneli",
+        "description": "Navbatdagi javoblarni ko'rib chiqing, AI qoralamalarini tasdiqlang yoki tahrirlang."
+      },
+      {
+        "title": "Ko'p brendli boshqaruv",
+        "description": "Barcha Instagram hisoblaringizni bitta ish maydonidan boshqaring."
+      },
+      {
+        "title": "Tahlil va tushunchalar",
+        "description": "Avtomatizatsiya darajasini, javob vaqtini, CSAT va daromad ta'sirini kuzating."
+      }
+    ]
   }
 }

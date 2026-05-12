@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/lib/navigation";
 import { LocaleSwitcher } from "@/components/ui/locale-switcher";
 import { QaqnuzWordmark } from "@/components/ui/qaqnuz-logo";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -59,9 +60,10 @@ export function Nav() {
 
           {/* Desktop right */}
           <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             <LocaleSwitcher />
             <Link
-              href="/book-demo"
+              href="/sign-in"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
             >
               {t("signIn")}
@@ -107,8 +109,16 @@ export function Nav() {
                 </Link>
               ))}
               <div className="pt-3 pb-1 space-y-3">
-                <div className="px-4">
+                <div className="px-4 flex items-center gap-3">
                   <LocaleSwitcher />
+                  <ThemeToggle />
+                  <Link
+                    href="/sign-in"
+                    onClick={() => setMobileOpen(false)}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                  >
+                    {t("signIn")}
+                  </Link>
                 </div>
                 <Link
                   href="/book-demo"

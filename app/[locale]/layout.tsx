@@ -5,6 +5,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/lib/routing";
 import { Nav } from "@/components/sections/nav";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext", "cyrillic"],
@@ -67,10 +68,12 @@ export default async function LocaleLayout({
         />
       </head>
       <body className="min-h-screen bg-background antialiased">
-        <NextIntlClientProvider messages={messages}>
-          <Nav />
-          <main>{children}</main>
-        </NextIntlClientProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider messages={messages}>
+            <Nav />
+            <main>{children}</main>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
