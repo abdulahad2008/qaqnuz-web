@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-/** Pixel-art Q mark — 9 rectangles forming the QaqnUz logomark */
+/** Pixel-art Q mark — 9 rectangles forming the Qaqnuz logomark */
 export function QaqnuzMark({ className }: { className?: string }) {
   return (
     <svg
@@ -22,7 +22,7 @@ export function QaqnuzMark({ className }: { className?: string }) {
   );
 }
 
-/** Full wordmark: Q mark + "QaqnUz" text — use in nav, footer, auth pages */
+/** Full wordmark: Q mark + "Qaqnuz" text — use in nav, footer, auth pages */
 export function QaqnuzWordmark({
   className,
   textClassName,
@@ -35,11 +35,11 @@ export function QaqnuzWordmark({
       <QaqnuzMark className="h-6 w-5" />
       <span
         className={cn(
-          "font-display italic text-lg tracking-tight text-foreground",
+          "font-sans font-semibold text-lg tracking-tight text-foreground",
           textClassName
         )}
       >
-        QaqnUz
+        Qaqnuz
       </span>
     </span>
   );

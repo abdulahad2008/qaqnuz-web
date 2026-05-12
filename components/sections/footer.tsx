@@ -57,8 +57,8 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4 group w-fit">
               <QaqnuzMark className="h-6 w-5 group-hover:opacity-80 transition-opacity" />
-              <span className="font-display italic text-lg text-foreground group-hover:text-accent transition-colors">
-                QaqnUz
+              <span className="font-sans font-semibold text-lg tracking-tight text-foreground group-hover:text-accent transition-colors">
+                Qaqnuz
               </span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed mb-5 max-w-[16rem]">

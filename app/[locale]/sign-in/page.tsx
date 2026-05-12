@@ -37,7 +37,7 @@ export default function SignInPage() {
             <div>
               <div className="flex items-center gap-2.5 mb-6">
                 <QaqnuzMark className="h-6 w-5" />
-                <span className="font-display italic text-lg text-foreground">QaqnUz</span>
+                <span className="font-sans font-semibold text-lg tracking-tight text-foreground">Qaqnuz</span>
               </div>
 
               <h1 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
