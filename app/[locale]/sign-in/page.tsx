@@ -2,30 +2,53 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowRight, LayoutDashboard, Layers, BarChart3, Sparkles } from "lucide-react";
+import { ArrowRight, LayoutDashboard, Layers, BarChart3, Sparkles, Eye, EyeOff } from "lucide-react";
 import { Section, Container } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/motion/fade-in";
 import { QaqnuzMark } from "@/components/ui/qaqnuz-logo";
 import { Link } from "@/lib/navigation";
+import { supabase } from "@/lib/supabase/client";
+import { useRouter } from "@/lib/navigation";
 
 const FEATURE_ICONS = [LayoutDashboard, Layers, BarChart3];
 
 export default function SignInPage() {
   const t = useTranslations("signIn");
   const features = t.raw("features") as { title: string; description: string }[];
+  const router = useRouter();
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!supabase) {
+      setError("Authentication is not configured yet.");
+      return;
+    }
+
     setLoading(true);
     setError("");
-    await new Promise((r) => setTimeout(r, 800));
-    setLoading(false);
-    setError("Invalid email or password. If you don't have an account yet, request access below.");
+
+    const { error: authError } = await supabase.auth.signInWithPassword({
+      email: form.email,
+      password: form.password,
+    });
+
+    if (authError) {
+      setLoading(false);
+      if (authError.message.includes("Invalid login credentials")) {
+        setError("Wrong email or password. If you haven't been invited yet, request access below.");
+      } else {
+        setError(authError.message);
+      }
+      return;
+    }
+
+    router.push("/dashboard");
   }
 
   return (
@@ -65,7 +88,6 @@ export default function SignInPage() {
                 })}
               </div>
 
-              {/* Early access badge */}
               <div className="surface-elevated px-5 py-4 flex gap-3 items-start">
                 <Sparkles className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                 <div>
@@ -93,6 +115,7 @@ export default function SignInPage() {
                   value={form.email}
                   onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
                   required
+                  autoComplete="email"
                   className="w-full px-4 py-3 rounded-xl bg-secondary border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/60 transition-colors"
                 />
               </div>
@@ -102,21 +125,25 @@ export default function SignInPage() {
                   <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     {t("form.password")}
                   </label>
+                </div>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder={t("form.passwordPlaceholder")}
+                    value={form.password}
+                    onChange={(e) => setForm((p) => ({ ...p, password: e.target.value }))}
+                    required
+                    autoComplete="current-password"
+                    className="w-full px-4 py-3 pr-11 rounded-xl bg-secondary border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/60 transition-colors"
+                  />
                   <button
                     type="button"
-                    className="text-xs text-accent hover:text-accent/80 transition-colors"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    {t("form.forgotPassword")}
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
-                <input
-                  type="password"
-                  placeholder={t("form.passwordPlaceholder")}
-                  value={form.password}
-                  onChange={(e) => setForm((p) => ({ ...p, password: e.target.value }))}
-                  required
-                  className="w-full px-4 py-3 rounded-xl bg-secondary border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent/60 transition-colors"
-                />
               </div>
 
               {error && (
