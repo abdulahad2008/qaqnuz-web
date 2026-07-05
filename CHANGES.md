@@ -1,3 +1,82 @@
+# Qaqnuz Home — Change Log
+
+## Home: Pipeline + InboxDemo transplant · dark logo-orange shell (2026-07-05)
+
+Transplanted the two strongest sections of the rejected prototype (7-stage AI
+**Pipeline** scroll story + live **InboxDemo**) into the production home page,
+rebuilt the **Hero** to the original motionsites spec, and re-based the whole
+marketing shell on the **logo orange** (`#ff6b33`) over a warm near-black
+(`#0e0e0f`) — the phoenix identity. Routes, locales, and other pages are
+untouched. Build green; all three locales render clean; Lighthouse `/uz`
+**Perf 95 · A11y 95**.
+
+### Tokens & shell (Phase 1)
+- `app/globals.css`: marketing shell is now **canonical dark** (warm near-black
+  base, warm cream text). Replaced the ember scale with the **logo-orange family**
+  (`--color-ember-500: #ff6b33`) and pointed `--accent` at it (`hsl 16 100% 60%`).
+  Killed leftover Nexora **indigo** (`::selection`, `.gradient-accent`, hero radial).
+  Added `danger`/`warning`/`success` status tokens for the guardrail/escalation beats.
+- `app/product-ui.css` (**new**): a `.product-ui`-scoped **light/blue** token layer
+  (`#1a5cff`, white surfaces, channel badges) mirroring `design/tokens.css` +
+  `themes.css`, so the product window never bleeds into the marketing shell.
+- `theme-provider`: defaults to **dark** (was `light` — violated the constitution).
+- Assets: copied `qaqnuz-300x300.svg` + hi-res logo → `public/brand/`; wired OG/twitter image.
+
+### Hero (Phase 2) — rebuilt to Appendix A
+- `components/sections/hero.tsx`: badge → serif headline with one **italic
+  orange** word → sub → pill CTA + ghost **play** button → frosted-glass compact
+  **FLOW-7 inbox preview** (light `.product-ui` window) clipped by the 100vh fold.
+- Ported `EmberCanvas` (`components/motion/ember-canvas.tsx`) as the **living
+  background** — `hero.mp4` shipped as an empty 0-byte placeholder, so the spec's
+  "port EmberCanvas if the hero is flat" applied. IntersectionObserver-paused,
+  reduced-motion-safe. The `<video>` slot stays wired for the future asset
+  (its empty placeholder yields a benign dev-only 416, handled by `onError`).
+- Dropped the Nexora CloudFront video URL and the indigo radial.
+
+### Pipeline (Phase 2b) — `components/pipeline/pipeline-story.tsx`
+- Ported the donor's 7-stage scroll story: scroll-linked sticky rail (desktop) +
+  viewport-triggered stepper (mobile) + the guardrail beat (wrong→caught→fixed).
+- Migrated `useLang()` → `useTranslations` and `useReducedMotionSafe` →
+  `useReducedMotion`; restyled donor cream/gold/flame/ink → dark `@theme` tokens.
+  Glows derive from `hsl(var(--accent)/…)`. New **`pipelineStory`** message
+  namespace (uz/ru/en) — kept separate from `pipeline`, which `/product` still uses.
+  Adds a "Batafsil →" link to `/product`.
+
+### InboxDemo (Phase 3) — `components/sections/inbox-demo.tsx`
+- Ported the donor's 4-industry scripted demo and **restyled the product UI to the
+  Pencil FLOW-7 mockups** (`qaqnuz-inbox-mockup.png`) using `.product-ui` tokens:
+  top bar (brand pill, ⌘K search, SLA, avatar), icon nav rail w/ Inbox badge,
+  conversation list with **filter + tag chips** (ESKALATSIYA / AI YOPDI / PLAYBOOK +
+  scores), thread with **journey chips** + the **amber escalation card**
+  (Qabul qilish / AI'ga qaytarish), **AI/Men/TAKEOVER** composer + quick actions,
+  and the full **AI TAHLILI** panel (Niyat bar, His-tuyg'u, Layer Moslik checklist,
+  TAVSIYALAR HIGH/MEDIUM/INFO, Lid holati 92%). New enriched **`inbox`** namespace
+  (uz/ru/en). Window is `aria-hidden`; industry tabs stay keyboard-navigable.
+
+### Judgment ports + pruning (Phases 4–5)
+- **Ported:** EmberCanvas (above). **Skipped w/ reason:** StatBar/CountUp (Results
+  already animates counters), Integrations (ChannelsSection covers it), Ignite
+  (fade-in exists), SmoothScroll/Lenis (avoids a dep + sticky-scroll risk),
+  FinalCta (target `cta.tsx` already ships a rich CTA).
+- **Removed** unused `sections/multi-brand.tsx` (also clears its pre-existing
+  missing-`{count}` runtime error) + `sections/logo-strip.tsx`. **Kept**
+  `dashboard-preview` (still used by `/product`).
+- Home order now: `Hero → Channels → Pipeline → InboxDemo → TrustRamp →
+  Guardrails → Results → Uzbekistan → Pricing → FAQ → CTA → Footer`.
+
+### Verification (Phase 6)
+- `pnpm build` clean (57 pages, 0 TS errors). New/edited files are **lint-clean**;
+  the 44 remaining lint problems are **pre-existing** in untouched, out-of-scope
+  files (dashboard/*, theme-toggle, …).
+- Screenshots at uz/ru/en × {1440, 768, 390}; reduced-motion confirms static
+  fallbacks (pipeline stepper, embers off). Zero raw hex in component code; all
+  user copy via `messages`.
+- Lighthouse `/uz` (desktop): **Perf 95 · A11y 95**. Remaining contrast items are
+  the brand-mandated white-on-orange CTA (an inherent property of logo orange) and
+  the decorative product-window channel-badge micro-labels — accepted constraints.
+
+---
+
 # Nexora Redesign + Full i18n — Change Log
 
 ## Summary (2026-05-12)

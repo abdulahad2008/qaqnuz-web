@@ -12,8 +12,12 @@ const ChannelsSection = dynamic(
   () => import("@/components/sections/channels-section").then((m) => m.ChannelsSection),
   { ssr: false }
 );
-const PipelineFlow = dynamic(
-  () => import("@/components/pipeline/pipeline-flow").then((m) => m.PipelineFlow),
+const PipelineStory = dynamic(
+  () => import("@/components/pipeline/pipeline-story").then((m) => m.PipelineStory),
+  { ssr: false }
+);
+const InboxDemo = dynamic(
+  () => import("@/components/sections/inbox-demo").then((m) => m.InboxDemo),
   { ssr: false }
 );
 const TrustRamp = dynamic(
@@ -22,17 +26,6 @@ const TrustRamp = dynamic(
 );
 const Guardrails = dynamic(
   () => import("@/components/sections/guardrails").then((m) => m.Guardrails),
-  { ssr: false }
-);
-const DashboardPreview = dynamic(
-  () =>
-    import("@/components/dashboard-preview/dashboard-preview").then(
-      (m) => m.DashboardPreview
-    ),
-  { ssr: false }
-);
-const MultiBrand = dynamic(
-  () => import("@/components/sections/multi-brand").then((m) => m.MultiBrand),
   { ssr: false }
 );
 const Results = dynamic(
@@ -68,11 +61,10 @@ export function BelowFold() {
   return (
     <>
       <ChannelsSection />
-      <PipelineFlow />
+      <PipelineStory />
+      <InboxDemo />
       <TrustRamp />
       <Guardrails />
-      <DashboardPreview />
-      <MultiBrand />
       <Results />
       <BuiltForUzbekistan />
       <PricingTeaser />

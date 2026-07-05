@@ -1,38 +1,45 @@
 @import "tailwindcss";
+@import "./product-ui.css";
 
-/* ─── Semantic Design Tokens (raw HSL values) ──────────────── */
+/* ─── Marketing shell — CANONICAL DARK ─────────────────────────
+   Phoenix identity: warm near-black base (#0e0e0f family), warm cream
+   text, LOGO-ORANGE accent (#ff6b33 → hsl 16 100% 60%). Trust-teal is
+   reserved for safety content only. Values are HSL triplets consumed as
+   hsl(var(--token)). Dark is the default the site ships; the light block
+   below only serves the theme toggle / product dashboard routes. ─── */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 210 14% 17%;
-  --primary: 210 14% 17%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 96%;
-  --secondary-foreground: 0 0% 9%;
-  --muted: 0 0% 96%;
-  --muted-foreground: 215 14% 40%;
-  --accent: 17 82% 51%;
+  /* dark is canonical — declared on :root so SSR paints dark first */
+  --background: 24 8% 5%;          /* #0e0d0c warm near-black */
+  --foreground: 40 33% 96%;        /* #f9f4ec warm cream */
+  --primary: 40 33% 96%;
+  --primary-foreground: 24 8% 5%;
+  --secondary: 26 8% 11%;          /* #1e1b18 elevated surface */
+  --secondary-foreground: 40 33% 96%;
+  --muted: 26 8% 11%;
+  --muted-foreground: 36 10% 64%;  /* warm gray */
+  --accent: 16 100% 60%;           /* #ff6b33 logo orange */
   --accent-foreground: 0 0% 100%;
-  --border: 220 13% 88%;
-  --ring: 17 82% 51%;
+  --border: 30 7% 18%;             /* warm hairline */
+  --ring: 16 100% 60%;
   --radius: 0.5rem;
-  --shadow-dashboard: 0 25px 80px -12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.06);
+  --shadow-dashboard: 0 25px 80px -12px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.05);
 }
 
-/* ─── Dark Mode Tokens ─────────────────────────────────────── */
-.dark {
-  --background: 222 14% 9%;
-  --foreground: 210 14% 93%;
-  --primary: 210 14% 93%;
-  --primary-foreground: 222 14% 9%;
-  --secondary: 222 14% 14%;
-  --secondary-foreground: 210 14% 93%;
-  --muted: 222 14% 14%;
-  --muted-foreground: 215 14% 62%;
-  --accent: 17 82% 54%;
+/* ─── Light Mode Tokens (toggle / dashboard only) ──────────── */
+.light {
+  --background: 0 0% 100%;
+  --foreground: 24 12% 12%;
+  --primary: 24 12% 12%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 30 12% 96%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 30 12% 96%;
+  --muted-foreground: 24 8% 40%;
+  --accent: 16 96% 52%;            /* logo orange, tuned for light */
   --accent-foreground: 0 0% 100%;
-  --border: 220 13% 20%;
-  --ring: 17 82% 54%;
-  --shadow-dashboard: 0 25px 80px -12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04);
+  --border: 30 12% 88%;
+  --ring: 16 96% 52%;
+  --shadow-dashboard: 0 25px 80px -12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.06);
 }
 
 /* ─── Tailwind v4 Theme ────────────────────────────────────── */
@@ -51,22 +58,33 @@
   --color-border: hsl(var(--border));
   --color-ring: hsl(var(--ring));
 
-  /* Ember — secondary accent (phoenix-v3 brand identity) */
-  --color-ember-50:  #fff8ed;
-  --color-ember-100: #ffeec9;
-  --color-ember-200: #ffd98e;
-  --color-ember-300: #ffbc4d;
-  --color-ember-400: #ff9d1a;
-  --color-ember-500: #f07d00;
-  --color-ember-600: #c45e00;
-  --color-ember-700: #9a4400;
-  --color-ember-800: #7a3600;
-  --color-ember-900: #5c2800;
+  /* Ember — logo-orange family (phoenix flame). Anchored on the logo
+     accent #ff6b33 (--color-ember-500). Every CTA/highlight/gradient
+     on the marketing shell derives from this scale. */
+  --color-ember-50:  #fff3ee;
+  --color-ember-100: #ffe1d4;
+  --color-ember-200: #ffc3aa;
+  --color-ember-300: #ff9e77;
+  --color-ember-400: #ff8352;
+  --color-ember-500: #ff6b33;
+  --color-ember-600: #ed4d16;
+  --color-ember-700: #c43a10;
+  --color-ember-800: #9c3013;
+  --color-ember-900: #7e2b15;
 
-  /* Trust/teal */
+  /* Trust/teal — reserved for safety / guardrail framing */
   --color-trust-400: #1db8a1;
   --color-trust-500: #0d9e89;
   --color-trust-600: #08806e;
+
+  /* Status — danger (caught/flagged) + warning (escalation) */
+  --color-danger-400: #f87171;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #dc2626;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-success-400: #34d399;
+  --color-success-500: #10b981;
 
   /* Neutral scale */
   --color-neutral-50:  #fafafa;
@@ -150,7 +168,7 @@ body {
 }
 
 ::selection {
-  background: rgba(99, 102, 241, 0.15);
+  background: rgba(255, 107, 51, 0.22);
   color: hsl(var(--foreground));
 }
 
@@ -171,14 +189,14 @@ body {
 
 /* ─── Gradient Text ────────────────────────────────────────── */
 .gradient-accent {
-  background: linear-gradient(135deg, hsl(var(--accent)) 0%, #818cf8 100%);
+  background: linear-gradient(135deg, var(--color-ember-500) 0%, var(--color-ember-300) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-ember {
-  background: linear-gradient(135deg, #f07d00 0%, #ff9d1a 50%, #ffbc4d 100%);
+  background: linear-gradient(135deg, var(--color-ember-600) 0%, var(--color-ember-500) 45%, var(--color-ember-300) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -203,7 +221,7 @@ body {
 }
 
 .ember-glow {
-  box-shadow: 0 0 40px -8px rgba(240, 125, 0, 0.25);
+  box-shadow: 0 0 40px -8px rgba(255, 107, 51, 0.30);
 }
 
 .trust-glow {
@@ -225,11 +243,11 @@ body {
 }
 
 .glass-ember {
-  background: rgba(240, 125, 0, 0.05);
+  background: rgba(255, 107, 51, 0.05);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(240, 125, 0, 0.18);
-  box-shadow: inset 0 1px 0 rgba(255, 188, 77, 0.10), 0 0 40px -12px rgba(240, 125, 0, 0.12);
+  border: 1px solid rgba(255, 107, 51, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 131, 82, 0.12), 0 0 40px -12px rgba(255, 107, 51, 0.14);
 }
 
 /* ─── Film Grain Overlay ────────────────────────────────────── */
