@@ -606,7 +606,7 @@
     "overline": "Three channels. One pipeline.",
     "title": "Every touchpoint,",
     "titleEmphasis": "fully automated.",
-    "description": "Qaqnuz handles Instagram DMs, public comments, and story mention replies through the same 8-stage AI pipeline — with the same 9 safety guardrails on every response.",
+    "description": "Qaqnuz handles Instagram DMs, public comments, and story mention replies through the same 7-stage AI pipeline — with the same 9 safety guardrails on every response.",
     "tabs": [
       {
         "key": "dms",
@@ -626,7 +626,48 @@
         "subtitle": "Story mention reply automation",
         "description": "When a customer mentions your brand in a story, Qaqnuz replies within seconds — turning organic story mentions into sales conversations automatically."
       }
-    ]
+    ],
+    "screens": {
+      "typing": "typing…",
+      "read": "Read",
+      "aiChip": "AI · 0.94",
+      "leadToast": "Lead captured",
+      "likes": "likes",
+      "ago": "1d",
+      "aiComment": "AI",
+      "dm": {
+        "handle": "kadr_beauty",
+        "activeNow": "active now",
+        "placeholder": "Message…",
+        "messages": [
+          { "from": "customer", "text": "Hi! How much is this cream? 🙏" },
+          { "from": "ai", "text": "Hi! Our Vitamin C cream is 89,000 UZS. Order now for 10% off! 🎁" },
+          { "from": "customer", "text": "Great! How do I pay?" },
+          { "from": "ai", "text": "Via Click or Payme. I'll send you the payment link! 💳" }
+        ]
+      },
+      "comments": {
+        "handle": "dilnoza_style",
+        "location": "Tashkent, Uzbekistan",
+        "caption": "New collection",
+        "list": [
+          { "user": "@nargiza_u", "text": "Do you have this dress in size 38? 😍", "ai": false, "likes": 3 },
+          { "user": "dilnoza_style", "text": "Yes, sizes 36–42! DM us, we'll send the catalog 🌸", "ai": true, "likes": 12 },
+          { "user": "@malika_t", "text": "How much is it?", "ai": false, "likes": 1 },
+          { "user": "dilnoza_style", "text": "From 150,000 UZS. Discount on now! 💜", "ai": true, "likes": 8 }
+        ]
+      },
+      "story": {
+        "handle": "moda_house",
+        "time": "2h",
+        "title": "New Autumn Collection!",
+        "subtitle": "50+ new models",
+        "mentionLabel": "@sarvinoz mentioned you",
+        "mention": "🔥 @moda_house love it!",
+        "reply": "Thank you! 💙 Want to see the new collection? Special code: MODA10 🎁",
+        "stamp": "AI auto-replied · 8s"
+      }
+    }
   },
   "bookDemo": {
     "title": "Book a",

@@ -1,6 +1,75 @@
 # Qaqnuz Home — Change Log
 
-## Home: Pipeline + InboxDemo transplant · dark logo-orange shell (2026-07-05)
+## Stage 2 — Polish pass: pipeline rail · phone demos · hero ambient (2026-07-05)
+
+Three precision workstreams on the home page. `pnpm build` + `pnpm lint` clean
+(new/edited files lint-clean); all 3 locales key-parity verified; Lighthouse
+`/uz` still **Perf 95 · A11y 95** (ambient added zero regression — CLS 0.065,
+TBT 0 ms). Grep proof (component code): **zero raw hex, zero palette classes**
+in `pipeline-story.tsx`, `channels-section.tsx`, `hero.tsx`, `hero-ambient.tsx`.
+
+### WS1 — Pipeline rail (`components/pipeline/pipeline-story.tsx`)
+Root cause → fix:
+- **Marker overshoot** — `markerTop` mapped 0–100 % of the *padded container*, so
+  the ball landed ~27 px past circle-7 (and above circle-1). → Ball `top` is now a
+  **measured px offset**, clamped to `[circle-1 center, circle-7 center]`.
+- **Uneven mapping** — 16.7 % steps assumed circle centers were evenly spread
+  across the container; they're only even within the `<ol>`. → Centers are
+  **measured per-circle** (refs + `useLayoutEffect`, recomputed on resize).
+- **Line/ball desync** — the line used a linear `scaleY` while the ball used a
+  piecewise map with the guardrail plateau. → **One** MotionValue (`fillRaw` →
+  `useSpring` 120/28) drives **both** the fill height and the ball top; they
+  cannot diverge. Spring output is clamped, so it never overshoots circle-7.
+- **Line through the digits** — lit circles were translucent (`bg-accent/20`). →
+  Lit circles are **opaque** solid accent discs; the line sits behind the `z-10`
+  `<ol>` and terminates at circle-7's center. `stage` now derives from the sprung
+  fill crossing measured centers (shared source → true hand-off).
+- **Verification** — Playwright asserts the ball's center is within 2 px of the
+  target circle: **p0.02 → circle-1 Δ0.00 px, p1.0 → circle-7 Δ0.11 px (PASS)**;
+  p0.5 correctly holds at circle-5 (guardrail). Screenshots at 5 scroll positions.
+
+### WS2 — Channels phone demos (`components/sections/channels-section.tsx`)
+Root cause: a static sketch with hardcoded UZ/RU strings in JSX and raw palette
+(`bg-blue-500`, `gray-*`, `#1a1a1a`, `#7c3aed`, `#e11d48`), the "Chat s
+kompaniyey" typo, and an "8 bosqichli" count contradicting the 7-stage
+hero/pipeline.
+- Shared modern **PhoneShell** (Dynamic Island, thin bezel, screen reflection).
+- **DM**: timed sequence — customer bubble → typing dots → spring AI reply →
+  "✦ AI · 0.94" chip + "✓✓ read" receipt → lead-captured toast. Restarts on tab
+  re-select. **Comments**: staggered blur-in, AI "verified" chip, heart pulse +
+  like tick. **Story**: filling progress bar (~5 s), slide-up mention, typewriter
+  AI reply, stamp. All pause offscreen (`onViewportEnter/Leave`), render a static
+  final state under `prefers-reduced-motion`, `aria-hidden` internals, keyboard-
+  native tabs.
+- Copy → `messages.channels.screens` (uz canonical + ru/en); avatar letters
+  derived from handles; typo fixed ("hozir onlayn"); **count 8 → 7** in channels
+  (uz/ru/en). `product-ui.css` gained social-surface tokens (IG gradient, bezel,
+  story bg, heart). Tokens-only; grep-clean.
+- **Flagged, not silently changed:** the broader 8-vs-7 inconsistency in
+  `/product`, `/pricing`, and the FAQ — those copies *enumerate 8 named steps*
+  (qualify→…→publish) and live on out-of-scope pages, so forcing "7" would break
+  the enumeration. Needs an owner decision on whether the product is 7- or 8-stage.
+
+### WS3 — Hero ambient (`components/motion/hero-ambient.tsx`, `hero.tsx`)
+Owner decision on the Stage-2 flag: **keep the dark hero** (CLAUDE.md marketing
+shell is dark) and add the ambient, rather than inverting to near-white (which
+would also force the fixed nav + headline to flip colours on scroll).
+- `HeroAmbient`: 4 large, very soft radial **clouds** in the logo-orange family
+  (accent + ember peach + faint gold) drifting slowly (38–60 s, different paths).
+  Compositor-only (`@keyframes drift-*`, transform/scale), token colours,
+  `will-change:transform`, **paused offscreen** (IntersectionObserver), collapsed
+  to a **static single frame** under `prefers-reduced-motion`.
+- Removed the flat static radial; kept EmberCanvas (subtler) + grain over it.
+- **Removed the hero badge** (owner: "do not write anything").
+- Replaced the active `<video src="/video/hero.mp4">` (empty placeholder → benign
+  416) with a **commented slot** wired to `/motion/hero-loop.webm|mp4` (Appendix A
+  attributes) — 416 gone, drop-in ready.
+- Fold verified at **1440×900 and 1280×800**: nav + headline + sub + CTAs + top of
+  the inbox preview all visible; preview clipped by the fold. Mobile (390) holds.
+
+---
+
+## Stage 1 — Home: Pipeline + InboxDemo transplant · dark logo-orange shell (2026-07-05)
 
 Transplanted the two strongest sections of the rejected prototype (7-stage AI
 **Pipeline** scroll story + live **InboxDemo**) into the production home page,

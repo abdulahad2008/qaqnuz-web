@@ -606,7 +606,7 @@
     "overline": "Uch kanal. Bitta quvur.",
     "title": "Har bir aloqa nuqtasi,",
     "titleEmphasis": "to'liq avtomatlashtirilgan.",
-    "description": "Qaqnuz Instagram DM, jamoat izohlari va story eslatmalariga javoblarni bir xil 8 bosqichli AI quvuri orqali — har bir javobda bir xil 9 ta xavfsizlik qo'riqlovchisi bilan boshqaradi.",
+    "description": "Qaqnuz Instagram DM, jamoat izohlari va story eslatmalariga javoblarni bir xil 7 bosqichli AI quvuri orqali — har bir javobda bir xil 9 ta xavfsizlik qo'riqlovchisi bilan boshqaradi.",
     "tabs": [
       {
         "key": "dms",
@@ -626,7 +626,48 @@
         "subtitle": "Story eslatma javob avtomatlashtirish",
         "description": "Mijoz story da brendingizni eslansa, Qaqnuz soniyalar ichida javob beradi — organik story eslatmalarini savdo suhbatlariga avtomatik ravishda aylantiradi."
       }
-    ]
+    ],
+    "screens": {
+      "typing": "yozmoqda…",
+      "read": "O'qildi",
+      "aiChip": "AI · 0.94",
+      "leadToast": "Lid qo'lga kiritildi",
+      "likes": "layk",
+      "ago": "1d",
+      "aiComment": "AI",
+      "dm": {
+        "handle": "kadr_beauty",
+        "activeNow": "hozir onlayn",
+        "placeholder": "Xabar yozing…",
+        "messages": [
+          { "from": "customer", "text": "Salom! Bu kremning narxi qancha? 🙏" },
+          { "from": "ai", "text": "Salom! Vitamin C kremimiz 89 000 so'm. Hozir buyurtma bersangiz 10% chegirma! 🎁" },
+          { "from": "customer", "text": "Ajoyib! Qanday to'layman?" },
+          { "from": "ai", "text": "Click yoki Payme orqali. To'lov havolasini yuboraman! 💳" }
+        ]
+      },
+      "comments": {
+        "handle": "dilnoza_style",
+        "location": "Toshkent, O'zbekiston",
+        "caption": "Yangi kolleksiya",
+        "list": [
+          { "user": "@nargiza_u", "text": "Bu ko'ylak bormi 38 razmer? 😍", "ai": false, "likes": 3 },
+          { "user": "dilnoza_style", "text": "Ha, 36–42 mavjud! DM yozing, katalog yuboramiz 🌸", "ai": true, "likes": 12 },
+          { "user": "@malika_t", "text": "Narxi qancha?", "ai": false, "likes": 1 },
+          { "user": "dilnoza_style", "text": "150 000 so'mdan. Hozir chegirma! 💜", "ai": true, "likes": 8 }
+        ]
+      },
+      "story": {
+        "handle": "moda_house",
+        "time": "2h",
+        "title": "Yangi Kuz Kolleksiyasi!",
+        "subtitle": "50+ yangi model",
+        "mentionLabel": "@sarvinoz sizni belgiladi",
+        "mention": "🔥 @moda_house juda yoqdi!",
+        "reply": "Rahmat! 💙 Yangi kolleksiya ko'rishni xohlaysizmi? Maxsus kod: MODA10 🎁",
+        "stamp": "AI avto-javob berdi · 8s"
+      }
+    }
   },
   "bookDemo": {
     "title": "30 daqiqalik",

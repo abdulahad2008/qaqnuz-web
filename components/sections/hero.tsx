@@ -5,6 +5,7 @@ import { ArrowRight, Play, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/lib/navigation";
 import { EmberCanvas } from "@/components/motion/ember-canvas";
+import { HeroAmbient } from "@/components/motion/hero-ambient";
 import { FilmGrain } from "@/components/motion/film-grain";
 import { QaqnuzMark } from "@/components/ui/qaqnuz-logo";
 
@@ -263,32 +264,19 @@ export function Hero() {
 
   return (
     <section className="relative flex h-screen min-h-[640px] flex-col overflow-hidden pt-16">
-      {/* Living background: video slot (hidden until asset ships) + embers */}
-      <div aria-hidden className="absolute inset-0" style={{ background: "hsl(var(--background))" }}>
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster=""
-          className="absolute inset-0 h-full w-full object-cover opacity-40"
-          onError={(e) => {
-            (e.currentTarget as HTMLVideoElement).style.display = "none";
-          }}
-        >
-          <source src="/video/hero.mp4" type="video/mp4" />
+      {/* Dark base + ambient orange clouds (Nexora airy feel, in the dark shell) */}
+      <div aria-hidden className="absolute inset-0" style={{ background: "hsl(var(--background))" }} />
+      <HeroAmbient />
+      {/*
+        Future motion asset: drop hero-loop.webm|mp4 into public/motion/ and
+        uncomment — no other changes needed (Appendix A video attributes).
+        <video autoPlay muted loop playsInline
+          className="absolute inset-0 h-full w-full object-cover opacity-40">
+          <source src="/motion/hero-loop.webm" type="video/webm" />
+          <source src="/motion/hero-loop.mp4" type="video/mp4" />
         </video>
-      </div>
-      <EmberCanvas className="opacity-90" />
-      {/* Orange radial glow (logo-orange, replaces Nexora indigo) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 72% 55% at 50% -5%, hsl(var(--accent) / 0.14) 0%, transparent 68%)",
-        }}
-      />
+      */}
+      <EmberCanvas className="opacity-70" />
       <FilmGrain opacity={0.02} />
       {/* Bottom fade so the clipped preview melts into the page */}
       <div
@@ -298,17 +286,7 @@ export function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center px-6 pt-6 lg:pt-10">
-        {/* Badge */}
-        <motion.div
-          initial={reduced ? false : { opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-6 inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/60 px-4 py-1.5 text-sm text-muted-foreground backdrop-blur-sm"
-        >
-          {t("badge")}
-        </motion.div>
-
+      <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center px-6 pt-10 lg:pt-16">
         {/* Headline */}
         <h1 className="text-center font-display text-[2.75rem] leading-[0.98] tracking-tight sm:text-6xl lg:text-[5rem]">
           <WordBlur words={words1} delay={0.15} className="text-foreground" />
