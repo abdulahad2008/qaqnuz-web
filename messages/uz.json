@@ -54,6 +54,18 @@
       "guardrailsLabel": "xavfsizlik filtrlari",
       "coverage": "24/7",
       "coverageLabel": "avtonom qamrov"
+    },
+    "inboxPreview": {
+      "sla": "SLA: 2m 14s",
+      "inboxLabel": "Inbox",
+      "aiActive": "AI faol",
+      "aiClosed": "AI YOPDI",
+      "customerMsg": "Bu ko'ylak bormi? 🧡",
+      "aiReply": "«Lola» ko'ylagi bor — 240 000 so'm, S–XL. Qaysi o'lcham kerak? 🧡",
+      "sourceChip": "Katalog",
+      "delivered": "yetkazildi",
+      "intent": "Niyat",
+      "responseTime": "O'rtacha javob"
     }
   },
   "logoStrip": {

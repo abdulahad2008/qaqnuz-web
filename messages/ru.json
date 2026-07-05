@@ -54,6 +54,18 @@
       "guardrailsLabel": "защитных фильтров",
       "coverage": "24/7",
       "coverageLabel": "автономная работа"
+    },
+    "inboxPreview": {
+      "sla": "SLA: 2m 14s",
+      "inboxLabel": "Inbox",
+      "aiActive": "AI активен",
+      "aiClosed": "AI ЗАКРЫЛ",
+      "customerMsg": "Это платье есть в наличии? 🧡",
+      "aiReply": "Платье «Lola» есть — 240 000 сум, S–XL. Какой размер нужен? 🧡",
+      "sourceChip": "Каталог",
+      "delivered": "доставлено",
+      "intent": "Намерение",
+      "responseTime": "Ср. ответ"
     }
   },
   "logoStrip": {

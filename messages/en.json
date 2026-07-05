@@ -54,6 +54,18 @@
       "guardrailsLabel": "safety guardrails",
       "coverage": "24/7",
       "coverageLabel": "autonomous coverage"
+    },
+    "inboxPreview": {
+      "sla": "SLA: 2m 14s",
+      "inboxLabel": "Inbox",
+      "aiActive": "AI active",
+      "aiClosed": "AI CLOSED",
+      "customerMsg": "Is this dress in stock? 🧡",
+      "aiReply": "The «Lola» dress is available — 240,000 UZS, S–XL. Which size do you need? 🧡",
+      "sourceChip": "Catalog",
+      "delivered": "delivered",
+      "intent": "Intent",
+      "responseTime": "Avg. reply"
     }
   },
   "logoStrip": {
