@@ -136,11 +136,10 @@ function DMScreen({ s, ui, play, reduced }: { s: Dm; ui: Screens; play: boolean;
   const threadRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (reduced) { setStep(total); return; }
-    if (!play) return;
-    setStep(0);
-    setTyping(false);
+    // Reduced-motion final state is carried by the initial useState above.
+    if (reduced || !play) return;
     const timers: number[] = [];
+    timers.push(window.setTimeout(() => { setStep(0); setTyping(false); }, 0));
     let delay = 600;
     s.messages.forEach((m, i) => {
       if (m.from === "ai") {
@@ -259,10 +258,9 @@ function CommentsScreen({ s, ui, play, reduced }: { s: Comments; ui: Screens; pl
   const [likeN, setLikeN] = useState(reduced ? 248 : 214);
 
   useEffect(() => {
-    if (reduced) { setCount(total); setLiked(true); setLikeN(248); return; }
-    if (!play) return;
-    setCount(0); setLiked(false); setLikeN(214);
+    if (reduced || !play) return;
     const timers: number[] = [];
+    timers.push(window.setTimeout(() => { setCount(0); setLiked(false); setLikeN(214); }, 0));
     s.list.forEach((_, i) => timers.push(window.setTimeout(() => setCount(i + 1), 700 + i * 750)));
     timers.push(window.setTimeout(() => { setLiked(true); setLikeN(248); }, 700 + total * 750 + 400));
     return () => timers.forEach(clearTimeout);
@@ -337,17 +335,16 @@ function CommentsScreen({ s, ui, play, reduced }: { s: Comments; ui: Screens; pl
 
 /* ── Story screen ─────────────────────────────────────────── */
 
-function StoryScreen({ s, ui, play, reduced }: { s: Story; ui: Screens; play: boolean; reduced: boolean }) {
+function StoryScreen({ s, play, reduced }: { s: Story; play: boolean; reduced: boolean }) {
   const L = s.handle.charAt(0).toUpperCase();
   const [showMention, setShowMention] = useState(reduced);
   const [typed, setTyped] = useState(reduced ? s.reply : "");
   const [showStamp, setShowStamp] = useState(reduced);
 
   useEffect(() => {
-    if (reduced) { setShowMention(true); setTyped(s.reply); setShowStamp(true); return; }
-    if (!play) return;
-    setShowMention(false); setTyped(""); setShowStamp(false);
+    if (reduced || !play) return;
     const timers: number[] = [];
+    timers.push(window.setTimeout(() => { setShowMention(false); setTyped(""); setShowStamp(false); }, 0));
     timers.push(window.setTimeout(() => setShowMention(true), 1400));
     // typewriter for the AI reply
     let idx = 0;
@@ -512,7 +509,7 @@ export function ChannelsSection() {
                   <PhoneShell dark={isDark}>
                     {active === "dms" && <DMScreen s={sc.dm} ui={sc} play={play} reduced={reduced} />}
                     {active === "comments" && <CommentsScreen s={sc.comments} ui={sc} play={play} reduced={reduced} />}
-                    {active === "stories" && <StoryScreen s={sc.story} ui={sc} play={play} reduced={reduced} />}
+                    {active === "stories" && <StoryScreen s={sc.story} play={play} reduced={reduced} />}
                   </PhoneShell>
                 </motion.div>
               </AnimatePresence>
