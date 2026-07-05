@@ -52,6 +52,13 @@
   --pu-ch-whatsapp:    #22c55e;
   --pu-ch-web:         #7c3aed;
 
+  /* social-surface chrome (channels phone demos) */
+  --pu-gradient-instagram: linear-gradient(135deg, #feda75 0%, #fa7e1e 28%, #d62976 58%, #962fbf 82%, #4f5bd5 100%);
+  --pu-bezel:          #16181d;   /* phone frame */
+  --pu-bezel-notch:    #0b0c0f;   /* dynamic island */
+  --pu-story-bg:       #101012;   /* story viewer (dark surface) */
+  --pu-heart:          #e11d48;   /* like heart */
+
   /* radii + type */
   --pu-radius-sm: 6px;
   --pu-radius-md: 10px;

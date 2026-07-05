@@ -1,302 +1,506 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { MessageCircle, MessageSquare, Bookmark, CheckCircle2, Heart } from "lucide-react";
+import {
+  MessageCircle,
+  MessageSquare,
+  Bookmark,
+  Heart,
+  Send,
+  MoreHorizontal,
+  CheckCheck,
+} from "lucide-react";
 import { Section, Container, SectionHeader } from "@/components/ui/section";
 import { FadeIn } from "@/components/motion/fade-in";
 
-/* ── Phone mockup conversations ──────────────────────────── */
+/*
+ * Living Instagram surface demos (DM / Comments / Story). Each screen plays a
+ * timed sequence when its tab is active and the phone is in view; it restarts
+ * when the tab is re-selected and renders a static final state under
+ * prefers-reduced-motion. All copy comes from channels.screens; all colour
+ * comes from the .product-ui token layer (social surfaces are light/dark
+ * product chrome, deliberately distinct from the dark marketing shell). The
+ * decorative internals are aria-hidden; the tab buttons stay keyboard-native.
+ */
 
-function DMPhone() {
+type Dm = { handle: string; activeNow: string; placeholder: string; messages: { from: string; text: string }[] };
+type Comment = { user: string; text: string; ai: boolean; likes: number };
+type Comments = { handle: string; location: string; caption: string; list: Comment[] };
+type Story = {
+  handle: string; time: string; title: string; subtitle: string;
+  mentionLabel: string; mention: string; reply: string; stamp: string;
+};
+type Screens = {
+  typing: string; read: string; aiChip: string; leadToast: string; likes: string; ago: string; aiComment: string;
+  dm: Dm; comments: Comments; story: Story;
+};
+
+/* ── shared bits ──────────────────────────────────────────── */
+
+function StatusBar({ dark = false }: { dark?: boolean }) {
+  const color = dark ? "var(--pu-text-inverse)" : "var(--pu-text)";
   return (
-    <div className="flex flex-col h-full bg-white">
-      {/* App header */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-100 bg-white">
-        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white text-[10px] font-bold">
-          K
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="text-[11px] font-semibold text-gray-900 leading-none">kadr_beauty</div>
-          <div className="text-[9px] text-gray-400 mt-0.5">Chat s kompaniyey</div>
-        </div>
-        <div className="flex gap-2 text-gray-400">
-          <div className="w-4 h-4 rounded-full border border-gray-200" />
-          <div className="w-4 h-4 rounded-full border border-gray-200" />
-        </div>
-      </div>
+    <div className="flex items-center justify-between px-6 pt-2.5 pb-1 text-[10px] font-semibold" style={{ color }}>
+      <span>9:41</span>
+      <span className="flex items-center gap-1">
+        <span className="flex gap-[2px] items-end">
+          {[3, 5, 7, 9].map((h) => (
+            <span key={h} className="w-[3px] rounded-sm" style={{ height: h, background: color }} />
+          ))}
+        </span>
+        <span className="ml-0.5 inline-block h-2 w-4 rounded-[3px] border" style={{ borderColor: color }}>
+          <span className="block h-full w-2/3 rounded-[1px]" style={{ background: color }} />
+        </span>
+      </span>
+    </div>
+  );
+}
 
-      {/* Messages */}
-      <div className="flex-1 overflow-hidden px-3 py-3 flex flex-col gap-2.5 bg-gray-50/50">
-        {/* User message */}
-        <div className="flex justify-end">
-          <div className="bg-blue-500 text-white text-[10px] rounded-2xl rounded-tr-sm px-3 py-2 max-w-[75%] leading-relaxed">
-            Salom! Bu kremning narxi qancha? 🙏
-          </div>
-        </div>
+function IgAvatar({ letter, size = 28, ring = false }: { letter: string; size?: number; ring?: boolean }) {
+  return (
+    <span
+      className="flex shrink-0 items-center justify-center rounded-full font-bold text-white"
+      style={{
+        width: size,
+        height: size,
+        fontSize: size * 0.36,
+        background: "var(--pu-gradient-instagram)",
+        boxShadow: ring ? "0 0 0 2px var(--pu-surface), 0 0 0 3.5px transparent" : undefined,
+      }}
+    >
+      {letter}
+    </span>
+  );
+}
 
-        {/* Bot response */}
-        <div className="flex gap-2">
-          <div className="w-5 h-5 rounded-full bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white text-[7px] font-bold shrink-0 mt-auto">
-            K
-          </div>
-          <div className="bg-white border border-gray-100 text-gray-800 text-[10px] rounded-2xl rounded-tl-sm px-3 py-2 max-w-[75%] leading-relaxed shadow-sm">
-            Salom! Bizning Vitamin C kremimiz 89,000 so&apos;m. Hozir buyurtma bersangiz 10% chegirma olasiz! 🎁
-          </div>
-        </div>
+function TypingDots({ dark = false }: { dark?: boolean }) {
+  return (
+    <span className="flex gap-1" aria-hidden="true">
+      {[0, 1, 2].map((i) => (
+        <motion.span
+          key={i}
+          className="h-1.5 w-1.5 rounded-full"
+          style={{ background: dark ? "var(--pu-text-inverse)" : "var(--pu-text-subtle)" }}
+          animate={{ opacity: [0.3, 1, 0.3], y: [0, -2, 0] }}
+          transition={{ repeat: Infinity, duration: 0.9, delay: i * 0.15 }}
+        />
+      ))}
+    </span>
+  );
+}
 
-        {/* User follow-up */}
-        <div className="flex justify-end">
-          <div className="bg-blue-500 text-white text-[10px] rounded-2xl rounded-tr-sm px-3 py-2 max-w-[75%] leading-relaxed">
-            Ajoyib! Qanday to&apos;layman?
+function PhoneShell({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
+  return (
+    <div className="product-ui relative" style={{ width: 280 }} aria-hidden="true">
+      {/* soft glow */}
+      <div
+        className="absolute -inset-6 -z-10 rounded-[3rem] blur-3xl"
+        style={{ background: "var(--pu-primary-soft)", opacity: 0.5 }}
+      />
+      <div
+        className="relative rounded-[2.9rem] p-[3px]"
+        style={{ background: "var(--pu-bezel)", boxShadow: "0 30px 80px -22px rgba(0,0,0,0.55)" }}
+      >
+        <div
+          className="relative overflow-hidden rounded-[2.6rem]"
+          style={{ background: dark ? "var(--pu-story-bg)" : "var(--pu-surface)" }}
+        >
+          {/* Dynamic Island */}
+          <div
+            className="absolute left-1/2 top-2 z-30 h-5 w-[68px] -translate-x-1/2 rounded-full"
+            style={{ background: "var(--pu-bezel-notch)" }}
+          />
+          {/* screen reflection highlight */}
+          <div
+            className="pointer-events-none absolute inset-0 z-20"
+            style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, transparent 38%)" }}
+          />
+          <div style={{ height: 532 }} className="relative flex flex-col">
+            {children}
           </div>
-        </div>
-
-        {/* Bot final */}
-        <div className="flex gap-2">
-          <div className="w-5 h-5 rounded-full bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white text-[7px] font-bold shrink-0 mt-auto">
-            K
-          </div>
-          <div className="bg-white border border-gray-100 text-gray-800 text-[10px] rounded-2xl rounded-tl-sm px-3 py-2 max-w-[75%] leading-relaxed shadow-sm">
-            Click yoki Payme orqali to&apos;lash mumkin. To&apos;lov havolasini yuboraman! 💳
-          </div>
-        </div>
-      </div>
-
-      {/* Input bar */}
-      <div className="flex items-center gap-2 px-3 py-2.5 border-t border-gray-100 bg-white">
-        <div className="flex-1 rounded-full bg-gray-100 px-3 py-1.5 text-[9px] text-gray-400">
-          Xabar yozing...
-        </div>
-        <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
-          <div className="w-2.5 h-2.5 border-r border-t border-white rotate-45 -translate-x-px" />
         </div>
       </div>
     </div>
   );
 }
 
-function CommentsPhone() {
-  const comments = [
-    { user: "@nargiza_u", text: "Bu ko'ylak bormi 38 razmer? 😍",       isBot: false, likes: 3  },
-    { user: "dilnoza_style", text: "Ha, 36-42 razmerlarda mavjud! DM yozing, to'liq katalog yuboramiz 🌸", isBot: true, likes: 12 },
-    { user: "@malika_t",   text: "Narxi qancha?",                        isBot: false, likes: 1  },
-    { user: "dilnoza_style", text: "150,000 so'mdan boshlanadi. Hozir chegirma mavjud! 💜",               isBot: true, likes: 8  },
-  ];
+/* ── DM screen ────────────────────────────────────────────── */
+
+function DMScreen({ s, ui, play, reduced }: { s: Dm; ui: Screens; play: boolean; reduced: boolean }) {
+  const total = s.messages.length;
+  const L = s.handle.charAt(0).toUpperCase();
+  const [step, setStep] = useState(reduced ? total : 0);
+  const [typing, setTyping] = useState(false);
+  const threadRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (reduced) { setStep(total); return; }
+    if (!play) return;
+    setStep(0);
+    setTyping(false);
+    const timers: number[] = [];
+    let delay = 600;
+    s.messages.forEach((m, i) => {
+      if (m.from === "ai") {
+        timers.push(window.setTimeout(() => setTyping(true), delay));
+        delay += 950;
+      }
+      timers.push(window.setTimeout(() => { setTyping(false); setStep(i + 1); }, delay));
+      delay += 1150;
+    });
+    return () => timers.forEach(clearTimeout);
+  }, [play, reduced, s.messages, total]);
+
+  useEffect(() => {
+    if (threadRef.current) threadRef.current.scrollTop = threadRef.current.scrollHeight;
+  }, [step, typing]);
+
+  const shown = s.messages.slice(0, step);
+  const lastAi = shown.map((m) => m.from).lastIndexOf("ai");
+
   return (
-    <div className="flex flex-col h-full bg-white">
-      {/* Post header */}
-      <div className="flex items-center gap-2 px-3 py-2.5 border-b border-gray-100">
-        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-400 to-indigo-500 flex items-center justify-center text-white text-[10px] font-bold">
-          D
+    <>
+      <StatusBar />
+      {/* header */}
+      <div className="flex items-center gap-2 border-b px-3 pb-2 pt-1" style={{ borderColor: "var(--pu-border)" }}>
+        <span className="relative">
+          <IgAvatar letter={L} size={30} />
+          <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2" style={{ background: "var(--pu-success)", borderColor: "var(--pu-surface)" }} />
+        </span>
+        <div className="min-w-0">
+          <div className="text-[12px] font-semibold" style={{ color: "var(--pu-text)" }}>{s.handle}</div>
+          <div className="text-[9px]" style={{ color: "var(--pu-text-subtle)" }}>{s.activeNow}</div>
         </div>
+        <MoreHorizontal className="ml-auto h-4 w-4" style={{ color: "var(--pu-text-subtle)" }} />
+      </div>
+
+      {/* thread */}
+      <div ref={threadRef} className="flex flex-1 flex-col gap-2 overflow-hidden px-3 py-3" style={{ background: "var(--pu-bg)" }}>
+        <AnimatePresence initial={false}>
+          {shown.map((m, i) => {
+            const isCustomer = m.from === "customer";
+            return (
+              <motion.div
+                key={i}
+                initial={reduced ? false : { opacity: 0, y: 10, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ type: "spring", stiffness: 380, damping: 26 }}
+                className={`flex flex-col ${isCustomer ? "items-end" : "items-start"}`}
+              >
+                <div className="flex items-end gap-1.5">
+                  {!isCustomer && <IgAvatar letter={L} size={18} />}
+                  <p
+                    className="max-w-[190px] rounded-2xl px-3 py-2 text-[11px] leading-relaxed"
+                    style={
+                      isCustomer
+                        ? { background: "var(--pu-primary)", color: "var(--pu-text-inverse)", borderBottomRightRadius: 4 }
+                        : { background: "var(--pu-surface-muted)", color: "var(--pu-text)", borderBottomLeftRadius: 4 }
+                    }
+                  >
+                    {m.text}
+                  </p>
+                </div>
+                {!isCustomer && (
+                  <span className="ml-6 mt-1 flex items-center gap-1 text-[8px]" style={{ color: "var(--pu-text-subtle)" }}>
+                    <span className="rounded px-1 py-0.5 font-semibold" style={{ background: "var(--pu-primary-soft)", color: "var(--pu-primary)" }}>✦ {ui.aiChip}</span>
+                    {i === lastAi && <span className="flex items-center gap-0.5" style={{ color: "var(--pu-primary)" }}><CheckCheck className="h-2.5 w-2.5" />{ui.read}</span>}
+                  </span>
+                )}
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+        {typing && !reduced && (
+          <div className="flex items-end gap-1.5">
+            <IgAvatar letter={L} size={18} />
+            <span className="rounded-2xl px-3 py-2.5" style={{ background: "var(--pu-surface-muted)", borderBottomLeftRadius: 4 }}>
+              <TypingDots />
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* lead toast */}
+      <AnimatePresence>
+        {step >= total && (
+          <motion.div
+            initial={reduced ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mx-3 mb-1 flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[10px] font-bold"
+            style={{ background: "var(--pu-success-soft)", color: "var(--pu-success-text)" }}
+          >
+            ✅ {ui.leadToast}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* input */}
+      <div className="flex items-center gap-2 border-t px-3 py-2" style={{ borderColor: "var(--pu-border)" }}>
+        <div className="flex-1 rounded-full px-3 py-1.5 text-[10px]" style={{ background: "var(--pu-surface-muted)", color: "var(--pu-text-subtle)" }}>
+          {s.placeholder}
+        </div>
+        <span className="flex h-6 w-6 items-center justify-center rounded-full" style={{ background: "var(--pu-primary)" }}>
+          <Send className="h-3 w-3" style={{ color: "var(--pu-text-inverse)" }} />
+        </span>
+      </div>
+    </>
+  );
+}
+
+/* ── Comments screen ──────────────────────────────────────── */
+
+function CommentsScreen({ s, ui, play, reduced }: { s: Comments; ui: Screens; play: boolean; reduced: boolean }) {
+  const total = s.list.length;
+  const L = s.handle.charAt(0).toUpperCase();
+  const [count, setCount] = useState(reduced ? total : 0);
+  const [liked, setLiked] = useState(reduced);
+  const [likeN, setLikeN] = useState(reduced ? 248 : 214);
+
+  useEffect(() => {
+    if (reduced) { setCount(total); setLiked(true); setLikeN(248); return; }
+    if (!play) return;
+    setCount(0); setLiked(false); setLikeN(214);
+    const timers: number[] = [];
+    s.list.forEach((_, i) => timers.push(window.setTimeout(() => setCount(i + 1), 700 + i * 750)));
+    timers.push(window.setTimeout(() => { setLiked(true); setLikeN(248); }, 700 + total * 750 + 400));
+    return () => timers.forEach(clearTimeout);
+  }, [play, reduced, s.list, total]);
+
+  return (
+    <>
+      <StatusBar />
+      {/* post header */}
+      <div className="flex items-center gap-2 px-3 pb-2 pt-1">
+        <IgAvatar letter={L} size={28} ring />
         <div>
-          <div className="text-[10px] font-semibold text-gray-900">dilnoza_style</div>
-          <div className="text-[8px] text-gray-400">Toshkent, O&apos;zbekiston</div>
+          <div className="text-[11px] font-semibold" style={{ color: "var(--pu-text)" }}>{s.handle}</div>
+          <div className="text-[8px]" style={{ color: "var(--pu-text-subtle)" }}>{s.location}</div>
         </div>
-        <div className="ml-auto text-gray-400 text-[9px] font-semibold">···</div>
+        <MoreHorizontal className="ml-auto h-4 w-4" style={{ color: "var(--pu-text-subtle)" }} />
       </div>
-
-      {/* Post image placeholder */}
-      <div className="h-24 bg-gradient-to-br from-purple-100 via-pink-50 to-indigo-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-2xl mb-1">👗</div>
-          <div className="text-[9px] text-gray-500 font-medium">Yangi kolleksiya</div>
-        </div>
+      {/* post image */}
+      <div className="relative flex h-[120px] items-center justify-center" style={{ background: "var(--pu-surface-sky)" }}>
+        <span className="text-4xl">👗</span>
+        <span className="absolute bottom-2 left-2 rounded px-1.5 py-0.5 text-[9px] font-medium" style={{ background: "var(--pu-surface)", color: "var(--pu-text-muted)" }}>{s.caption}</span>
       </div>
-
-      {/* Actions */}
+      {/* actions */}
       <div className="flex items-center gap-3 px-3 py-2">
-        <Heart className="h-4 w-4 text-rose-500" fill="currentColor" />
-        <MessageCircle className="h-4 w-4 text-gray-500" />
-        <Bookmark className="h-4 w-4 text-gray-500 ml-auto" />
+        <motion.span animate={liked && !reduced ? { scale: [1, 1.4, 1] } : {}} transition={{ duration: 0.4 }}>
+          <Heart className="h-5 w-5" style={{ color: liked ? "var(--pu-heart)" : "var(--pu-text-muted)", fill: liked ? "var(--pu-heart)" : "transparent" }} />
+        </motion.span>
+        <MessageCircle className="h-5 w-5" style={{ color: "var(--pu-text-muted)" }} />
+        <Send className="h-5 w-5" style={{ color: "var(--pu-text-muted)" }} />
+        <Bookmark className="ml-auto h-5 w-5" style={{ color: "var(--pu-text-muted)" }} />
       </div>
+      <div className="px-3 text-[10px] font-semibold" style={{ color: "var(--pu-text)" }}>{likeN.toLocaleString()} {ui.likes}</div>
 
-      {/* Comments */}
-      <div className="flex-1 overflow-hidden px-3 pb-2 flex flex-col gap-2">
-        {comments.map((c, i) => (
-          <div key={i} className="flex gap-2">
-            <div className={`w-5 h-5 rounded-full shrink-0 flex items-center justify-center text-white text-[7px] font-bold ${c.isBot ? "bg-gradient-to-br from-purple-400 to-indigo-500" : "bg-gray-300"}`}>
-              {c.user[c.isBot ? 0 : 1].toUpperCase()}
-            </div>
-            <div className="flex-1">
-              <div className="flex items-baseline gap-1 flex-wrap">
-                <span className={`text-[9px] font-semibold ${c.isBot ? "text-indigo-600" : "text-gray-800"}`}>
-                  {c.user}
+      {/* comments */}
+      <div className="flex flex-1 flex-col gap-2 overflow-hidden px-3 py-2">
+        <AnimatePresence initial={false}>
+          {s.list.slice(0, count).map((c, i) => (
+            <motion.div
+              key={i}
+              initial={reduced ? false : { opacity: 0, x: -8, filter: "blur(4px)" }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.35 }}
+              className="flex gap-2"
+            >
+              {c.ai ? <IgAvatar letter={L} size={20} /> : (
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[8px] font-bold text-white" style={{ background: "var(--pu-text-subtle)" }}>
+                  {c.user[1]?.toUpperCase()}
                 </span>
-                <span className="text-[9px] text-gray-600 leading-snug">{c.text}</span>
+              )}
+              <div className="min-w-0 flex-1">
+                <p className="text-[9px] leading-snug">
+                  <span className="font-semibold" style={{ color: c.ai ? "var(--pu-primary)" : "var(--pu-text)" }}>{c.user}</span>{" "}
+                  <span style={{ color: "var(--pu-text-muted)" }}>{c.text}</span>
+                </p>
+                <div className="mt-0.5 flex items-center gap-2 text-[7px]" style={{ color: "var(--pu-text-subtle)" }}>
+                  <span>{ui.ago}</span>
+                  <span>{c.likes} {ui.likes}</span>
+                  {c.ai && (
+                    <span className="flex items-center gap-0.5 font-semibold" style={{ color: "var(--pu-primary)" }}>
+                      <CheckCheck className="h-2 w-2" /> {ui.aiComment}
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="flex items-center gap-2 mt-0.5">
-                <span className="text-[7px] text-gray-400">1d</span>
-                <span className="text-[7px] text-gray-400">{c.likes} likes</span>
-                {c.isBot && <span className="text-[7px] text-indigo-500 flex items-center gap-0.5"><CheckCircle2 className="h-2 w-2" /> AI</span>}
-              </div>
-            </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+    </>
+  );
+}
+
+/* ── Story screen ─────────────────────────────────────────── */
+
+function StoryScreen({ s, ui, play, reduced }: { s: Story; ui: Screens; play: boolean; reduced: boolean }) {
+  const L = s.handle.charAt(0).toUpperCase();
+  const [showMention, setShowMention] = useState(reduced);
+  const [typed, setTyped] = useState(reduced ? s.reply : "");
+  const [showStamp, setShowStamp] = useState(reduced);
+
+  useEffect(() => {
+    if (reduced) { setShowMention(true); setTyped(s.reply); setShowStamp(true); return; }
+    if (!play) return;
+    setShowMention(false); setTyped(""); setShowStamp(false);
+    const timers: number[] = [];
+    timers.push(window.setTimeout(() => setShowMention(true), 1400));
+    // typewriter for the AI reply
+    let idx = 0;
+    timers.push(window.setTimeout(() => {
+      const iv = window.setInterval(() => {
+        idx += 1;
+        setTyped(s.reply.slice(0, idx));
+        if (idx >= s.reply.length) window.clearInterval(iv);
+      }, 28);
+      timers.push(iv);
+    }, 2400));
+    timers.push(window.setTimeout(() => setShowStamp(true), 2400 + s.reply.length * 28 + 400));
+    return () => timers.forEach((t) => { clearTimeout(t); clearInterval(t); });
+  }, [play, reduced, s.reply]);
+
+  return (
+    <>
+      <StatusBar dark />
+      {/* progress bars */}
+      <div className="flex gap-1 px-3 pt-1">
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="h-0.5 flex-1 overflow-hidden rounded-full" style={{ background: "rgba(255,255,255,0.3)" }}>
+            {i === 0 && (
+              <motion.div
+                className="h-full rounded-full"
+                style={{ background: "var(--pu-text-inverse)" }}
+                initial={{ width: reduced ? "100%" : "0%" }}
+                animate={{ width: play ? "100%" : reduced ? "100%" : "0%" }}
+                transition={{ duration: reduced ? 0 : 5, ease: "linear" }}
+              />
+            )}
           </div>
         ))}
       </div>
-    </div>
-  );
-}
-
-function StoriesPhone() {
-  return (
-    <div className="flex flex-col h-full bg-white">
-      {/* Story viewer header */}
-      <div className="bg-gray-900 px-3 pt-3 pb-2">
-        {/* Progress bar */}
-        <div className="flex gap-1 mb-3">
-          <div className="flex-1 h-0.5 rounded-full bg-white" />
-          <div className="flex-1 h-0.5 rounded-full bg-white/30" />
-          <div className="flex-1 h-0.5 rounded-full bg-white/30" />
-        </div>
-        {/* Profile */}
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-full border-2 border-orange-400 bg-gradient-to-br from-orange-300 to-pink-400" />
-          <span className="text-white text-[10px] font-semibold">moda_house</span>
-          <span className="text-white/50 text-[8px]">2h</span>
-        </div>
+      {/* profile */}
+      <div className="flex items-center gap-2 px-3 py-2">
+        <IgAvatar letter={L} size={24} />
+        <span className="text-[10px] font-semibold" style={{ color: "var(--pu-text-inverse)" }}>{s.handle}</span>
+        <span className="text-[8px]" style={{ color: "rgba(255,255,255,0.55)" }}>{s.time}</span>
       </div>
-
-      {/* Story content */}
-      <div className="flex-1 bg-gradient-to-b from-gray-900 to-gray-800 flex flex-col items-center justify-center px-4">
-        <div className="text-center">
-          <div className="text-3xl mb-2">🧥</div>
-          <div className="text-white text-[11px] font-bold mb-1">Yangi Kuz Kolleksiyasi!</div>
-          <div className="text-white/70 text-[9px]">50+ yangi model</div>
-        </div>
+      {/* content */}
+      <div className="flex flex-1 flex-col items-center justify-center px-4">
+        <span className="mb-1.5 text-3xl">🧥</span>
+        <div className="text-center text-[12px] font-bold" style={{ color: "var(--pu-text-inverse)" }}>{s.title}</div>
+        <div className="text-[9px]" style={{ color: "rgba(255,255,255,0.7)" }}>{s.subtitle}</div>
       </div>
-
-      {/* Story mention reply */}
-      <div className="bg-gray-900 px-3 py-3">
-        <div className="text-white/60 text-[8px] mb-2 text-center">@sarvinoz mentionladi</div>
-
-        {/* User mention bubble */}
-        <div className="bg-white/10 rounded-2xl px-3 py-2 mb-2">
-          <div className="text-white text-[9px]">@sarvinoz: 🔥 @moda_house juda yoqdi!</div>
-        </div>
-
-        {/* AI reply */}
-        <div className="bg-orange-500 rounded-2xl px-3 py-2 mb-2">
-          <div className="text-white text-[9px] leading-relaxed">
-            Rahmat! 💙 Yangi kolleksiya ko&apos;rishni xohlaysizmi? Maxsus kod: MODA10 🎁
+      {/* mention + AI reply */}
+      <div className="px-3 pb-2.5">
+        <div className="mb-1.5 text-center text-[8px]" style={{ color: "rgba(255,255,255,0.6)" }}>{s.mentionLabel}</div>
+        <AnimatePresence>
+          {showMention && (
+            <motion.div
+              initial={reduced ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-1.5 rounded-2xl px-3 py-2 text-[9px]"
+              style={{ background: "rgba(255,255,255,0.12)", color: "var(--pu-text-inverse)" }}
+            >
+              {s.mention}
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {(typed || reduced) && (
+          <div className="mb-1.5 rounded-2xl px-3 py-2 text-[9px] leading-relaxed" style={{ background: "var(--pu-primary)", color: "var(--pu-text-inverse)" }}>
+            {typed}
+            {!reduced && typed.length < s.reply.length && <span className="ml-0.5 inline-block h-2.5 w-[2px] align-middle" style={{ background: "var(--pu-text-inverse)" }} />}
           </div>
-        </div>
-
-        <div className="flex items-center gap-1 justify-center">
-          <CheckCircle2 className="h-2.5 w-2.5 text-emerald-400" />
-          <span className="text-[8px] text-emerald-400">AI auto-replied · 8s</span>
-        </div>
+        )}
+        <AnimatePresence>
+          {showStamp && (
+            <motion.div initial={reduced ? false : { opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center justify-center gap-1">
+              <CheckCheck className="h-2.5 w-2.5" style={{ color: "var(--pu-success-400)" }} />
+              <span className="text-[8px]" style={{ color: "var(--pu-success-400)" }}>{s.stamp}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </div>
+    </>
   );
 }
 
-const CHANNEL_CONTENT = {
-  dms:      { component: DMPhone,       bg: "from-blue-50 to-indigo-50" },
-  comments: { component: CommentsPhone, bg: "from-purple-50 to-pink-50" },
-  stories:  { component: StoriesPhone,  bg: "from-gray-900 to-gray-800" },
-};
+/* ── section ──────────────────────────────────────────────── */
 
-const CHANNEL_ICONS = {
-  dms:      MessageCircle,
-  comments: MessageSquare,
-  stories:  Bookmark,
-};
-
-const CHANNEL_COLORS = {
-  dms:      "hsl(var(--accent))",
-  comments: "#7c3aed",
-  stories:  "#e11d48",
-};
+const ICONS = { dms: MessageCircle, comments: MessageSquare, stories: Bookmark } as const;
 
 export function ChannelsSection() {
   const t = useTranslations("channels");
-  const tabs = t.raw("tabs") as {
-    key: string;
-    label: string;
-    subtitle: string;
-    description: string;
-  }[];
+  const reduced = useReducedMotion() ?? false;
+  const tabs = t.raw("tabs") as { key: string; label: string; subtitle: string; description: string }[];
+  const sc = t.raw("screens") as Screens;
 
   const [active, setActive] = useState("dms");
+  const [inView, setInView] = useState(false);
   const activeTab = tabs.find((tab) => tab.key === active) ?? tabs[0];
-  const PhoneContent = CHANNEL_CONTENT[active as keyof typeof CHANNEL_CONTENT]?.component ?? DMPhone;
+  const play = inView && !reduced;
+  const isDark = active === "stories";
 
   return (
-    <Section variant="surface">
+    <Section id="channels" variant="surface">
       <Container>
         <FadeIn>
           <SectionHeader
             overline={t("overline")}
-            title={
-              <>
-                {t("title")}{" "}
-                <em className="not-italic text-accent">{t("titleEmphasis")}</em>
-              </>
-            }
+            title={<>{t("title")} <em className="not-italic text-accent">{t("titleEmphasis")}</em></>}
             description={t("description")}
           />
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left: tabs + description */}
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Left: tabs */}
             <div>
-              <div className="space-y-1 mb-8">
+              <div className="mb-8 space-y-1">
                 {tabs.map((tab) => {
-                  const Icon = CHANNEL_ICONS[tab.key as keyof typeof CHANNEL_ICONS] ?? MessageCircle;
+                  const Icon = ICONS[tab.key as keyof typeof ICONS] ?? MessageCircle;
                   const isActive = active === tab.key;
                   return (
                     <button
                       key={tab.key}
                       onClick={() => setActive(tab.key)}
-                      className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-left transition-all duration-200 ${
-                        isActive
-                          ? "bg-background shadow-sm border border-border"
-                          : "hover:bg-background/60"
+                      className={`flex w-full items-center gap-4 rounded-xl px-4 py-3.5 text-left transition-all duration-200 ${
+                        isActive ? "border border-border bg-background shadow-sm" : "hover:bg-background/60"
                       }`}
                     >
-                      <Icon
-                        className="h-6 w-6 shrink-0 transition-colors duration-200"
-                        style={{ color: isActive ? CHANNEL_COLORS[tab.key as keyof typeof CHANNEL_COLORS] : "hsl(var(--muted-foreground))" }}
-                      />
+                      <Icon className="h-6 w-6 shrink-0 transition-colors" style={{ color: isActive ? "hsl(var(--accent))" : "hsl(var(--muted-foreground))" }} />
                       <div>
-                        <div
-                          className={`text-lg font-bold transition-colors duration-200 ${
-                            isActive ? "text-foreground" : "text-muted-foreground"
-                          }`}
-                        >
-                          {tab.label}
-                        </div>
-                        {isActive && (
-                          <div className="text-xs text-muted-foreground mt-0.5">{tab.subtitle}</div>
-                        )}
+                        <div className={`text-lg font-bold ${isActive ? "text-foreground" : "text-muted-foreground"}`}>{tab.label}</div>
+                        {isActive && <div className="mt-0.5 text-xs text-muted-foreground">{tab.subtitle}</div>}
                       </div>
                     </button>
                   );
                 })}
               </div>
-
-              {/* Description for active tab */}
               <AnimatePresence mode="wait">
-                <motion.div
+                <motion.p
                   key={active}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.2 }}
+                  className="px-4 text-sm leading-relaxed text-muted-foreground"
                 >
-                  <p className="text-muted-foreground leading-relaxed text-sm px-4">
-                    {activeTab.description}
-                  </p>
-                </motion.div>
+                  {activeTab.description}
+                </motion.p>
               </AnimatePresence>
             </div>
 
-            {/* Right: phone mockup */}
-            <div className="flex justify-center lg:justify-end">
+            {/* Right: phone */}
+            <motion.div
+              className="flex justify-center lg:justify-end"
+              onViewportEnter={() => setInView(true)}
+              onViewportLeave={() => setInView(false)}
+              viewport={{ margin: "-80px" }}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -304,53 +508,15 @@ export function ChannelsSection() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.97, y: -12 }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative"
-                  style={{ width: 280 }}
                 >
-                  {/* Glow behind phone */}
-                  <div
-                    className="absolute inset-8 rounded-full blur-3xl opacity-30 -z-10"
-                    style={{ background: CHANNEL_COLORS[active as keyof typeof CHANNEL_COLORS] }}
-                  />
-
-                  {/* Phone shell */}
-                  <div
-                    className="rounded-[2.8rem] overflow-hidden shadow-2xl"
-                    style={{
-                      border: "10px solid #1a1a1a",
-                      backgroundColor: "#1a1a1a",
-                      boxShadow: "0 0 0 1px rgba(255,255,255,0.1) inset, 0 30px 80px -20px rgba(0,0,0,0.4)",
-                    }}
-                  >
-                    {/* Notch / Dynamic Island */}
-                    <div className="flex justify-center pt-2.5 pb-1 bg-gray-950">
-                      <div className="w-20 h-5 rounded-full bg-gray-900" />
-                    </div>
-
-                    {/* Screen */}
-                    <div style={{ height: 480 }} className="overflow-hidden">
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={active}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.15 }}
-                          className="h-full"
-                        >
-                          <PhoneContent />
-                        </motion.div>
-                      </AnimatePresence>
-                    </div>
-
-                    {/* Home bar */}
-                    <div className="flex justify-center py-2 bg-white">
-                      <div className="w-24 h-1 rounded-full bg-gray-200" />
-                    </div>
-                  </div>
+                  <PhoneShell dark={isDark}>
+                    {active === "dms" && <DMScreen s={sc.dm} ui={sc} play={play} reduced={reduced} />}
+                    {active === "comments" && <CommentsScreen s={sc.comments} ui={sc} play={play} reduced={reduced} />}
+                    {active === "stories" && <StoryScreen s={sc.story} ui={sc} play={play} reduced={reduced} />}
+                  </PhoneShell>
                 </motion.div>
               </AnimatePresence>
-            </div>
+            </motion.div>
           </div>
         </FadeIn>
       </Container>
