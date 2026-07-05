@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { UserPlus, Mail, CheckCircle2, Clock, Search, Trash2, ExternalLink } from "lucide-react";
+import { UserPlus, Mail, Phone, CheckCircle2, Clock, Search, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Lead {
   id: string;
   created_at: string;
   name: string;
-  email: string;
+  phone?: string;
+  email?: string;
   company: string;
   role: string;
   message: string;
@@ -139,18 +140,30 @@ export function LeadsTable({ leads, isAdmin }: { leads: Lead[]; isAdmin: boolean
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-full bg-accent/15 flex items-center justify-center shrink-0">
                             <span className="text-xs font-bold text-accent">
-                              {(lead.name ?? lead.email).charAt(0).toUpperCase()}
+                              {(lead.name ?? lead.phone ?? lead.email ?? "?").charAt(0).toUpperCase()}
                             </span>
                           </div>
                           <div>
                             <p className="font-medium text-foreground">{lead.name}</p>
-                            <a
-                              href={`mailto:${lead.email}`}
-                              className="text-xs text-muted-foreground hover:text-accent transition-colors flex items-center gap-1"
-                            >
-                              <Mail className="h-3 w-3" />
-                              {lead.email}
-                            </a>
+                            {lead.phone ? (
+                              <a
+                                href={`tel:${lead.phone}`}
+                                className="text-xs text-muted-foreground hover:text-accent transition-colors flex items-center gap-1"
+                              >
+                                <Phone className="h-3 w-3" />
+                                {lead.phone}
+                              </a>
+                            ) : lead.email ? (
+                              <a
+                                href={`mailto:${lead.email}`}
+                                className="text-xs text-muted-foreground hover:text-accent transition-colors flex items-center gap-1"
+                              >
+                                <Mail className="h-3 w-3" />
+                                {lead.email}
+                              </a>
+                            ) : (
+                              <span className="text-xs text-muted-foreground">—</span>
+                            )}
                           </div>
                         </div>
                       </td>

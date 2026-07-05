@@ -73,16 +73,11 @@
   },
   "pipeline": {
     "overline": "The AI Pipeline",
-    "title": "Eight stages.",
+    "title": "Seven stages.",
     "titleEmphasis": "Zero compromises.",
     "description": "Every message your brand receives passes through a fully audited AI pipeline before a single word is published. Scroll to walk through each stage.",
     "detailHoverHint": "Scroll to walk through each stage.",
     "stages": [
-      {
-        "label": "Qualify",
-        "detail": "Score ≥ 0.6 required to advance",
-        "description": "Determines whether AI should respond. Filters spam, bot activity, and out-of-scope interactions before spending any LLM tokens."
-      },
       {
         "label": "Classify",
         "detail": "Intent · Sentiment · Language · Priority",
@@ -124,7 +119,12 @@
     "kicker": "Live demo",
     "title": "A real inbox. Real conversations.",
     "sub": "The exact QAQNUZ workspace — pick your industry and watch the AI sell.",
-    "tabs": ["Clinic", "Online store", "Delivery", "Beauty salon"],
+    "tabs": [
+      "Clinic",
+      "Online store",
+      "Delivery",
+      "Beauty salon"
+    ],
     "inboxTitle": "Inbox",
     "aiActive": "AI active",
     "typing": "typing…",
@@ -134,16 +134,41 @@
       "brandPill": "Korzinka.uz · Operator",
       "search": "Conversation, customer, product, FAQ…",
       "sla": "SLA: 2m 14s",
-      "nav": ["Home", "Inbox", "Studio", "Growth", "Settings"],
-      "filters": ["All · 147", "New · 23", "Mine · 8", "Escalation · 3"],
+      "nav": [
+        "Home",
+        "Inbox",
+        "Studio",
+        "Growth",
+        "Settings"
+      ],
+      "filters": [
+        "All · 147",
+        "New · 23",
+        "Mine · 8",
+        "Escalation · 3"
+      ],
       "tagAiClosed": "AI CLOSED",
       "tagPlaybook": "PLAYBOOK",
       "tagEscalation": "ESCALATION",
       "tagMine": "YOURS",
-      "journey": ["Order", "Delivery", "Payment", "Issue"],
+      "journey": [
+        "Order",
+        "Delivery",
+        "Payment",
+        "Issue"
+      ],
       "aiSource": "Catalog",
-      "quickActions": ["Confirm return", "Offer compensation", "Call courier", "Internal note"],
-      "composerToggle": ["AI", "Me", "TAKEOVER"],
+      "quickActions": [
+        "Confirm return",
+        "Offer compensation",
+        "Call courier",
+        "Internal note"
+      ],
+      "composerToggle": [
+        "AI",
+        "Me",
+        "TAKEOVER"
+      ],
       "send": "Send",
       "replyPlaceholder": "Write a message…",
       "escTitle": "AI confidence dropped (0.48) — operator assistance recommended",
@@ -154,12 +179,29 @@
       "sentiment": "Sentiment",
       "sentimentValue": "Positive",
       "layerTitle": "Layer match",
-      "layers": ["Facts", "Commercial", "Behavior", "Action"],
+      "layers": [
+        "Facts",
+        "Commercial",
+        "Behavior",
+        "Action"
+      ],
       "recsTitle": "RECOMMENDATIONS",
       "recs": [
-        { "level": "HIGH", "text": "Quickly confirm the return", "score": "0.91" },
-        { "level": "MEDIUM", "text": "Compensation: 50,000 UZS bonus", "score": "0.76" },
-        { "level": "INFO", "text": "VIP customer — reply fast", "score": "" }
+        {
+          "level": "HIGH",
+          "text": "Quickly confirm the return",
+          "score": "0.91"
+        },
+        {
+          "level": "MEDIUM",
+          "text": "Compensation: 50,000 UZS bonus",
+          "score": "0.76"
+        },
+        {
+          "level": "INFO",
+          "text": "VIP customer — reply fast",
+          "score": ""
+        }
       ],
       "leadTitle": "Lead status",
       "leadValue": "92%",
@@ -167,45 +209,123 @@
     },
     "conversations": [
       {
-        "sector": "Clinic", "channel": "telegram", "customer": "Aziz Karimov", "preview": "Can I book for tomorrow?",
+        "sector": "Clinic",
+        "channel": "telegram",
+        "customer": "Aziz Karimov",
+        "preview": "Can I book for tomorrow?",
         "messages": [
-          { "from": "customer", "text": "Hello, can I book a dentist appointment for tomorrow?" },
-          { "from": "ai", "text": "Hello Aziz! Of course. Tomorrow we have 10:00, 14:30 and 17:00 free. Which works for you?" },
-          { "from": "customer", "text": "14:30 works" },
-          { "from": "ai", "text": "Great! You're booked for tomorrow at 14:30. Address: 15 Amir Temur street. A reminder arrives one hour before 🦷" },
-          { "from": "system", "text": "✅ Appointment booked — 14:30" }
+          {
+            "from": "customer",
+            "text": "Hello, can I book a dentist appointment for tomorrow?"
+          },
+          {
+            "from": "ai",
+            "text": "Hello Aziz! Of course. Tomorrow we have 10:00, 14:30 and 17:00 free. Which works for you?"
+          },
+          {
+            "from": "customer",
+            "text": "14:30 works"
+          },
+          {
+            "from": "ai",
+            "text": "Great! You're booked for tomorrow at 14:30. Address: 15 Amir Temur street. A reminder arrives one hour before 🦷"
+          },
+          {
+            "from": "system",
+            "text": "✅ Appointment booked — 14:30"
+          }
         ]
       },
       {
-        "sector": "Online store", "channel": "instagram", "customer": "Madina R.", "preview": "Is this dress available? 🧡",
+        "sector": "Online store",
+        "channel": "instagram",
+        "customer": "Madina R.",
+        "preview": "Is this dress available? 🧡",
         "messages": [
-          { "from": "customer", "text": "Is this dress available? 🧡" },
-          { "from": "ai-draft-wrong", "text": "Yes! It's 140,000 UZS 😊" },
-          { "from": "guardrail", "text": "Price doesn't match the catalog — rewritten" },
-          { "from": "ai", "text": "Hi! The “Lola” dress is in stock — 240,000 UZS, S–XL. Which size do you need? 🧡" },
-          { "from": "customer", "text": "M please, how do I pay?" },
-          { "from": "ai", "text": "Size M reserved! You can pay via Click or Payme. Link: pay.qaqnuz.uz/8214" },
-          { "from": "system", "text": "✅ Order confirmed — 240,000 UZS" }
+          {
+            "from": "customer",
+            "text": "Is this dress available? 🧡"
+          },
+          {
+            "from": "ai-draft-wrong",
+            "text": "Yes! It's 140,000 UZS 😊"
+          },
+          {
+            "from": "guardrail",
+            "text": "Price doesn't match the catalog — rewritten"
+          },
+          {
+            "from": "ai",
+            "text": "Hi! The “Lola” dress is in stock — 240,000 UZS, S–XL. Which size do you need? 🧡"
+          },
+          {
+            "from": "customer",
+            "text": "M please, how do I pay?"
+          },
+          {
+            "from": "ai",
+            "text": "Size M reserved! You can pay via Click or Payme. Link: pay.qaqnuz.uz/8214"
+          },
+          {
+            "from": "system",
+            "text": "✅ Order confirmed — 240,000 UZS"
+          }
         ]
       },
       {
-        "sector": "Delivery", "channel": "whatsapp", "customer": "Bobur T.", "preview": "Where is my order?",
+        "sector": "Delivery",
+        "channel": "whatsapp",
+        "customer": "Bobur T.",
+        "preview": "Where is my order?",
         "messages": [
-          { "from": "customer", "text": "Where is my order? #4412" },
-          { "from": "ai", "text": "Hi Bobur! Order #4412 is with the courier — arriving in about 25 minutes 🛵" },
-          { "from": "customer", "text": "Can I change the address?" },
-          { "from": "ai", "text": "The courier is already on the way, so an operator will change it — connecting you now. One minute ⏳" },
-          { "from": "system", "text": "👤 Handed to operator — answered in 42 seconds" }
+          {
+            "from": "customer",
+            "text": "Where is my order? #4412"
+          },
+          {
+            "from": "ai",
+            "text": "Hi Bobur! Order #4412 is with the courier — arriving in about 25 minutes 🛵"
+          },
+          {
+            "from": "customer",
+            "text": "Can I change the address?"
+          },
+          {
+            "from": "ai",
+            "text": "The courier is already on the way, so an operator will change it — connecting you now. One minute ⏳"
+          },
+          {
+            "from": "system",
+            "text": "👤 Handed to operator — answered in 42 seconds"
+          }
         ]
       },
       {
-        "sector": "Beauty salon", "channel": "instagram", "customer": "Nilufar S.", "preview": "Any manicure slots?",
+        "sector": "Beauty salon",
+        "channel": "instagram",
+        "customer": "Nilufar S.",
+        "preview": "Any manicure slots?",
         "messages": [
-          { "from": "customer", "text": "Any manicure slots on Saturday?" },
-          { "from": "ai", "text": "Hello Nilufar! Saturday has 11:00 and 16:00 free. Gel polish is 180,000 UZS 💅" },
-          { "from": "customer", "text": "Book me for 16:00" },
-          { "from": "ai", "text": "Done! Saturday 16:00 — master Kamola will be waiting. We'll remind you a day before ✨" },
-          { "from": "system", "text": "✅ Booked — Saturday 16:00" }
+          {
+            "from": "customer",
+            "text": "Any manicure slots on Saturday?"
+          },
+          {
+            "from": "ai",
+            "text": "Hello Nilufar! Saturday has 11:00 and 16:00 free. Gel polish is 180,000 UZS 💅"
+          },
+          {
+            "from": "customer",
+            "text": "Book me for 16:00"
+          },
+          {
+            "from": "ai",
+            "text": "Done! Saturday 16:00 — master Kamola will be waiting. We'll remind you a day before ✨"
+          },
+          {
+            "from": "system",
+            "text": "✅ Booked — Saturday 16:00"
+          }
         ]
       }
     ]
@@ -218,13 +338,41 @@
     "incomingText": "Is this dress available? 🧡",
     "moreLink": "Learn more",
     "stages": [
-      { "title": "Reads the intent", "desc": "AI identifies the goal: product inquiry, price, availability.", "detail": "Intent: product availability · confidence 98%" },
-      { "title": "Detects the language", "desc": "Uzbek, Russian or English — the reply matches the customer's language.", "detail": "Language: Uzbek (Latin) · tone: friendly" },
-      { "title": "Knowledge base", "desc": "Price, size, stock — pulled only from your catalog.", "detail": "Found: “Lola” dress · 240,000 UZS · S–XL in stock" },
-      { "title": "Drafts the reply", "desc": "Written in your brand's tone, aimed at closing the sale.", "detail": "Draft ready · purchase nudge added" },
-      { "title": "9 safety filters", "desc": "Price, promises, tone, privacy — every reply passes 9 filters.", "detail": "" },
-      { "title": "Human oversight", "desc": "Uncertain cases go to an operator. You are always in control.", "detail": "High confidence · auto-approve · operator notified" },
-      { "title": "Sent", "desc": "The reply reaches the customer — in 1.4 seconds on average.", "detail": "Delivered ✓✓ · 1.4s" }
+      {
+        "title": "Reads the intent",
+        "desc": "AI identifies the goal: product inquiry, price, availability.",
+        "detail": "Intent: product availability · confidence 98%"
+      },
+      {
+        "title": "Detects the language",
+        "desc": "Uzbek, Russian or English — the reply matches the customer's language.",
+        "detail": "Language: Uzbek (Latin) · tone: friendly"
+      },
+      {
+        "title": "Knowledge base",
+        "desc": "Price, size, stock — pulled only from your catalog.",
+        "detail": "Found: “Lola” dress · 240,000 UZS · S–XL in stock"
+      },
+      {
+        "title": "Drafts the reply",
+        "desc": "Written in your brand's tone, aimed at closing the sale.",
+        "detail": "Draft ready · purchase nudge added"
+      },
+      {
+        "title": "9 safety filters",
+        "desc": "Price, promises, tone, privacy — every reply passes 9 filters.",
+        "detail": ""
+      },
+      {
+        "title": "Human oversight",
+        "desc": "Uncertain cases go to an operator. You are always in control.",
+        "detail": "High confidence · auto-approve · operator notified"
+      },
+      {
+        "title": "Sent",
+        "desc": "The reply reaches the customer — in 1.4 seconds on average.",
+        "detail": "Delivered ✓✓ · 1.4s"
+      }
     ],
     "guardrail": {
       "draftLabel": "AI draft",
@@ -233,7 +381,17 @@
       "explain": "Wrong price detected — the reply was stopped and rewritten.",
       "fixedLabel": "Corrected reply",
       "fixedDraft": "Hi Madina! The “Lola” dress is in stock — 240,000 UZS, sizes S to XL. Which size do you need? 🧡",
-      "filters": ["Price accuracy", "Promise control", "Tone match", "Privacy", "Catalog match", "Discount rules", "Language quality", "Spam protection", "Escalation trigger"]
+      "filters": [
+        "Price accuracy",
+        "Promise control",
+        "Tone match",
+        "Privacy",
+        "Catalog match",
+        "Discount rules",
+        "Language quality",
+        "Spam protection",
+        "Escalation trigger"
+      ]
     }
   },
   "trustRamp": {
@@ -349,54 +507,108 @@
         "label": "Inbox",
         "description": "Unified 3-tab conversation view across DMs, Comments, and Story mentions. Each thread shows pipeline status, trust level, and response queue.",
         "stats": [
-          { "label": "DMs", "value": "247" },
-          { "label": "Comments", "value": "1.2k" },
-          { "label": "Stories", "value": "89" }
+          {
+            "label": "DMs",
+            "value": "247"
+          },
+          {
+            "label": "Comments",
+            "value": "1.2k"
+          },
+          {
+            "label": "Stories",
+            "value": "89"
+          }
         ]
       },
       {
         "label": "Brands",
         "description": "11-tab brand profile editor: identity, voice, products, campaigns, payments, delivery, FAQs, guardrails, escalation, hours, and compliance settings.",
         "stats": [
-          { "label": "Brands", "value": "12" },
-          { "label": "Profiles", "value": "11 tabs" },
-          { "label": "Active", "value": "9" }
+          {
+            "label": "Brands",
+            "value": "12"
+          },
+          {
+            "label": "Profiles",
+            "value": "11 tabs"
+          },
+          {
+            "label": "Active",
+            "value": "9"
+          }
         ]
       },
       {
         "label": "Monitor",
         "description": "Real-time pipeline health metrics. Service status for all 7 AMT microservices, queue depth, error rates, and LLM latency — all in one view.",
         "stats": [
-          { "label": "Services", "value": "7/7" },
-          { "label": "Queue", "value": "Live" },
-          { "label": "Uptime", "value": "99.9%" }
+          {
+            "label": "Services",
+            "value": "7/7"
+          },
+          {
+            "label": "Queue",
+            "value": "Live"
+          },
+          {
+            "label": "Uptime",
+            "value": "99.9%"
+          }
         ]
       },
       {
         "label": "Queue",
         "description": "Proactive action approval queue. Review, edit, approve, or reject AI-generated responses. One-click publish or send back for recomposition.",
         "stats": [
-          { "label": "Pending", "value": "14" },
-          { "label": "Approved/hr", "value": "38" },
-          { "label": "Avg review", "value": "12s" }
+          {
+            "label": "Pending",
+            "value": "14"
+          },
+          {
+            "label": "Approved/hr",
+            "value": "38"
+          },
+          {
+            "label": "Avg review",
+            "value": "12s"
+          }
         ]
       },
       {
         "label": "Analytics",
         "description": "Interactive charts: response volume, sentiment trends, pipeline funnel, cost per conversation, and per-brand LLM spend breakdown.",
         "stats": [
-          { "label": "Cost/conv", "value": "$0.04" },
-          { "label": "Sentiment", "value": "+87%" },
-          { "label": "Response rate", "value": "98%" }
+          {
+            "label": "Cost/conv",
+            "value": "$0.04"
+          },
+          {
+            "label": "Sentiment",
+            "value": "+87%"
+          },
+          {
+            "label": "Response rate",
+            "value": "98%"
+          }
         ]
       },
       {
         "label": "Metrics",
         "description": "Conversation volumes and status tracking. Daily/weekly/monthly breakdowns, trust level distribution, and operator performance scorecards.",
         "stats": [
-          { "label": "Total convs", "value": "18.4k" },
-          { "label": "Auto rate", "value": "76%" },
-          { "label": "CSAT", "value": "4.8/5" }
+          {
+            "label": "Total convs",
+            "value": "18.4k"
+          },
+          {
+            "label": "Auto rate",
+            "value": "76%"
+          },
+          {
+            "label": "CSAT",
+            "value": "4.8/5"
+          }
         ]
       }
     ]
@@ -477,7 +689,7 @@
     "overline": "Pricing",
     "title": "Simple tiers.",
     "titleEmphasis": "No surprises.",
-    "description": "All plans include the full 8-stage AI pipeline and 9 safety guardrails. You pay for volume, not features.",
+    "description": "All plans include the full 7-stage AI pipeline and 9 safety guardrails. You pay for volume, not features.",
     "viewFull": "View full pricing & comparison table",
     "contactUs": "Contact us",
     "custom": "Custom",
@@ -490,7 +702,7 @@
         "features": [
           "1 Instagram account",
           "Up to 1,000 DMs / month",
-          "Full AI pipeline (all 8 stages)",
+          "Full AI pipeline (all 7 stages)",
           "9 safety guardrails",
           "L1–L2 trust ramp",
           "Email support"
@@ -533,7 +745,7 @@
     "items": [
       {
         "q": "What exactly is Qaqnuz?",
-        "a": "Qaqnuz is an AI-native automation platform that manages Instagram DMs, comments, and story mentions for Uzbekistan-based brands. It runs every incoming message through an 8-stage AI pipeline — qualify, classify, retrieve, compose, guard, evaluate, trust gate, publish — with 9 safety checks on every response. Operators retain full control through the Mission Control dashboard, with human override always one click away."
+        "a": "Qaqnuz is an AI-native automation platform that manages Instagram DMs, comments, and story mentions for Uzbekistan-based brands. It runs every incoming message through an 7-stage AI pipeline — classify, retrieve, compose, guard, evaluate, trust gate, publish — with 9 safety checks on every response. Operators retain full control through the Mission Control dashboard, with human override always one click away."
       },
       {
         "q": "How long does setup take?",
@@ -545,7 +757,7 @@
       },
       {
         "q": "How is Qaqnuz priced?",
-        "a": "Pricing is based on the number of Instagram accounts and monthly message volume. All plans include the full 8-stage pipeline and 9 safety guardrails — you pay for scale, not for features. Contact us for a customized quote. We do not charge per API call or per LLM token — cost governance is handled internally with configurable per-brand budgets."
+        "a": "Pricing is based on the number of Instagram accounts and monthly message volume. All plans include the full 7-stage pipeline and 9 safety guardrails — you pay for scale, not for features. Contact us for a customized quote. We do not charge per API call or per LLM token — cost governance is handled internally with configurable per-brand budgets."
       },
       {
         "q": "How does Qaqnuz handle customer data and privacy?",
@@ -640,10 +852,22 @@
         "activeNow": "active now",
         "placeholder": "Message…",
         "messages": [
-          { "from": "customer", "text": "Hi! How much is this cream? 🙏" },
-          { "from": "ai", "text": "Hi! Our Vitamin C cream is 89,000 UZS. Order now for 10% off! 🎁" },
-          { "from": "customer", "text": "Great! How do I pay?" },
-          { "from": "ai", "text": "Via Click or Payme. I'll send you the payment link! 💳" }
+          {
+            "from": "customer",
+            "text": "Hi! How much is this cream? 🙏"
+          },
+          {
+            "from": "ai",
+            "text": "Hi! Our Vitamin C cream is 89,000 UZS. Order now for 10% off! 🎁"
+          },
+          {
+            "from": "customer",
+            "text": "Great! How do I pay?"
+          },
+          {
+            "from": "ai",
+            "text": "Via Click or Payme. I'll send you the payment link! 💳"
+          }
         ]
       },
       "comments": {
@@ -651,10 +875,30 @@
         "location": "Tashkent, Uzbekistan",
         "caption": "New collection",
         "list": [
-          { "user": "@nargiza_u", "text": "Do you have this dress in size 38? 😍", "ai": false, "likes": 3 },
-          { "user": "dilnoza_style", "text": "Yes, sizes 36–42! DM us, we'll send the catalog 🌸", "ai": true, "likes": 12 },
-          { "user": "@malika_t", "text": "How much is it?", "ai": false, "likes": 1 },
-          { "user": "dilnoza_style", "text": "From 150,000 UZS. Discount on now! 💜", "ai": true, "likes": 8 }
+          {
+            "user": "@nargiza_u",
+            "text": "Do you have this dress in size 38? 😍",
+            "ai": false,
+            "likes": 3
+          },
+          {
+            "user": "dilnoza_style",
+            "text": "Yes, sizes 36–42! DM us, we'll send the catalog 🌸",
+            "ai": true,
+            "likes": 12
+          },
+          {
+            "user": "@malika_t",
+            "text": "How much is it?",
+            "ai": false,
+            "likes": 1
+          },
+          {
+            "user": "dilnoza_style",
+            "text": "From 150,000 UZS. Discount on now! 💜",
+            "ai": true,
+            "likes": 8
+          }
         ]
       },
       "story": {
@@ -689,16 +933,16 @@
     ],
     "calendarLabel": "Calendar",
     "calendarPlaceholder": "Calendar embed placeholder",
+    "calendarNote": "Get in touch to schedule your demo call.",
+    "calendarTelegram": "Message us on Telegram",
     "form": {
       "title": "Tell us about your brand",
       "name": "Your name",
       "namePlaceholder": "Azizbek Karimov",
+      "phone": "Phone number",
+      "phonePlaceholder": "+998 90 123 45 67",
       "brand": "Brand name",
       "brandPlaceholder": "e.g. BeautyBox UZ",
-      "igHandle": "Instagram handle",
-      "igHandlePlaceholder": "@yourbrand",
-      "email": "Work email",
-      "emailPlaceholder": "you@brand.uz",
       "volume": "Monthly DM volume",
       "volumeDefault": "Select volume...",
       "volumeOptions": [
@@ -721,31 +965,114 @@
     "overline": "Pricing",
     "title": "Transparent pricing.",
     "titleEmphasis": "No hidden fees.",
-    "description": "All plans include the full 8-stage AI pipeline, 9 safety guardrails, and audit trail. You pay for scale, not for capabilities.",
+    "description": "All plans include the full 7-stage AI pipeline, 9 safety guardrails, and audit trail. You pay for scale, not for capabilities.",
     "tiers": [
-      { "name": "Starter", "description": "Single brand, getting started with AI automation.", "cta": "Book a demo" },
-      { "name": "Growth", "description": "Scaling brands and multi-account operators.", "badge": "Most Popular", "cta": "Book a demo" },
-      { "name": "Enterprise", "description": "Agencies and unlimited-scale operations.", "cta": "Talk to sales" }
+      {
+        "name": "Starter",
+        "description": "Single brand, getting started with AI automation.",
+        "cta": "Book a demo"
+      },
+      {
+        "name": "Growth",
+        "description": "Scaling brands and multi-account operators.",
+        "badge": "Most Popular",
+        "cta": "Book a demo"
+      },
+      {
+        "name": "Enterprise",
+        "description": "Agencies and unlimited-scale operations.",
+        "cta": "Talk to sales"
+      }
     ],
     "tableFeature": "Feature",
     "tableStarter": "Starter",
     "tableGrowth": "Growth",
     "tableEnterprise": "Enterprise",
     "features": [
-      { "name": "Instagram accounts", "starter": "1", "growth": "Up to 5", "enterprise": "Unlimited" },
-      { "name": "Monthly DM volume", "starter": "1,000", "growth": "10,000", "enterprise": "Unlimited" },
-      { "name": "8-stage AI pipeline", "starter": true, "growth": true, "enterprise": true },
-      { "name": "9 safety guardrails", "starter": true, "growth": true, "enterprise": true },
-      { "name": "Trust ramp (L1–L4)", "starter": "L1–L2", "growth": "L1–L4", "enterprise": "L1–L4" },
-      { "name": "Proactive DM campaigns", "starter": false, "growth": true, "enterprise": true },
-      { "name": "Cost governance", "starter": false, "growth": true, "enterprise": true },
-      { "name": "Multi-language (UZ/RU/EN)", "starter": false, "growth": true, "enterprise": true },
-      { "name": "Full Mission Control", "starter": false, "growth": true, "enterprise": true },
-      { "name": "Custom LLM configuration", "starter": false, "growth": false, "enterprise": true },
-      { "name": "Audit trail export", "starter": false, "growth": false, "enterprise": true },
-      { "name": "SLA guarantee", "starter": false, "growth": false, "enterprise": true },
-      { "name": "On-premises deployment", "starter": false, "growth": false, "enterprise": true },
-      { "name": "Support", "starter": "Email", "growth": "Priority + CSM", "enterprise": "Dedicated SLA" }
+      {
+        "name": "Instagram accounts",
+        "starter": "1",
+        "growth": "Up to 5",
+        "enterprise": "Unlimited"
+      },
+      {
+        "name": "Monthly DM volume",
+        "starter": "1,000",
+        "growth": "10,000",
+        "enterprise": "Unlimited"
+      },
+      {
+        "name": "7-stage AI pipeline",
+        "starter": true,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "9 safety guardrails",
+        "starter": true,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "Trust ramp (L1–L4)",
+        "starter": "L1–L2",
+        "growth": "L1–L4",
+        "enterprise": "L1–L4"
+      },
+      {
+        "name": "Proactive DM campaigns",
+        "starter": false,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "Cost governance",
+        "starter": false,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "Multi-language (UZ/RU/EN)",
+        "starter": false,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "Full Mission Control",
+        "starter": false,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "Custom LLM configuration",
+        "starter": false,
+        "growth": false,
+        "enterprise": true
+      },
+      {
+        "name": "Audit trail export",
+        "starter": false,
+        "growth": false,
+        "enterprise": true
+      },
+      {
+        "name": "SLA guarantee",
+        "starter": false,
+        "growth": false,
+        "enterprise": true
+      },
+      {
+        "name": "On-premises deployment",
+        "starter": false,
+        "growth": false,
+        "enterprise": true
+      },
+      {
+        "name": "Support",
+        "starter": "Email",
+        "growth": "Priority + CSM",
+        "enterprise": "Dedicated SLA"
+      }
     ],
     "customQuote": "Get a custom quote",
     "customQuoteNote": "All prices are custom-quoted based on your specific volume and requirements."
@@ -781,14 +1108,38 @@
     ],
     "techTitle": "Technical Stack",
     "techStack": [
-      ["Backend API", "Hono · Node.js"],
-      ["Pipeline Queue", "BullMQ · Redis 7"],
-      ["Database", "PostgreSQL 16 + pgvector"],
-      ["Vector Search", "pgvector embeddings"],
-      ["LLM Providers", "OpenRouter · Anthropic · OpenAI"],
-      ["Frontend", "Next.js 16 · React 19"],
-      ["Observability", "OpenTelemetry · Prometheus"],
-      ["Deployment", "Docker · Dokploy · Traefik"]
+      [
+        "Backend API",
+        "Hono · Node.js"
+      ],
+      [
+        "Pipeline Queue",
+        "BullMQ · Redis 7"
+      ],
+      [
+        "Database",
+        "PostgreSQL 16 + pgvector"
+      ],
+      [
+        "Vector Search",
+        "pgvector embeddings"
+      ],
+      [
+        "LLM Providers",
+        "OpenRouter · Anthropic · OpenAI"
+      ],
+      [
+        "Frontend",
+        "Next.js 16 · React 19"
+      ],
+      [
+        "Observability",
+        "OpenTelemetry · Prometheus"
+      ],
+      [
+        "Deployment",
+        "Docker · Dokploy · Traefik"
+      ]
     ],
     "ctaTitle": "Ready to go deeper?",
     "ctaDescription": "Book a technical demo and walk through the full pipeline with your own Instagram account.",
@@ -905,7 +1256,11 @@
         "excerpt": "A Tashkent-based fashion retailer deployed Qaqnuz at Trust Level L1, gradually ascending to L3 over 8 weeks. Response rate went from 31% to 94%.",
         "metric": "3×",
         "metricLabel": "Response rate",
-        "tags": ["Fashion", "Engagement", "L3 Trust"]
+        "tags": [
+          "Fashion",
+          "Engagement",
+          "L3 Trust"
+        ]
       },
       {
         "slug": "24-7-automation",
@@ -913,7 +1268,11 @@
         "excerpt": "A cosmetics brand eliminated response delays on nights and weekends. Qaqnuz's L2 auto-publish handles routine inquiries; the operator queue surfaces only complex cases.",
         "metric": "24/7",
         "metricLabel": "Always-on",
-        "tags": ["Cosmetics", "Operations", "L2 Trust"]
+        "tags": [
+          "Cosmetics",
+          "Operations",
+          "L2 Trust"
+        ]
       }
     ],
     "ctaTitle": "Want to be a case study?",
@@ -921,14 +1280,31 @@
     "ctaButton": "Book a demo",
     "backToStudies": "All case studies",
     "brandGrowth": {
-      "tags": ["Fashion", "Tashkent", "L3 Trust", "Multi-channel"],
+      "tags": [
+        "Fashion",
+        "Tashkent",
+        "L3 Trust",
+        "Multi-channel"
+      ],
       "title": "How a fashion brand tripled their DM response rate",
       "description": "A Tashkent-based fashion retailer deployed Qaqnuz to handle Instagram DMs across three accounts. Starting at Trust Level L1, they progressed to L3 in 8 weeks — while maintaining a 4.9/5 customer satisfaction score.",
       "metrics": [
-        { "value": "3×", "label": "Response rate" },
-        { "value": "4 min", "label": "Avg response time" },
-        { "value": "94%", "label": "DMs handled by AI" },
-        { "value": "1,200+", "label": "DMs/month" }
+        {
+          "value": "3×",
+          "label": "Response rate"
+        },
+        {
+          "value": "4 min",
+          "label": "Avg response time"
+        },
+        {
+          "value": "94%",
+          "label": "DMs handled by AI"
+        },
+        {
+          "value": "1,200+",
+          "label": "DMs/month"
+        }
       ],
       "challengeTitle": "The challenge",
       "challengeText": "Before Qaqnuz, the brand's DM response rate was 31% — most messages went unanswered for hours or days. A single operator handled all accounts manually, working long shifts with no overnight coverage.",
@@ -939,14 +1315,31 @@
       "ctaButton": "Get similar results for your brand"
     },
     "automation247": {
-      "tags": ["Cosmetics", "Tashkent", "L2 Trust", "Always-on"],
+      "tags": [
+        "Cosmetics",
+        "Tashkent",
+        "L2 Trust",
+        "Always-on"
+      ],
       "title": "24/7 coverage without a 24/7 team",
       "description": "A Tashkent cosmetics brand deployed Qaqnuz to eliminate overnight and weekend response gaps. Within 30 days, AI was handling 78% of all inquiries autonomously.",
       "metrics": [
-        { "value": "24/7", "label": "Coverage" },
-        { "value": "78%", "label": "Auto-handled" },
-        { "value": "2 min", "label": "Avg response time" },
-        { "value": "800+", "label": "DMs/month" }
+        {
+          "value": "24/7",
+          "label": "Coverage"
+        },
+        {
+          "value": "78%",
+          "label": "Auto-handled"
+        },
+        {
+          "value": "2 min",
+          "label": "Avg response time"
+        },
+        {
+          "value": "800+",
+          "label": "DMs/month"
+        }
       ],
       "challengeTitle": "The challenge",
       "challengeText": "The brand received hundreds of DMs weekly but had no overnight or weekend coverage. Most customer questions about product availability, pricing, and delivery went unanswered until the next business day.",

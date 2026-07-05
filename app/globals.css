@@ -86,6 +86,13 @@
   --color-success-400: #34d399;
   --color-success-500: #10b981;
 
+  /* Payment brand marks — approximate public brand colours, used to tint the
+     provider wordmarks (nominative use). Swap for official values if provided. */
+  --color-pay-click: #00aeef;
+  --color-pay-payme: #00c4b3;
+  --color-pay-uzum:  #7b3fe4;
+  --color-pay-humo:  #1e4fd8;
+
   /* Neutral scale */
   --color-neutral-50:  #fafafa;
   --color-neutral-100: #f4f4f5;

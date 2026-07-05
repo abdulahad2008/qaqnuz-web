@@ -3,14 +3,13 @@
 import { useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import {
-  Search, Tag, Database, PenLine, Shield, Star, GitMerge, Send,
+  Tag, Database, PenLine, Shield, Star, GitMerge, Send,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Section, Container, SectionHeader } from "@/components/ui/section";
 import { FadeIn } from "@/components/motion/fade-in";
 
 const STAGE_VISUAL = [
-  { id: "qualify",  icon: Search,   color: "#a1a1aa", rgb: "161,161,170" },
   { id: "classify", icon: Tag,      color: "#ffbc4d", rgb: "255,188,77" },
   { id: "retrieve", icon: Database, color: "#ff9d1a", rgb: "255,157,26" },
   { id: "compose",  icon: PenLine,  color: "#f07d00", rgb: "240,125,0" },
