@@ -151,6 +151,30 @@
   50% { opacity: 1; transform: scale(1.4); }
 }
 
+/* Ambient hero clouds — slow compositor drift (transform only). Different
+   speeds/paths give the airy, living feel. Under reduced motion the global
+   rule below collapses these to a single static frame. */
+@keyframes drift-a {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(7%, 5%, 0) scale(1.18); }
+  100% { transform: translate3d(-4%, 3%, 0) scale(1.06); }
+}
+@keyframes drift-b {
+  0%   { transform: translate3d(0, 0, 0) scale(1.1); }
+  50%  { transform: translate3d(-8%, -4%, 0) scale(0.92); }
+  100% { transform: translate3d(5%, -6%, 0) scale(1.12); }
+}
+@keyframes drift-c {
+  0%   { transform: translate3d(0, 0, 0) scale(0.95); }
+  50%  { transform: translate3d(5%, -7%, 0) scale(1.2); }
+  100% { transform: translate3d(-6%, 4%, 0) scale(1); }
+}
+@keyframes drift-d {
+  0%   { transform: translate3d(0, 0, 0) scale(1.05); }
+  50%  { transform: translate3d(-5%, 6%, 0) scale(1.15); }
+  100% { transform: translate3d(6%, 2%, 0) scale(0.98); }
+}
+
 /* ─── Base ─────────────────────────────────────────────────── */
 * { box-sizing: border-box; }
 
@@ -304,6 +328,11 @@ body {
 }
 .dark .hero-overlay {
   background: linear-gradient(180deg, rgba(14,16,23,0.90) 0%, rgba(14,16,23,0.86) 60%, rgba(14,16,23,0.94) 100%);
+}
+
+/* Pause ambient drift when the hero is offscreen (toggled via IntersectionObserver) */
+.hero-ambient.is-paused .hero-cloud {
+  animation-play-state: paused;
 }
 
 /* ─── Reduced Motion ───────────────────────────────────────── */
