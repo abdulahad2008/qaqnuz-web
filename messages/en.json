@@ -120,6 +120,96 @@
       }
     ]
   },
+  "inbox": {
+    "kicker": "Live demo",
+    "title": "A real inbox. Real conversations.",
+    "sub": "The exact QAQNUZ workspace — pick your industry and watch the AI sell.",
+    "tabs": ["Clinic", "Online store", "Delivery", "Beauty salon"],
+    "inboxTitle": "Inbox",
+    "aiActive": "AI active",
+    "typing": "typing…",
+    "delivered": "delivered",
+    "leadCaptured": "Lead captured",
+    "ui": {
+      "brandPill": "Korzinka.uz · Operator",
+      "search": "Conversation, customer, product, FAQ…",
+      "sla": "SLA: 2m 14s",
+      "nav": ["Home", "Inbox", "Studio", "Growth", "Settings"],
+      "filters": ["All · 147", "New · 23", "Mine · 8", "Escalation · 3"],
+      "tagAiClosed": "AI CLOSED",
+      "tagPlaybook": "PLAYBOOK",
+      "tagEscalation": "ESCALATION",
+      "tagMine": "YOURS",
+      "journey": ["Order", "Delivery", "Payment", "Issue"],
+      "aiSource": "Catalog",
+      "quickActions": ["Confirm return", "Offer compensation", "Call courier", "Internal note"],
+      "composerToggle": ["AI", "Me", "TAKEOVER"],
+      "send": "Send",
+      "replyPlaceholder": "Write a message…",
+      "escTitle": "AI confidence dropped (0.48) — operator assistance recommended",
+      "escAccept": "Accept",
+      "escReturn": "Return to AI",
+      "panelTitle": "AI ANALYSIS",
+      "intent": "Intent",
+      "sentiment": "Sentiment",
+      "sentimentValue": "Positive",
+      "layerTitle": "Layer match",
+      "layers": ["Facts", "Commercial", "Behavior", "Action"],
+      "recsTitle": "RECOMMENDATIONS",
+      "recs": [
+        { "level": "HIGH", "text": "Quickly confirm the return", "score": "0.91" },
+        { "level": "MEDIUM", "text": "Compensation: 50,000 UZS bonus", "score": "0.76" },
+        { "level": "INFO", "text": "VIP customer — reply fast", "score": "" }
+      ],
+      "leadTitle": "Lead status",
+      "leadValue": "92%",
+      "leadNote": "High-quality lead"
+    },
+    "conversations": [
+      {
+        "sector": "Clinic", "channel": "telegram", "customer": "Aziz Karimov", "preview": "Can I book for tomorrow?",
+        "messages": [
+          { "from": "customer", "text": "Hello, can I book a dentist appointment for tomorrow?" },
+          { "from": "ai", "text": "Hello Aziz! Of course. Tomorrow we have 10:00, 14:30 and 17:00 free. Which works for you?" },
+          { "from": "customer", "text": "14:30 works" },
+          { "from": "ai", "text": "Great! You're booked for tomorrow at 14:30. Address: 15 Amir Temur street. A reminder arrives one hour before 🦷" },
+          { "from": "system", "text": "✅ Appointment booked — 14:30" }
+        ]
+      },
+      {
+        "sector": "Online store", "channel": "instagram", "customer": "Madina R.", "preview": "Is this dress available? 🧡",
+        "messages": [
+          { "from": "customer", "text": "Is this dress available? 🧡" },
+          { "from": "ai-draft-wrong", "text": "Yes! It's 140,000 UZS 😊" },
+          { "from": "guardrail", "text": "Price doesn't match the catalog — rewritten" },
+          { "from": "ai", "text": "Hi! The “Lola” dress is in stock — 240,000 UZS, S–XL. Which size do you need? 🧡" },
+          { "from": "customer", "text": "M please, how do I pay?" },
+          { "from": "ai", "text": "Size M reserved! You can pay via Click or Payme. Link: pay.qaqnuz.uz/8214" },
+          { "from": "system", "text": "✅ Order confirmed — 240,000 UZS" }
+        ]
+      },
+      {
+        "sector": "Delivery", "channel": "whatsapp", "customer": "Bobur T.", "preview": "Where is my order?",
+        "messages": [
+          { "from": "customer", "text": "Where is my order? #4412" },
+          { "from": "ai", "text": "Hi Bobur! Order #4412 is with the courier — arriving in about 25 minutes 🛵" },
+          { "from": "customer", "text": "Can I change the address?" },
+          { "from": "ai", "text": "The courier is already on the way, so an operator will change it — connecting you now. One minute ⏳" },
+          { "from": "system", "text": "👤 Handed to operator — answered in 42 seconds" }
+        ]
+      },
+      {
+        "sector": "Beauty salon", "channel": "instagram", "customer": "Nilufar S.", "preview": "Any manicure slots?",
+        "messages": [
+          { "from": "customer", "text": "Any manicure slots on Saturday?" },
+          { "from": "ai", "text": "Hello Nilufar! Saturday has 11:00 and 16:00 free. Gel polish is 180,000 UZS 💅" },
+          { "from": "customer", "text": "Book me for 16:00" },
+          { "from": "ai", "text": "Done! Saturday 16:00 — master Kamola will be waiting. We'll remind you a day before ✨" },
+          { "from": "system", "text": "✅ Booked — Saturday 16:00" }
+        ]
+      }
+    ]
+  },
   "pipelineStory": {
     "kicker": "The message's journey",
     "title": "The machine's mind — open",

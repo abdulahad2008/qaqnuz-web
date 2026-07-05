@@ -120,6 +120,96 @@
       }
     ]
   },
+  "inbox": {
+    "kicker": "Jonli demo",
+    "title": "Haqiqiy inbox. Haqiqiy suhbatlar.",
+    "sub": "QAQNUZ ish stolining aynan o'zi — sohangizni tanlang va AI qanday sotayotganini kuzating.",
+    "tabs": ["Klinika", "Onlayn do'kon", "Yetkazib berish", "Go'zallik saloni"],
+    "inboxTitle": "Inbox",
+    "aiActive": "AI faol",
+    "typing": "yozmoqda…",
+    "delivered": "yetkazildi",
+    "leadCaptured": "Lid qo'lga kiritildi",
+    "ui": {
+      "brandPill": "Korzinka.uz · Operator",
+      "search": "Suhbat, mijoz, mahsulot, FAQ…",
+      "sla": "SLA: 2m 14s",
+      "nav": ["Asosiy", "Inbox", "Studio", "Growth", "Sozlamalar"],
+      "filters": ["Hammasi · 147", "Yangi · 23", "Mening · 8", "Eskalatsiya · 3"],
+      "tagAiClosed": "AI YOPDI",
+      "tagPlaybook": "PLAYBOOK",
+      "tagEscalation": "ESKALATSIYA",
+      "tagMine": "SIZGA",
+      "journey": ["Buyurtma", "Yetkazish", "To'lov", "Muammo"],
+      "aiSource": "Katalog",
+      "quickActions": ["Qaytarish tasdiqlash", "Kompensatsiya taklifi", "Kuryer chaqirish", "Ichki eslatma"],
+      "composerToggle": ["AI", "Men", "TAKEOVER"],
+      "send": "Yuborish",
+      "replyPlaceholder": "Xabar yozing…",
+      "escTitle": "AI confidence pasaydi (0.48) — operator yordami tavsiya etiladi",
+      "escAccept": "Qabul qilish",
+      "escReturn": "AI'ga qaytarish",
+      "panelTitle": "AI TAHLILI",
+      "intent": "Niyat",
+      "sentiment": "His-tuyg'u",
+      "sentimentValue": "Pozitiv",
+      "layerTitle": "Layer Moslik",
+      "layers": ["Facts", "Commercial", "Behavior", "Action"],
+      "recsTitle": "TAVSIYALAR",
+      "recs": [
+        { "level": "HIGH", "text": "Tezkor qaytarish tasdiqlash", "score": "0.91" },
+        { "level": "MEDIUM", "text": "Kompensatsiya: 50 000 UZS bonus", "score": "0.76" },
+        { "level": "INFO", "text": "VIP mijoz — tez javob bering", "score": "" }
+      ],
+      "leadTitle": "Lid holati",
+      "leadValue": "92%",
+      "leadNote": "Yuqori sifatli lid"
+    },
+    "conversations": [
+      {
+        "sector": "Klinika", "channel": "telegram", "customer": "Aziz Karimov", "preview": "Ertaga qabulga yozilsam bo'ladimi?",
+        "messages": [
+          { "from": "customer", "text": "Assalomu alaykum, ertaga stomatologga qabulga yozilsam bo'ladimi?" },
+          { "from": "ai", "text": "Assalomu alaykum, Aziz aka! Albatta. Ertaga 10:00, 14:30 va 17:00 bo'sh. Qaysi vaqt qulay?" },
+          { "from": "customer", "text": "14:30 yaxshi" },
+          { "from": "ai", "text": "Ajoyib! Sizni ertaga 14:30 ga yozdim. Manzil: Amir Temur ko'chasi 15. Eslatma 1 soat oldin yuboriladi 🦷" },
+          { "from": "system", "text": "✅ Qabul band qilindi — 14:30" }
+        ]
+      },
+      {
+        "sector": "Onlayn do'kon", "channel": "instagram", "customer": "Madina R.", "preview": "Bu ko'ylak bormi? 🧡",
+        "messages": [
+          { "from": "customer", "text": "Bu ko'ylak bormi? 🧡" },
+          { "from": "ai-draft-wrong", "text": "Bor! Narxi 140 000 so'm 😊" },
+          { "from": "guardrail", "text": "Narx katalogga mos emas — qayta yozildi" },
+          { "from": "ai", "text": "Assalomu alaykum! «Lola» ko'ylagi bor — 240 000 so'm, S–XL. Qaysi o'lcham kerak? 🧡" },
+          { "from": "customer", "text": "M bo'lsin, qanday to'layman?" },
+          { "from": "ai", "text": "M o'lcham band qilindi! Click yoki Payme orqali to'lashingiz mumkin. Havola: pay.qaqnuz.uz/8214" },
+          { "from": "system", "text": "✅ Buyurtma tasdiqlandi — 240 000 so'm" }
+        ]
+      },
+      {
+        "sector": "Yetkazib berish", "channel": "whatsapp", "customer": "Bobur T.", "preview": "Buyurtmam qayerda?",
+        "messages": [
+          { "from": "customer", "text": "Buyurtmam qayerda? #4412" },
+          { "from": "ai", "text": "Salom, Bobur aka! #4412 buyurtmangiz kuryerda — taxminan 25 daqiqada yetib boradi 🛵" },
+          { "from": "customer", "text": "Manzilni o'zgartirsam bo'ladimi?" },
+          { "from": "ai", "text": "Kuryer yo'lda bo'lgani uchun manzilni operator o'zgartiradi — hozir bog'layman. 1 daqiqa ⏳" },
+          { "from": "system", "text": "👤 Operatorga uzatildi — 42 soniyada javob berildi" }
+        ]
+      },
+      {
+        "sector": "Go'zallik saloni", "channel": "instagram", "customer": "Nilufar S.", "preview": "Manikyurga joy bormi?",
+        "messages": [
+          { "from": "customer", "text": "Shanba kuni manikyurga joy bormi?" },
+          { "from": "ai", "text": "Assalomu alaykum, Nilufar! Shanba 11:00 va 16:00 bo'sh. Gel-lak bilan 180 000 so'm 💅" },
+          { "from": "customer", "text": "16:00 ga yozing" },
+          { "from": "ai", "text": "Yozdim! Shanba 16:00 — usta Kamola sizni kutadi. Bir kun oldin eslatma yuboramiz ✨" },
+          { "from": "system", "text": "✅ Band qilindi — shanba 16:00" }
+        ]
+      }
+    ]
+  },
   "pipelineStory": {
     "kicker": "Xabarning sayohati",
     "title": "Mashinaning miyasi — ochiq",
