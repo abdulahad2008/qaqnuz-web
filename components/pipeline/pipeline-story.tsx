@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
+  useSpring,
   useTransform,
 } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -186,8 +187,38 @@ function GuardrailBeat({
 
 /* --- desktop scroll-linked scene ----------------------------------- */
 
+// Rail geometry — a fixed-height column of 7 circles. Real circle-center
+// offsets are MEASURED after layout (never assumed from percentages) and feed
+// a single MotionValue, so the fill line and the ball can never desync.
+const RAIL_H = 500;
+// Scroll-progress → circle index. Index 4 repeats across 0.42→0.70 so the ball
+// HOLDS at circle 5 during the guardrail beat, then advances to circle 6.
+const FILL_INPUT = [0.02, 0.12, 0.22, 0.32, 0.42, 0.7, 0.74, 0.88];
+const FILL_STOPS = [0, 1, 2, 3, 4, 4, 5, 6];
+
+function piecewise(x: number, xs: number[], ys: number[]) {
+  const n = xs.length;
+  if (x <= xs[0]) return ys[0];
+  if (x >= xs[n - 1]) return ys[n - 1];
+  for (let i = 1; i < n; i++) {
+    if (x <= xs[i]) {
+      const t = (x - xs[i - 1]) / (xs[i] - xs[i - 1]);
+      return ys[i - 1] + t * (ys[i] - ys[i - 1]);
+    }
+  }
+  return ys[n - 1];
+}
+
+const defaultCenters = () =>
+  Array.from({ length: 7 }, (_, i) => 11 + ((RAIL_H - 22) * i) / 6);
+
 function DesktopPipeline({ stages, g }: { stages: Stage[]; g: Guardrail }) {
   const outerRef = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
+  const numberRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const centersRef = useRef<number[]>(defaultCenters());
+  const [centers, setCenters] = useState<number[]>(defaultCenters);
+
   const { scrollYProgress } = useScroll({
     target: outerRef,
     offset: ["start start", "end end"],
@@ -196,51 +227,104 @@ function DesktopPipeline({ stages, g }: { stages: Stage[]; g: Guardrail }) {
   const [stage, setStage] = useState(0);
   const [guardPhase, setGuardPhase] = useState<GuardPhase>("wrong");
 
-  useMotionValueEvent(scrollYProgress, "change", (p) => {
+  // Measure real circle-center Y offsets (relative to the rail) after layout
+  // and on resize — the single source of geometric truth.
+  useLayoutEffect(() => {
+    const measure = () => {
+      const rail = railRef.current;
+      if (!rail) return;
+      const railTop = rail.getBoundingClientRect().top;
+      const next = numberRefs.current.map((el) => {
+        if (!el) return 0;
+        const r = el.getBoundingClientRect();
+        return r.top - railTop + r.height / 2;
+      });
+      if (next.length === 7 && next.every((n) => n > 0)) {
+        centersRef.current = next;
+        setCenters(next);
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  // ONE source of truth. fillRaw(px) reads the latest measured centers every
+  // frame; the ball's top AND the line's height both derive from its spring,
+  // clamped to [circle-1 center, circle-7 center] so nothing overshoots.
+  const fillRaw = useTransform(scrollYProgress, (p) => {
+    const cs = centersRef.current;
+    return piecewise(
+      p,
+      FILL_INPUT,
+      FILL_STOPS.map((idx) => cs[idx])
+    );
+  });
+  const fillSpring = useSpring(fillRaw, { stiffness: 120, damping: 28 });
+  const clampFill = (v: number) => {
+    const cs = centersRef.current;
+    return Math.min(Math.max(v, cs[0]), cs[6]);
+  };
+  const ballTop = useTransform(fillSpring, clampFill);
+  const lineHeight = useTransform(
+    fillSpring,
+    (v) => clampFill(v) - centersRef.current[0]
+  );
+
+  // Circle N lights the instant the (sprung) fill crosses its measured center
+  // — the visual hand-off — so `stage` and the visuals share one source.
+  useMotionValueEvent(fillSpring, "change", (v) => {
+    const cs = centersRef.current;
     let s = 0;
-    for (let i = 0; i < THRESHOLDS.length; i++) if (p >= THRESHOLDS[i]) s = i;
+    for (let i = 0; i < cs.length; i++) if (v >= cs[i] - 1) s = i;
     setStage(s);
-    if (s === 4) setGuardPhase(guardPhaseAt(p));
+  });
+  useMotionValueEvent(scrollYProgress, "change", (p) => {
+    setGuardPhase(guardPhaseAt(p));
   });
 
-  const markerTop = useTransform(
-    scrollYProgress,
-    [0.02, 0.12, 0.22, 0.32, 0.42, 0.7, 0.74, 0.88, 1],
-    ["0%", "16.7%", "33.3%", "50%", "66.7%", "66.7%", "83.3%", "100%", "100%"]
-  );
-  const lineScale = useTransform(scrollYProgress, [0.02, 0.9], [0, 1]);
-
   const active = stages[stage];
+  const c0 = centers[0];
+  const c6 = centers[6];
 
   return (
     <div ref={outerRef} className="relative hidden md:block" style={{ height: "420vh" }}>
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden px-6">
         <div className="mx-auto grid w-full max-w-5xl grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-center gap-16">
           {/* rail */}
-          <div className="relative py-4 pl-2">
+          <div ref={railRef} className="relative pl-2">
+            {/* static track — behind the circles */}
             <div
               aria-hidden="true"
-              className="absolute bottom-4 left-[calc(0.5rem+11px)] top-4 w-px bg-border"
+              className="absolute left-[calc(0.5rem+11px)] w-px bg-border"
+              style={{ top: c0, height: c6 - c0 }}
             />
+            {/* animated fill — same source as the ball, so never desynced */}
             <motion.div
               aria-hidden="true"
-              style={{ scaleY: lineScale }}
-              className="absolute bottom-4 left-[calc(0.5rem+11px)] top-4 w-px origin-top bg-gradient-to-b from-accent via-ember-500 to-ember-700"
+              className="absolute left-[calc(0.5rem+11px)] w-px bg-gradient-to-b from-accent via-ember-500 to-ember-700"
+              style={{ top: c0, height: lineHeight }}
             />
+            {/* traveling ball — sits under the opaque circles for a clean hand-off */}
             <motion.div
               aria-hidden="true"
-              style={{ top: markerTop, boxShadow: "0 0 18px hsl(var(--accent) / 0.7)" }}
+              data-rail="ball"
               className="absolute left-2 h-[22px] w-[22px] -translate-y-1/2 rounded-full bg-accent"
+              style={{ top: ballTop, boxShadow: "0 0 18px hsl(var(--accent) / 0.7)" }}
             />
-            <ol className="relative flex h-[60vh] max-h-[520px] flex-col justify-between">
+            <ol className="relative z-10 flex flex-col justify-between" style={{ height: RAIL_H }}>
               {stages.map((s, i) => {
                 const lit = i <= stage;
                 return (
                   <li key={s.title} className="flex items-center gap-4">
                     <span
-                      className={`flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full border text-[10px] font-bold transition-all duration-300 ${
+                      ref={(el) => {
+                        numberRefs.current[i] = el;
+                      }}
+                      data-rail="circle"
+                      className={`flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full border text-[10px] font-bold transition-colors duration-300 ${
                         lit
-                          ? "border-accent bg-accent/20 text-accent"
+                          ? "border-accent bg-accent text-accent-foreground"
                           : "border-border bg-background text-muted-foreground"
                       }`}
                     >
