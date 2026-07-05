@@ -17,7 +17,7 @@
   /* text */
   --pu-text:          #18181b;
   --pu-text-muted:    #52525b;
-  --pu-text-subtle:   #a1a1aa;
+  --pu-text-subtle:   #6b7280;  /* zinc-500: AA-legible tertiary (was #a1a1aa) */
   --pu-text-inverse:  #ffffff;
 
   /* borders */
