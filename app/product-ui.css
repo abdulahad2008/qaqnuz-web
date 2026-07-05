@@ -1,0 +1,66 @@
+/* ============================================================
+ * Product-UI token layer — the REAL Qaqnuz product design system
+ * (Pencil FLOW-7). Scoped under `.product-ui` so the light/blue
+ * product palette never leaks into the dark/orange marketing shell.
+ * Values mirror design/tokens.css + design/themes.css (light theme).
+ * Consume via var(--pu-*) — never raw hex — inside .product-ui.
+ * ============================================================ */
+
+.product-ui {
+  /* surfaces */
+  --pu-bg:            #fafafa;   /* page */
+  --pu-surface:       #ffffff;   /* elevated cards, bars */
+  --pu-surface-muted: #f4f4f5;   /* sunken / neutral fill */
+  --pu-surface-hover: #ececee;
+  --pu-surface-sky:   #eef3ff;   /* accent-soft AI bubble / selected row */
+
+  /* text */
+  --pu-text:          #18181b;
+  --pu-text-muted:    #52525b;
+  --pu-text-subtle:   #a1a1aa;
+  --pu-text-inverse:  #ffffff;
+
+  /* borders */
+  --pu-border:        #e5e5e7;
+  --pu-border-strong: #d4d4d8;
+
+  /* primary — product blue */
+  --pu-primary:        #1a5cff;
+  --pu-primary-hover:  #1448cc;
+  --pu-primary-soft:   #e8eeff;
+
+  /* status */
+  --pu-success:        #16a34a;
+  --pu-success-text:   #15803d;
+  --pu-success-soft:   #dcfce7;
+  --pu-warning:        #92400e;
+  --pu-warning-soft:   #fef3c7;
+  --pu-danger:         #dc2626;
+  --pu-danger-text:    #b91c1c;
+  --pu-danger-soft:    #fee2e2;
+  --pu-info:           #2563eb;
+  --pu-info-soft:      #dbeafe;
+
+  /* AI-brain layer hues (facts/commerce/behaviour/action) */
+  --pu-purple:         #7c3aed;
+  --pu-purple-soft:    #ede5f7;
+  --pu-orange:         #f59e0b;
+
+  /* channel badges (FLOW-7 inbox avatars) */
+  --pu-ch-instagram:   #f97316;
+  --pu-ch-telegram:    #0ea5e9;
+  --pu-ch-whatsapp:    #22c55e;
+  --pu-ch-web:         #7c3aed;
+
+  /* radii + type */
+  --pu-radius-sm: 6px;
+  --pu-radius-md: 10px;
+  --pu-radius-lg: 16px;
+  --pu-radius-pill: 9999px;
+  --pu-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* baseline surface so the window always reads as the light product */
+  background: var(--pu-bg);
+  color: var(--pu-text);
+  font-family: var(--pu-font);
+}

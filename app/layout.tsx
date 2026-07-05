@@ -14,10 +14,19 @@ export const metadata: Metadata = {
     type: "website",
     locale: "uz_UZ",
     alternateLocale: ["en_US", "ru_RU"],
+    images: [
+      {
+        url: "/brand/qaqnuz-og.png",
+        width: 1200,
+        height: 1200,
+        alt: "Qaqnuz",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@qaqnuz",
+    images: ["/brand/qaqnuz-og.png"],
   },
 };
 
