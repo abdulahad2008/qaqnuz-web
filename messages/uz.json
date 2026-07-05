@@ -73,16 +73,11 @@
   },
   "pipeline": {
     "overline": "Sun'iy Intellekt Quvuri",
-    "title": "Sakkiz bosqich.",
+    "title": "Yetti bosqich.",
     "titleEmphasis": "Murosasiz.",
     "description": "Brendingiz oladigan har bir xabar bitta so'z nashr etilishidan oldin to'liq tekshirilgan AI quvuri orqali o'tadi. Har bir bosqichni ko'rish uchun aylantiring.",
     "detailHoverHint": "Har bir bosqichni ko'rish uchun aylantiring.",
     "stages": [
-      {
-        "label": "Filtrlash",
-        "detail": "Ball ≥ 0,6 talab etiladi",
-        "description": "AIning javob berishi kerakligini aniqlaydi. Spam, bot faoliyati va mavzudan tashqari muloqotlarni LLM tokenlarini sarflashdan oldin filtrlaydi."
-      },
       {
         "label": "Tasniflash",
         "detail": "Niyat · Kayfiyat · Til · Ustuvorlik",
@@ -694,7 +689,7 @@
     "overline": "Narxlar",
     "title": "Oddiy tariflar.",
     "titleEmphasis": "Kutilmagan narxlarsiz.",
-    "description": "Barcha tariflar to'liq 8 bosqichli AI quvuri va 9 ta xavfsizlik filtriga kiradi. Hajm uchun to'laysiz, xususiyatlar uchun emas.",
+    "description": "Barcha tariflar to'liq 7 bosqichli AI quvuri va 9 ta xavfsizlik filtriga kiradi. Hajm uchun to'laysiz, xususiyatlar uchun emas.",
     "viewFull": "To'liq narxlar va taqqoslash jadvalini ko'ring",
     "contactUs": "Biz bilan bog'laning",
     "custom": "Maxsus",
@@ -707,7 +702,7 @@
         "features": [
           "1 ta Instagram hisobi",
           "Oyiga 1 000 tagacha DM",
-          "To'liq AI quvuri (8 bosqichning barchasi)",
+          "To'liq AI quvuri (7 bosqichning barchasi)",
           "9 ta xavfsizlik filtri",
           "L1–L2 ishonch rampa",
           "Email qo'llab-quvvatlash"
@@ -750,7 +745,7 @@
     "items": [
       {
         "q": "Qaqnuz nima?",
-        "a": "Qaqnuz — O'zbekistondagi brendlar uchun Instagram DMlar, izohlar va story eslatmalarini boshqaruvchi sun'iy intellekt platformasi. Har bir kiruvchi xabar 8 bosqichli AI quvuri orqali o'tadi: filtrlash, tasniflash, qidirish, yozish, himoya, baholash, ishonch sathi, nashr — har bir javobda 9 xavfsizlik tekshiruvi bilan. Operatorlar Mission Control paneli orqali to'liq nazoratni qo'llarida ushlab turishadi, inson muomalasi doim bir bosishda."
+        "a": "Qaqnuz — O'zbekistondagi brendlar uchun Instagram DMlar, izohlar va story eslatmalarini boshqaruvchi sun'iy intellekt platformasi. Har bir kiruvchi xabar 7 bosqichli AI quvuri orqali o'tadi: tasniflash, qidirish, yozish, himoya, baholash, ishonch sathi, nashr — har bir javobda 9 xavfsizlik tekshiruvi bilan. Operatorlar Mission Control paneli orqali to'liq nazoratni qo'llarida ushlab turishadi, inson muomalasi doim bir bosishda."
       },
       {
         "q": "O'rnatish qancha vaqt oladi?",
@@ -762,7 +757,7 @@
       },
       {
         "q": "Qaqnuz narxi qancha?",
-        "a": "Narx Instagram hisoblari soni va oylik xabar hajmiga qarab belgilanadi. Barcha tariflar to'liq 8 bosqichli AI quvuri va 9 ta xavfsizlik filtriga kiradi — hajm uchun to'laysiz, xususiyatlar uchun emas. Maxsus taklif uchun biz bilan bog'laning. API chaqiruvi yoki LLM token uchun alohida haq yo'q — xarajatlarni boshqarish har bir brend uchun sozlanuvchi byudjetlar orqali ichki amalga oshiriladi."
+        "a": "Narx Instagram hisoblari soni va oylik xabar hajmiga qarab belgilanadi. Barcha tariflar to'liq 7 bosqichli AI quvuri va 9 ta xavfsizlik filtriga kiradi — hajm uchun to'laysiz, xususiyatlar uchun emas. Maxsus taklif uchun biz bilan bog'laning. API chaqiruvi yoki LLM token uchun alohida haq yo'q — xarajatlarni boshqarish har bir brend uchun sozlanuvchi byudjetlar orqali ichki amalga oshiriladi."
       },
       {
         "q": "Qaqnuz mijozlar ma'lumotlari va maxfiylikni qanday boshqaradi?",
@@ -938,6 +933,8 @@
     ],
     "calendarLabel": "Taqvim",
     "calendarPlaceholder": "Taqvim widget joylashuvi",
+    "calendarNote": "Demo qo'ng'irog'ini belgilash uchun biz bilan bog'laning.",
+    "calendarTelegram": "Telegram orqali yozish",
     "form": {
       "title": "Brendingiz haqida ayting",
       "name": "Ismingiz",
@@ -968,7 +965,7 @@
     "overline": "Narxlar",
     "title": "Shaffof narxlar.",
     "titleEmphasis": "Yashirin to'lovlar yo'q.",
-    "description": "Barcha rejalar to'liq 8 bosqichli AI quvuri, 9 ta xavfsizlik qo'riqlovchisi va audit jurналини o'z ichiga oladi. Imkoniyatlar uchun emas, hajm uchun to'laysiz.",
+    "description": "Barcha rejalar to'liq 7 bosqichli AI quvuri, 9 ta xavfsizlik qo'riqlovchisi va audit jurналини o'z ichiga oladi. Imkoniyatlar uchun emas, hajm uchun to'laysiz.",
     "tiers": [
       {
         "name": "Starter",
@@ -1005,7 +1002,7 @@
         "enterprise": "Cheksiz"
       },
       {
-        "name": "8 bosqichli AI quvuri",
+        "name": "7 bosqichli AI quvuri",
         "starter": true,
         "growth": true,
         "enterprise": true

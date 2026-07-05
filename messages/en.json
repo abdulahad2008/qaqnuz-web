@@ -73,16 +73,11 @@
   },
   "pipeline": {
     "overline": "The AI Pipeline",
-    "title": "Eight stages.",
+    "title": "Seven stages.",
     "titleEmphasis": "Zero compromises.",
     "description": "Every message your brand receives passes through a fully audited AI pipeline before a single word is published. Scroll to walk through each stage.",
     "detailHoverHint": "Scroll to walk through each stage.",
     "stages": [
-      {
-        "label": "Qualify",
-        "detail": "Score ≥ 0.6 required to advance",
-        "description": "Determines whether AI should respond. Filters spam, bot activity, and out-of-scope interactions before spending any LLM tokens."
-      },
       {
         "label": "Classify",
         "detail": "Intent · Sentiment · Language · Priority",
@@ -694,7 +689,7 @@
     "overline": "Pricing",
     "title": "Simple tiers.",
     "titleEmphasis": "No surprises.",
-    "description": "All plans include the full 8-stage AI pipeline and 9 safety guardrails. You pay for volume, not features.",
+    "description": "All plans include the full 7-stage AI pipeline and 9 safety guardrails. You pay for volume, not features.",
     "viewFull": "View full pricing & comparison table",
     "contactUs": "Contact us",
     "custom": "Custom",
@@ -707,7 +702,7 @@
         "features": [
           "1 Instagram account",
           "Up to 1,000 DMs / month",
-          "Full AI pipeline (all 8 stages)",
+          "Full AI pipeline (all 7 stages)",
           "9 safety guardrails",
           "L1–L2 trust ramp",
           "Email support"
@@ -750,7 +745,7 @@
     "items": [
       {
         "q": "What exactly is Qaqnuz?",
-        "a": "Qaqnuz is an AI-native automation platform that manages Instagram DMs, comments, and story mentions for Uzbekistan-based brands. It runs every incoming message through an 8-stage AI pipeline — qualify, classify, retrieve, compose, guard, evaluate, trust gate, publish — with 9 safety checks on every response. Operators retain full control through the Mission Control dashboard, with human override always one click away."
+        "a": "Qaqnuz is an AI-native automation platform that manages Instagram DMs, comments, and story mentions for Uzbekistan-based brands. It runs every incoming message through an 7-stage AI pipeline — classify, retrieve, compose, guard, evaluate, trust gate, publish — with 9 safety checks on every response. Operators retain full control through the Mission Control dashboard, with human override always one click away."
       },
       {
         "q": "How long does setup take?",
@@ -762,7 +757,7 @@
       },
       {
         "q": "How is Qaqnuz priced?",
-        "a": "Pricing is based on the number of Instagram accounts and monthly message volume. All plans include the full 8-stage pipeline and 9 safety guardrails — you pay for scale, not for features. Contact us for a customized quote. We do not charge per API call or per LLM token — cost governance is handled internally with configurable per-brand budgets."
+        "a": "Pricing is based on the number of Instagram accounts and monthly message volume. All plans include the full 7-stage pipeline and 9 safety guardrails — you pay for scale, not for features. Contact us for a customized quote. We do not charge per API call or per LLM token — cost governance is handled internally with configurable per-brand budgets."
       },
       {
         "q": "How does Qaqnuz handle customer data and privacy?",
@@ -938,6 +933,8 @@
     ],
     "calendarLabel": "Calendar",
     "calendarPlaceholder": "Calendar embed placeholder",
+    "calendarNote": "Get in touch to schedule your demo call.",
+    "calendarTelegram": "Message us on Telegram",
     "form": {
       "title": "Tell us about your brand",
       "name": "Your name",
@@ -968,7 +965,7 @@
     "overline": "Pricing",
     "title": "Transparent pricing.",
     "titleEmphasis": "No hidden fees.",
-    "description": "All plans include the full 8-stage AI pipeline, 9 safety guardrails, and audit trail. You pay for scale, not for capabilities.",
+    "description": "All plans include the full 7-stage AI pipeline, 9 safety guardrails, and audit trail. You pay for scale, not for capabilities.",
     "tiers": [
       {
         "name": "Starter",
@@ -1005,7 +1002,7 @@
         "enterprise": "Unlimited"
       },
       {
-        "name": "8-stage AI pipeline",
+        "name": "7-stage AI pipeline",
         "starter": true,
         "growth": true,
         "enterprise": true

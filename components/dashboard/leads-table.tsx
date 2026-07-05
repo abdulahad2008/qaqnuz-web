@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UserPlus, Mail, Phone, CheckCircle2, Clock, Search, Trash2, ExternalLink } from "lucide-react";
+import { UserPlus, Mail, Phone, CheckCircle2, Clock, Search, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Lead {

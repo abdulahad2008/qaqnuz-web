@@ -15,6 +15,7 @@ import { supabase } from "@/lib/supabase/client";
 const CAL_URL = process.env.NEXT_PUBLIC_CAL_URL;
 
 function CalendarEmbed({ placeholder }: { placeholder: string }) {
+  const t = useTranslations("bookDemo");
   if (CAL_URL) {
     return (
       <div className="rounded-xl overflow-hidden border border-border" style={{ height: 600 }}>
@@ -38,11 +39,10 @@ function CalendarEmbed({ placeholder }: { placeholder: string }) {
       <div>
         <p className="text-sm font-semibold text-foreground mb-1">{placeholder}</p>
         <p className="text-xs text-muted-foreground">
-          Send us a message at{" "}
+          {t("calendarNote")}{" "}
           <a href="mailto:demo@qaqnuz.uz" className="text-accent hover:underline">
             demo@qaqnuz.uz
           </a>
-          {" "}and we'll schedule your demo call.
         </p>
       </div>
       <a
@@ -51,7 +51,7 @@ function CalendarEmbed({ placeholder }: { placeholder: string }) {
         rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 text-xs text-accent hover:text-accent/80 transition-colors font-medium"
       >
-        Or message us on Telegram
+        {t("calendarTelegram")}
         <ExternalLink className="h-3 w-3" />
       </a>
     </div>
