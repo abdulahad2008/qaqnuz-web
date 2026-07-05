@@ -120,6 +120,32 @@
       }
     ]
   },
+  "pipelineStory": {
+    "kicker": "The message's journey",
+    "title": "The machine's mind — open",
+    "sub": "Madina's message passes through 7 stages before it becomes a reply. Every stage is visible — nothing is hidden.",
+    "incomingLabel": "Incoming message",
+    "incomingText": "Is this dress available? 🧡",
+    "moreLink": "Learn more",
+    "stages": [
+      { "title": "Reads the intent", "desc": "AI identifies the goal: product inquiry, price, availability.", "detail": "Intent: product availability · confidence 98%" },
+      { "title": "Detects the language", "desc": "Uzbek, Russian or English — the reply matches the customer's language.", "detail": "Language: Uzbek (Latin) · tone: friendly" },
+      { "title": "Knowledge base", "desc": "Price, size, stock — pulled only from your catalog.", "detail": "Found: “Lola” dress · 240,000 UZS · S–XL in stock" },
+      { "title": "Drafts the reply", "desc": "Written in your brand's tone, aimed at closing the sale.", "detail": "Draft ready · purchase nudge added" },
+      { "title": "9 safety filters", "desc": "Price, promises, tone, privacy — every reply passes 9 filters.", "detail": "" },
+      { "title": "Human oversight", "desc": "Uncertain cases go to an operator. You are always in control.", "detail": "High confidence · auto-approve · operator notified" },
+      { "title": "Sent", "desc": "The reply reaches the customer — in 1.4 seconds on average.", "detail": "Delivered ✓✓ · 1.4s" }
+    ],
+    "guardrail": {
+      "draftLabel": "AI draft",
+      "wrongDraft": "Of course! It's 140,000 UZS, order right now 😊",
+      "chip": "⚠ Guardrail caught this: price doesn't match the knowledge base",
+      "explain": "Wrong price detected — the reply was stopped and rewritten.",
+      "fixedLabel": "Corrected reply",
+      "fixedDraft": "Hi Madina! The “Lola” dress is in stock — 240,000 UZS, sizes S to XL. Which size do you need? 🧡",
+      "filters": ["Price accuracy", "Promise control", "Tone match", "Privacy", "Catalog match", "Discount rules", "Language quality", "Spam protection", "Escalation trigger"]
+    }
+  },
   "trustRamp": {
     "overline": "Trust Ramp",
     "title": "Start careful.",

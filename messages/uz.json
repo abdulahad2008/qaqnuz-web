@@ -120,6 +120,32 @@
       }
     ]
   },
+  "pipelineStory": {
+    "kicker": "Xabarning sayohati",
+    "title": "Mashinaning miyasi — ochiq",
+    "sub": "Madinaning xabari javobga aylangunicha 7 bosqichdan o'tadi. Har bir bosqichni ko'rishingiz mumkin — hech narsa yashirilmagan.",
+    "incomingLabel": "Kiruvchi xabar",
+    "incomingText": "Bu ko'ylak bormi? 🧡",
+    "moreLink": "Batafsil",
+    "stages": [
+      { "title": "Niyatni o'qiydi", "desc": "AI savolning maqsadini aniqlaydi: mahsulot so'rovi, narx, mavjudlik.", "detail": "Niyat: mahsulot mavjudligi · ishonch 98%" },
+      { "title": "Tilni aniqlaydi", "desc": "O'zbek, rus yoki ingliz — mijoz qaysi tilda yozsa, o'sha tilda javob.", "detail": "Til: o'zbek (lotin) · ohang: samimiy" },
+      { "title": "Bilim bazasi", "desc": "Narx, o'lcham, mavjudlik — faqat sizning katalogingizdan olinadi.", "detail": "Topildi: Ko'ylak «Lola» · 240 000 so'm · S–XL mavjud" },
+      { "title": "Javob tayyorlaydi", "desc": "Brendingiz ohangida, sotuvga yo'naltirilgan javob yoziladi.", "detail": "Qoralama tayyor · savdoga undash qo'shildi" },
+      { "title": "9 xavfsizlik filtri", "desc": "Narx, va'da, ohang, maxfiylik — har bir javob 9 ta filtrdan o'tadi.", "detail": "" },
+      { "title": "Inson nazorati", "desc": "Shubhali holatlar operatorga yo'naltiriladi. Siz doim boshqaruvdasiz.", "detail": "Ishonch yuqori · avto-tasdiq · operator xabardor" },
+      { "title": "Yuboriladi", "desc": "Javob mijozga yetib boradi — o'rtacha 1.4 soniyada.", "detail": "Yetkazildi ✓✓ · 1.4s" }
+    ],
+    "guardrail": {
+      "draftLabel": "AI qoralamasi",
+      "wrongDraft": "Albatta bor! Narxi 140 000 so'm, hoziroq buyurtma qiling 😊",
+      "chip": "⚠ Guardrail ushladi: narx bilim bazasiga mos emas",
+      "explain": "Noto'g'ri narx aniqlandi — javob to'xtatildi va qayta yozildi.",
+      "fixedLabel": "Tuzatilgan javob",
+      "fixedDraft": "Assalomu alaykum, Madina! «Lola» ko'ylagi bor — narxi 240 000 so'm, o'lchamlar S dan XL gacha. Qaysi o'lcham kerak? 🧡",
+      "filters": ["Narx aniqligi", "Va'da nazorati", "Ohang mosligi", "Maxfiylik", "Katalog mosligi", "Chegirma qoidalari", "Til sifati", "Spam-himoya", "Eskalatsiya triggeri"]
+    }
+  },
   "trustRamp": {
     "overline": "Ishonch Rampa",
     "title": "Ehtiyotkorlik bilan boshlang.",

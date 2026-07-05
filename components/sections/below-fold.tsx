@@ -12,8 +12,8 @@ const ChannelsSection = dynamic(
   () => import("@/components/sections/channels-section").then((m) => m.ChannelsSection),
   { ssr: false }
 );
-const PipelineFlow = dynamic(
-  () => import("@/components/pipeline/pipeline-flow").then((m) => m.PipelineFlow),
+const PipelineStory = dynamic(
+  () => import("@/components/pipeline/pipeline-story").then((m) => m.PipelineStory),
   { ssr: false }
 );
 const TrustRamp = dynamic(
@@ -68,7 +68,7 @@ export function BelowFold() {
   return (
     <>
       <ChannelsSection />
-      <PipelineFlow />
+      <PipelineStory />
       <TrustRamp />
       <Guardrails />
       <DashboardPreview />

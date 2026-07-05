@@ -72,10 +72,19 @@
   --color-ember-800: #9c3013;
   --color-ember-900: #7e2b15;
 
-  /* Trust/teal */
+  /* Trust/teal — reserved for safety / guardrail framing */
   --color-trust-400: #1db8a1;
   --color-trust-500: #0d9e89;
   --color-trust-600: #08806e;
+
+  /* Status — danger (caught/flagged) + warning (escalation) */
+  --color-danger-400: #f87171;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #dc2626;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-success-400: #34d399;
+  --color-success-500: #10b981;
 
   /* Neutral scale */
   --color-neutral-50:  #fafafa;
