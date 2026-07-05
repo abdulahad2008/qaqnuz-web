@@ -348,7 +348,7 @@ export function InboxDemo() {
                   key={ui.nav[i]}
                   title={ui.nav[i]}
                   className="relative flex h-9 w-9 items-center justify-center rounded-lg"
-                  style={i === 1 ? { background: "var(--pu-primary)", color: "#fff" } : { color: "var(--pu-text-subtle)" }}
+                  style={i === 1 ? { background: "var(--pu-primary)", color: "var(--pu-text-inverse)" } : { color: "var(--pu-text-subtle)" }}
                 >
                   <Icon className="h-4 w-4" />
                   {i === 1 && (
@@ -379,7 +379,7 @@ export function InboxDemo() {
                       key={f}
                       className="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold"
                       style={i === 0
-                        ? { background: "var(--pu-primary)", color: "#fff" }
+                        ? { background: "var(--pu-primary)", color: "var(--pu-text-inverse)" }
                         : { background: "var(--pu-surface-muted)", color: "var(--pu-text-muted)" }}
                     >
                       {f}
@@ -510,7 +510,7 @@ export function InboxDemo() {
                       <span
                         key={c}
                         className="rounded-md px-2 py-1"
-                        style={i === 0 ? { background: "var(--pu-primary)", color: "#fff" } : { color: "var(--pu-text-muted)" }}
+                        style={i === 0 ? { background: "var(--pu-primary)", color: "var(--pu-text-inverse)" } : { color: "var(--pu-text-muted)" }}
                       >
                         {c}
                       </span>

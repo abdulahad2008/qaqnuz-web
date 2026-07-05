@@ -75,7 +75,6 @@ function HeroInboxPreview() {
     <div
       className="product-ui select-none overflow-hidden rounded-xl text-left"
       aria-hidden="true"
-      style={{ boxShadow: "0 1px 0 rgba(255,255,255,0.04) inset" }}
     >
       {/* Top bar */}
       <div className="flex items-center gap-2 border-b px-3 py-2.5 bg-[var(--pu-surface)] border-[var(--pu-border)]">
@@ -287,7 +286,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 72% 55% at 50% -5%, rgba(255,107,51,0.14) 0%, transparent 68%)",
+            "radial-gradient(ellipse 72% 55% at 50% -5%, hsl(var(--accent) / 0.14) 0%, transparent 68%)",
         }}
       />
       <FilmGrain opacity={0.02} />
@@ -345,7 +344,7 @@ export function Hero() {
         >
           <Link
             href="/book-demo"
-            className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground shadow-[0_0_40px_-8px_rgba(255,107,51,0.5)] transition-colors hover:bg-accent/90"
+            className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground shadow-[0_0_40px_-8px_hsl(var(--accent)/0.5)] transition-colors hover:bg-accent/90"
           >
             {t("cta1")}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
