@@ -6,17 +6,14 @@ import { useTranslations } from "next-intl";
 import { Section, Container, SectionHeader } from "@/components/ui/section";
 import { FadeIn, FadeInStagger, FadeInChild } from "@/components/motion/fade-in";
 
+// Third-party payment providers Qaqnuz integrates with. Wordmark colours come
+// from @theme brand tokens (nominative use). To show an official mark, drop its
+// SVG at public/brand/payments/<id>.svg and set hasLogo:true.
 const paymentMethods = [
-  { name: "Click", color: "#00b4d8", bg: "rgba(0,180,216,0.08)" },
-  { name: "Payme", color: "#1DB954", bg: "rgba(29,185,84,0.08)"  },
-  { name: "Uzum",  color: "#9b59b6", bg: "rgba(155,89,182,0.08)" },
-  { name: "Humo",  color: "#e67e22", bg: "rgba(230,126,34,0.08)" },
-];
-
-const languages = [
-  { code: "UZ", name: "O'zbek",  flag: "🇺🇿" },
-  { code: "RU", name: "Русский", flag: "🇷🇺" },
-  { code: "EN", name: "English", flag: "🇬🇧" },
+  { id: "click", name: "Click", token: "--color-pay-click", hasLogo: false },
+  { id: "payme", name: "Payme", token: "--color-pay-payme", hasLogo: false },
+  { id: "uzum",  name: "Uzum",  token: "--color-pay-uzum",  hasLogo: false },
+  { id: "humo",  name: "Humo",  token: "--color-pay-humo",  hasLogo: false },
 ];
 
 const FEATURE_ICONS = [Globe, CreditCard, ShieldCheck] as const;
@@ -43,37 +40,31 @@ export function BuiltForUzbekistan() {
           />
         </FadeIn>
 
-        {/* Payment logos */}
+        {/* Payment provider logos */}
         <FadeIn delay={0.1}>
           <div className="flex flex-wrap justify-center gap-4 mb-16">
             {paymentMethods.map((payment) => (
               <motion.div
-                key={payment.name}
-                whileHover={{ scale: 1.05, y: -2 }}
-                className="flex items-center gap-3 px-6 py-3 rounded-xl border border-border bg-background"
-                style={{ background: payment.bg }}
+                key={payment.id}
+                whileHover={{ scale: 1.04, y: -2 }}
+                className="flex min-w-[132px] items-center justify-center rounded-2xl border border-border bg-background px-7 py-4 shadow-sm"
               >
-                <div className="w-2 h-2 rounded-full" style={{ background: payment.color }} />
-                <span className="text-sm font-bold" style={{ color: payment.color }}>
-                  {payment.name}
-                </span>
+                {payment.hasLogo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={`/brand/payments/${payment.id}.svg`}
+                    alt={payment.name}
+                    className="h-6 w-auto"
+                  />
+                ) : (
+                  <span
+                    className="text-xl font-extrabold tracking-tight"
+                    style={{ color: `var(${payment.token})` }}
+                  >
+                    {payment.name}
+                  </span>
+                )}
               </motion.div>
-            ))}
-          </div>
-        </FadeIn>
-
-        {/* Language badges */}
-        <FadeIn delay={0.15}>
-          <div className="flex flex-wrap justify-center gap-3 mb-16">
-            {languages.map((lang) => (
-              <div
-                key={lang.code}
-                className="flex items-center gap-2.5 px-4 py-2 rounded-full surface-elevated"
-              >
-                <span className="text-base">{lang.flag}</span>
-                <span className="text-xs font-bold text-foreground">{lang.code}</span>
-                <span className="text-xs text-muted-foreground">{lang.name}</span>
-              </div>
             ))}
           </div>
         </FadeIn>

@@ -124,7 +124,12 @@
     "kicker": "Jonli demo",
     "title": "Haqiqiy inbox. Haqiqiy suhbatlar.",
     "sub": "QAQNUZ ish stolining aynan o'zi — sohangizni tanlang va AI qanday sotayotganini kuzating.",
-    "tabs": ["Klinika", "Onlayn do'kon", "Yetkazib berish", "Go'zallik saloni"],
+    "tabs": [
+      "Klinika",
+      "Onlayn do'kon",
+      "Yetkazib berish",
+      "Go'zallik saloni"
+    ],
     "inboxTitle": "Inbox",
     "aiActive": "AI faol",
     "typing": "yozmoqda…",
@@ -134,16 +139,41 @@
       "brandPill": "Korzinka.uz · Operator",
       "search": "Suhbat, mijoz, mahsulot, FAQ…",
       "sla": "SLA: 2m 14s",
-      "nav": ["Asosiy", "Inbox", "Studio", "Growth", "Sozlamalar"],
-      "filters": ["Hammasi · 147", "Yangi · 23", "Mening · 8", "Eskalatsiya · 3"],
+      "nav": [
+        "Asosiy",
+        "Inbox",
+        "Studio",
+        "Growth",
+        "Sozlamalar"
+      ],
+      "filters": [
+        "Hammasi · 147",
+        "Yangi · 23",
+        "Mening · 8",
+        "Eskalatsiya · 3"
+      ],
       "tagAiClosed": "AI YOPDI",
       "tagPlaybook": "PLAYBOOK",
       "tagEscalation": "ESKALATSIYA",
       "tagMine": "SIZGA",
-      "journey": ["Buyurtma", "Yetkazish", "To'lov", "Muammo"],
+      "journey": [
+        "Buyurtma",
+        "Yetkazish",
+        "To'lov",
+        "Muammo"
+      ],
       "aiSource": "Katalog",
-      "quickActions": ["Qaytarish tasdiqlash", "Kompensatsiya taklifi", "Kuryer chaqirish", "Ichki eslatma"],
-      "composerToggle": ["AI", "Men", "TAKEOVER"],
+      "quickActions": [
+        "Qaytarish tasdiqlash",
+        "Kompensatsiya taklifi",
+        "Kuryer chaqirish",
+        "Ichki eslatma"
+      ],
+      "composerToggle": [
+        "AI",
+        "Men",
+        "TAKEOVER"
+      ],
       "send": "Yuborish",
       "replyPlaceholder": "Xabar yozing…",
       "escTitle": "AI confidence pasaydi (0.48) — operator yordami tavsiya etiladi",
@@ -154,12 +184,29 @@
       "sentiment": "His-tuyg'u",
       "sentimentValue": "Pozitiv",
       "layerTitle": "Layer Moslik",
-      "layers": ["Facts", "Commercial", "Behavior", "Action"],
+      "layers": [
+        "Facts",
+        "Commercial",
+        "Behavior",
+        "Action"
+      ],
       "recsTitle": "TAVSIYALAR",
       "recs": [
-        { "level": "HIGH", "text": "Tezkor qaytarish tasdiqlash", "score": "0.91" },
-        { "level": "MEDIUM", "text": "Kompensatsiya: 50 000 UZS bonus", "score": "0.76" },
-        { "level": "INFO", "text": "VIP mijoz — tez javob bering", "score": "" }
+        {
+          "level": "HIGH",
+          "text": "Tezkor qaytarish tasdiqlash",
+          "score": "0.91"
+        },
+        {
+          "level": "MEDIUM",
+          "text": "Kompensatsiya: 50 000 UZS bonus",
+          "score": "0.76"
+        },
+        {
+          "level": "INFO",
+          "text": "VIP mijoz — tez javob bering",
+          "score": ""
+        }
       ],
       "leadTitle": "Lid holati",
       "leadValue": "92%",
@@ -167,45 +214,123 @@
     },
     "conversations": [
       {
-        "sector": "Klinika", "channel": "telegram", "customer": "Aziz Karimov", "preview": "Ertaga qabulga yozilsam bo'ladimi?",
+        "sector": "Klinika",
+        "channel": "telegram",
+        "customer": "Aziz Karimov",
+        "preview": "Ertaga qabulga yozilsam bo'ladimi?",
         "messages": [
-          { "from": "customer", "text": "Assalomu alaykum, ertaga stomatologga qabulga yozilsam bo'ladimi?" },
-          { "from": "ai", "text": "Assalomu alaykum, Aziz aka! Albatta. Ertaga 10:00, 14:30 va 17:00 bo'sh. Qaysi vaqt qulay?" },
-          { "from": "customer", "text": "14:30 yaxshi" },
-          { "from": "ai", "text": "Ajoyib! Sizni ertaga 14:30 ga yozdim. Manzil: Amir Temur ko'chasi 15. Eslatma 1 soat oldin yuboriladi 🦷" },
-          { "from": "system", "text": "✅ Qabul band qilindi — 14:30" }
+          {
+            "from": "customer",
+            "text": "Assalomu alaykum, ertaga stomatologga qabulga yozilsam bo'ladimi?"
+          },
+          {
+            "from": "ai",
+            "text": "Assalomu alaykum, Aziz aka! Albatta. Ertaga 10:00, 14:30 va 17:00 bo'sh. Qaysi vaqt qulay?"
+          },
+          {
+            "from": "customer",
+            "text": "14:30 yaxshi"
+          },
+          {
+            "from": "ai",
+            "text": "Ajoyib! Sizni ertaga 14:30 ga yozdim. Manzil: Amir Temur ko'chasi 15. Eslatma 1 soat oldin yuboriladi 🦷"
+          },
+          {
+            "from": "system",
+            "text": "✅ Qabul band qilindi — 14:30"
+          }
         ]
       },
       {
-        "sector": "Onlayn do'kon", "channel": "instagram", "customer": "Madina R.", "preview": "Bu ko'ylak bormi? 🧡",
+        "sector": "Onlayn do'kon",
+        "channel": "instagram",
+        "customer": "Madina R.",
+        "preview": "Bu ko'ylak bormi? 🧡",
         "messages": [
-          { "from": "customer", "text": "Bu ko'ylak bormi? 🧡" },
-          { "from": "ai-draft-wrong", "text": "Bor! Narxi 140 000 so'm 😊" },
-          { "from": "guardrail", "text": "Narx katalogga mos emas — qayta yozildi" },
-          { "from": "ai", "text": "Assalomu alaykum! «Lola» ko'ylagi bor — 240 000 so'm, S–XL. Qaysi o'lcham kerak? 🧡" },
-          { "from": "customer", "text": "M bo'lsin, qanday to'layman?" },
-          { "from": "ai", "text": "M o'lcham band qilindi! Click yoki Payme orqali to'lashingiz mumkin. Havola: pay.qaqnuz.uz/8214" },
-          { "from": "system", "text": "✅ Buyurtma tasdiqlandi — 240 000 so'm" }
+          {
+            "from": "customer",
+            "text": "Bu ko'ylak bormi? 🧡"
+          },
+          {
+            "from": "ai-draft-wrong",
+            "text": "Bor! Narxi 140 000 so'm 😊"
+          },
+          {
+            "from": "guardrail",
+            "text": "Narx katalogga mos emas — qayta yozildi"
+          },
+          {
+            "from": "ai",
+            "text": "Assalomu alaykum! «Lola» ko'ylagi bor — 240 000 so'm, S–XL. Qaysi o'lcham kerak? 🧡"
+          },
+          {
+            "from": "customer",
+            "text": "M bo'lsin, qanday to'layman?"
+          },
+          {
+            "from": "ai",
+            "text": "M o'lcham band qilindi! Click yoki Payme orqali to'lashingiz mumkin. Havola: pay.qaqnuz.uz/8214"
+          },
+          {
+            "from": "system",
+            "text": "✅ Buyurtma tasdiqlandi — 240 000 so'm"
+          }
         ]
       },
       {
-        "sector": "Yetkazib berish", "channel": "whatsapp", "customer": "Bobur T.", "preview": "Buyurtmam qayerda?",
+        "sector": "Yetkazib berish",
+        "channel": "whatsapp",
+        "customer": "Bobur T.",
+        "preview": "Buyurtmam qayerda?",
         "messages": [
-          { "from": "customer", "text": "Buyurtmam qayerda? #4412" },
-          { "from": "ai", "text": "Salom, Bobur aka! #4412 buyurtmangiz kuryerda — taxminan 25 daqiqada yetib boradi 🛵" },
-          { "from": "customer", "text": "Manzilni o'zgartirsam bo'ladimi?" },
-          { "from": "ai", "text": "Kuryer yo'lda bo'lgani uchun manzilni operator o'zgartiradi — hozir bog'layman. 1 daqiqa ⏳" },
-          { "from": "system", "text": "👤 Operatorga uzatildi — 42 soniyada javob berildi" }
+          {
+            "from": "customer",
+            "text": "Buyurtmam qayerda? #4412"
+          },
+          {
+            "from": "ai",
+            "text": "Salom, Bobur aka! #4412 buyurtmangiz kuryerda — taxminan 25 daqiqada yetib boradi 🛵"
+          },
+          {
+            "from": "customer",
+            "text": "Manzilni o'zgartirsam bo'ladimi?"
+          },
+          {
+            "from": "ai",
+            "text": "Kuryer yo'lda bo'lgani uchun manzilni operator o'zgartiradi — hozir bog'layman. 1 daqiqa ⏳"
+          },
+          {
+            "from": "system",
+            "text": "👤 Operatorga uzatildi — 42 soniyada javob berildi"
+          }
         ]
       },
       {
-        "sector": "Go'zallik saloni", "channel": "instagram", "customer": "Nilufar S.", "preview": "Manikyurga joy bormi?",
+        "sector": "Go'zallik saloni",
+        "channel": "instagram",
+        "customer": "Nilufar S.",
+        "preview": "Manikyurga joy bormi?",
         "messages": [
-          { "from": "customer", "text": "Shanba kuni manikyurga joy bormi?" },
-          { "from": "ai", "text": "Assalomu alaykum, Nilufar! Shanba 11:00 va 16:00 bo'sh. Gel-lak bilan 180 000 so'm 💅" },
-          { "from": "customer", "text": "16:00 ga yozing" },
-          { "from": "ai", "text": "Yozdim! Shanba 16:00 — usta Kamola sizni kutadi. Bir kun oldin eslatma yuboramiz ✨" },
-          { "from": "system", "text": "✅ Band qilindi — shanba 16:00" }
+          {
+            "from": "customer",
+            "text": "Shanba kuni manikyurga joy bormi?"
+          },
+          {
+            "from": "ai",
+            "text": "Assalomu alaykum, Nilufar! Shanba 11:00 va 16:00 bo'sh. Gel-lak bilan 180 000 so'm 💅"
+          },
+          {
+            "from": "customer",
+            "text": "16:00 ga yozing"
+          },
+          {
+            "from": "ai",
+            "text": "Yozdim! Shanba 16:00 — usta Kamola sizni kutadi. Bir kun oldin eslatma yuboramiz ✨"
+          },
+          {
+            "from": "system",
+            "text": "✅ Band qilindi — shanba 16:00"
+          }
         ]
       }
     ]
@@ -218,13 +343,41 @@
     "incomingText": "Bu ko'ylak bormi? 🧡",
     "moreLink": "Batafsil",
     "stages": [
-      { "title": "Niyatni o'qiydi", "desc": "AI savolning maqsadini aniqlaydi: mahsulot so'rovi, narx, mavjudlik.", "detail": "Niyat: mahsulot mavjudligi · ishonch 98%" },
-      { "title": "Tilni aniqlaydi", "desc": "O'zbek, rus yoki ingliz — mijoz qaysi tilda yozsa, o'sha tilda javob.", "detail": "Til: o'zbek (lotin) · ohang: samimiy" },
-      { "title": "Bilim bazasi", "desc": "Narx, o'lcham, mavjudlik — faqat sizning katalogingizdan olinadi.", "detail": "Topildi: Ko'ylak «Lola» · 240 000 so'm · S–XL mavjud" },
-      { "title": "Javob tayyorlaydi", "desc": "Brendingiz ohangida, sotuvga yo'naltirilgan javob yoziladi.", "detail": "Qoralama tayyor · savdoga undash qo'shildi" },
-      { "title": "9 xavfsizlik filtri", "desc": "Narx, va'da, ohang, maxfiylik — har bir javob 9 ta filtrdan o'tadi.", "detail": "" },
-      { "title": "Inson nazorati", "desc": "Shubhali holatlar operatorga yo'naltiriladi. Siz doim boshqaruvdasiz.", "detail": "Ishonch yuqori · avto-tasdiq · operator xabardor" },
-      { "title": "Yuboriladi", "desc": "Javob mijozga yetib boradi — o'rtacha 1.4 soniyada.", "detail": "Yetkazildi ✓✓ · 1.4s" }
+      {
+        "title": "Niyatni o'qiydi",
+        "desc": "AI savolning maqsadini aniqlaydi: mahsulot so'rovi, narx, mavjudlik.",
+        "detail": "Niyat: mahsulot mavjudligi · ishonch 98%"
+      },
+      {
+        "title": "Tilni aniqlaydi",
+        "desc": "O'zbek, rus yoki ingliz — mijoz qaysi tilda yozsa, o'sha tilda javob.",
+        "detail": "Til: o'zbek (lotin) · ohang: samimiy"
+      },
+      {
+        "title": "Bilim bazasi",
+        "desc": "Narx, o'lcham, mavjudlik — faqat sizning katalogingizdan olinadi.",
+        "detail": "Topildi: Ko'ylak «Lola» · 240 000 so'm · S–XL mavjud"
+      },
+      {
+        "title": "Javob tayyorlaydi",
+        "desc": "Brendingiz ohangida, sotuvga yo'naltirilgan javob yoziladi.",
+        "detail": "Qoralama tayyor · savdoga undash qo'shildi"
+      },
+      {
+        "title": "9 xavfsizlik filtri",
+        "desc": "Narx, va'da, ohang, maxfiylik — har bir javob 9 ta filtrdan o'tadi.",
+        "detail": ""
+      },
+      {
+        "title": "Inson nazorati",
+        "desc": "Shubhali holatlar operatorga yo'naltiriladi. Siz doim boshqaruvdasiz.",
+        "detail": "Ishonch yuqori · avto-tasdiq · operator xabardor"
+      },
+      {
+        "title": "Yuboriladi",
+        "desc": "Javob mijozga yetib boradi — o'rtacha 1.4 soniyada.",
+        "detail": "Yetkazildi ✓✓ · 1.4s"
+      }
     ],
     "guardrail": {
       "draftLabel": "AI qoralamasi",
@@ -233,7 +386,17 @@
       "explain": "Noto'g'ri narx aniqlandi — javob to'xtatildi va qayta yozildi.",
       "fixedLabel": "Tuzatilgan javob",
       "fixedDraft": "Assalomu alaykum, Madina! «Lola» ko'ylagi bor — narxi 240 000 so'm, o'lchamlar S dan XL gacha. Qaysi o'lcham kerak? 🧡",
-      "filters": ["Narx aniqligi", "Va'da nazorati", "Ohang mosligi", "Maxfiylik", "Katalog mosligi", "Chegirma qoidalari", "Til sifati", "Spam-himoya", "Eskalatsiya triggeri"]
+      "filters": [
+        "Narx aniqligi",
+        "Va'da nazorati",
+        "Ohang mosligi",
+        "Maxfiylik",
+        "Katalog mosligi",
+        "Chegirma qoidalari",
+        "Til sifati",
+        "Spam-himoya",
+        "Eskalatsiya triggeri"
+      ]
     }
   },
   "trustRamp": {
@@ -349,54 +512,108 @@
         "label": "Kirish qutisi",
         "description": "DMlar, Izohlar va Story eslatmalari bo'yicha birlashtirilgan 3-tab suhbat ko'rinishi. Har bir ip quvur holati, ishonch darajasi va javob navbatini ko'rsatadi.",
         "stats": [
-          { "label": "DMlar", "value": "247" },
-          { "label": "Izohlar", "value": "1,2k" },
-          { "label": "Story", "value": "89" }
+          {
+            "label": "DMlar",
+            "value": "247"
+          },
+          {
+            "label": "Izohlar",
+            "value": "1,2k"
+          },
+          {
+            "label": "Story",
+            "value": "89"
+          }
         ]
       },
       {
         "label": "Brendlar",
         "description": "11-tab brend profil muharriri: identifikatsiya, ovoz, mahsulotlar, kampaniyalar, to'lovlar, etkazib berish, FAQ, himoya, eskalatsiya, ish vaqtlari va muvofiqlik sozlamalari.",
         "stats": [
-          { "label": "Brendlar", "value": "12" },
-          { "label": "Profillar", "value": "11 tab" },
-          { "label": "Faol", "value": "9" }
+          {
+            "label": "Brendlar",
+            "value": "12"
+          },
+          {
+            "label": "Profillar",
+            "value": "11 tab"
+          },
+          {
+            "label": "Faol",
+            "value": "9"
+          }
         ]
       },
       {
         "label": "Monitor",
         "description": "Real vaqtli quvur holati ko'rsatkichlari. Barcha 7 AMT mikroxizmat, navbat chuqurligi, xato darajalari va LLM kechikishi uchun xizmat holati — barchasi bir ko'rinishda.",
         "stats": [
-          { "label": "Xizmatlar", "value": "7/7" },
-          { "label": "Navbat", "value": "Jonli" },
-          { "label": "Ishlash vaqti", "value": "99,9%" }
+          {
+            "label": "Xizmatlar",
+            "value": "7/7"
+          },
+          {
+            "label": "Navbat",
+            "value": "Jonli"
+          },
+          {
+            "label": "Ishlash vaqti",
+            "value": "99,9%"
+          }
         ]
       },
       {
         "label": "Navbat",
         "description": "Faol tasdiqlash navbati. AI tomonidan yaratilgan javoblarni ko'rib chiqish, tahrirlash, tasdiqlash yoki rad etish. Bir bosishda nashr yoki qayta tuzish uchun qaytarish.",
         "stats": [
-          { "label": "Kutmoqda", "value": "14" },
-          { "label": "Tasdiq/soat", "value": "38" },
-          { "label": "O'rtacha ko'rib chiqish", "value": "12s" }
+          {
+            "label": "Kutmoqda",
+            "value": "14"
+          },
+          {
+            "label": "Tasdiq/soat",
+            "value": "38"
+          },
+          {
+            "label": "O'rtacha ko'rib chiqish",
+            "value": "12s"
+          }
         ]
       },
       {
         "label": "Tahlil",
         "description": "Interaktiv grafiklar: javob hajmi, kayfiyat tendentsiyalari, quvur voronkasi, suhbat boshiga xarajat va brendga ko'ra LLM xarajatlarining taqsimlanishi.",
         "stats": [
-          { "label": "Suhbat xarajati", "value": "$0.04" },
-          { "label": "Kayfiyat", "value": "+87%" },
-          { "label": "Javob darajasi", "value": "98%" }
+          {
+            "label": "Suhbat xarajati",
+            "value": "$0.04"
+          },
+          {
+            "label": "Kayfiyat",
+            "value": "+87%"
+          },
+          {
+            "label": "Javob darajasi",
+            "value": "98%"
+          }
         ]
       },
       {
         "label": "Metrikalar",
         "description": "Suhbat hajmi va holat kuzatuvi. Kunlik/haftalik/oylik taqsimotlar, ishonch darajasi taqsimoti va operator ishlash ko'rsatmalari.",
         "stats": [
-          { "label": "Jami suhbatlar", "value": "18,4k" },
-          { "label": "Avto darajasi", "value": "76%" },
-          { "label": "CSAT", "value": "4.8/5" }
+          {
+            "label": "Jami suhbatlar",
+            "value": "18,4k"
+          },
+          {
+            "label": "Avto darajasi",
+            "value": "76%"
+          },
+          {
+            "label": "CSAT",
+            "value": "4.8/5"
+          }
         ]
       }
     ]
@@ -640,10 +857,22 @@
         "activeNow": "hozir onlayn",
         "placeholder": "Xabar yozing…",
         "messages": [
-          { "from": "customer", "text": "Salom! Bu kremning narxi qancha? 🙏" },
-          { "from": "ai", "text": "Salom! Vitamin C kremimiz 89 000 so'm. Hozir buyurtma bersangiz 10% chegirma! 🎁" },
-          { "from": "customer", "text": "Ajoyib! Qanday to'layman?" },
-          { "from": "ai", "text": "Click yoki Payme orqali. To'lov havolasini yuboraman! 💳" }
+          {
+            "from": "customer",
+            "text": "Salom! Bu kremning narxi qancha? 🙏"
+          },
+          {
+            "from": "ai",
+            "text": "Salom! Vitamin C kremimiz 89 000 so'm. Hozir buyurtma bersangiz 10% chegirma! 🎁"
+          },
+          {
+            "from": "customer",
+            "text": "Ajoyib! Qanday to'layman?"
+          },
+          {
+            "from": "ai",
+            "text": "Click yoki Payme orqali. To'lov havolasini yuboraman! 💳"
+          }
         ]
       },
       "comments": {
@@ -651,10 +880,30 @@
         "location": "Toshkent, O'zbekiston",
         "caption": "Yangi kolleksiya",
         "list": [
-          { "user": "@nargiza_u", "text": "Bu ko'ylak bormi 38 razmer? 😍", "ai": false, "likes": 3 },
-          { "user": "dilnoza_style", "text": "Ha, 36–42 mavjud! DM yozing, katalog yuboramiz 🌸", "ai": true, "likes": 12 },
-          { "user": "@malika_t", "text": "Narxi qancha?", "ai": false, "likes": 1 },
-          { "user": "dilnoza_style", "text": "150 000 so'mdan. Hozir chegirma! 💜", "ai": true, "likes": 8 }
+          {
+            "user": "@nargiza_u",
+            "text": "Bu ko'ylak bormi 38 razmer? 😍",
+            "ai": false,
+            "likes": 3
+          },
+          {
+            "user": "dilnoza_style",
+            "text": "Ha, 36–42 mavjud! DM yozing, katalog yuboramiz 🌸",
+            "ai": true,
+            "likes": 12
+          },
+          {
+            "user": "@malika_t",
+            "text": "Narxi qancha?",
+            "ai": false,
+            "likes": 1
+          },
+          {
+            "user": "dilnoza_style",
+            "text": "150 000 so'mdan. Hozir chegirma! 💜",
+            "ai": true,
+            "likes": 8
+          }
         ]
       },
       "story": {
@@ -693,12 +942,10 @@
       "title": "Brendingiz haqida ayting",
       "name": "Ismingiz",
       "namePlaceholder": "Azizbek Karimov",
+      "phone": "Telefon raqami",
+      "phonePlaceholder": "+998 90 123 45 67",
       "brand": "Brend nomi",
       "brandPlaceholder": "Masalan: BeautyBox UZ",
-      "igHandle": "Instagram handle",
-      "igHandlePlaceholder": "@brendingiz",
-      "email": "Ish emaili",
-      "emailPlaceholder": "siz@brend.uz",
       "volume": "Oylik DM hajmi",
       "volumeDefault": "Hajmni tanlang...",
       "volumeOptions": [
@@ -723,29 +970,112 @@
     "titleEmphasis": "Yashirin to'lovlar yo'q.",
     "description": "Barcha rejalar to'liq 8 bosqichli AI quvuri, 9 ta xavfsizlik qo'riqlovchisi va audit jurналини o'z ichiga oladi. Imkoniyatlar uchun emas, hajm uchun to'laysiz.",
     "tiers": [
-      { "name": "Starter", "description": "Bitta brend, AI avtomatlashtirish bilan boshlanish.", "cta": "Demo buyurtma" },
-      { "name": "Growth", "description": "O'sib borayotgan brendlar va ko'p hisob operatorlari.", "badge": "Eng mashhur", "cta": "Demo buyurtma" },
-      { "name": "Enterprise", "description": "Agentliklar va cheksiz miqyosli operatsiyalar.", "cta": "Savdo bilan gaplashing" }
+      {
+        "name": "Starter",
+        "description": "Bitta brend, AI avtomatlashtirish bilan boshlanish.",
+        "cta": "Demo buyurtma"
+      },
+      {
+        "name": "Growth",
+        "description": "O'sib borayotgan brendlar va ko'p hisob operatorlari.",
+        "badge": "Eng mashhur",
+        "cta": "Demo buyurtma"
+      },
+      {
+        "name": "Enterprise",
+        "description": "Agentliklar va cheksiz miqyosli operatsiyalar.",
+        "cta": "Savdo bilan gaplashing"
+      }
     ],
     "tableFeature": "Xususiyat",
     "tableStarter": "Starter",
     "tableGrowth": "Growth",
     "tableEnterprise": "Enterprise",
     "features": [
-      { "name": "Instagram hisoblar", "starter": "1", "growth": "5 tagacha", "enterprise": "Cheksiz" },
-      { "name": "Oylik DM hajmi", "starter": "1 000", "growth": "10 000", "enterprise": "Cheksiz" },
-      { "name": "8 bosqichli AI quvuri", "starter": true, "growth": true, "enterprise": true },
-      { "name": "9 ta xavfsizlik qo'riqlovchisi", "starter": true, "growth": true, "enterprise": true },
-      { "name": "Ishonch ramkasi (L1–L4)", "starter": "L1–L2", "growth": "L1–L4", "enterprise": "L1–L4" },
-      { "name": "Faol DM kampaniyalari", "starter": false, "growth": true, "enterprise": true },
-      { "name": "Xarajat boshqaruvi", "starter": false, "growth": true, "enterprise": true },
-      { "name": "Ko'p til (UZ/RU/EN)", "starter": false, "growth": true, "enterprise": true },
-      { "name": "To'liq Mission Control", "starter": false, "growth": true, "enterprise": true },
-      { "name": "Maxsus LLM konfiguratsiyasi", "starter": false, "growth": false, "enterprise": true },
-      { "name": "Audit jurnalini eksport", "starter": false, "growth": false, "enterprise": true },
-      { "name": "SLA kafolati", "starter": false, "growth": false, "enterprise": true },
-      { "name": "On-premises joylashtirilishi", "starter": false, "growth": false, "enterprise": true },
-      { "name": "Qo'llab-quvvatlash", "starter": "Email", "growth": "Ustuvor + CSM", "enterprise": "Maxsus SLA" }
+      {
+        "name": "Instagram hisoblar",
+        "starter": "1",
+        "growth": "5 tagacha",
+        "enterprise": "Cheksiz"
+      },
+      {
+        "name": "Oylik DM hajmi",
+        "starter": "1 000",
+        "growth": "10 000",
+        "enterprise": "Cheksiz"
+      },
+      {
+        "name": "8 bosqichli AI quvuri",
+        "starter": true,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "9 ta xavfsizlik qo'riqlovchisi",
+        "starter": true,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "Ishonch ramkasi (L1–L4)",
+        "starter": "L1–L2",
+        "growth": "L1–L4",
+        "enterprise": "L1–L4"
+      },
+      {
+        "name": "Faol DM kampaniyalari",
+        "starter": false,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "Xarajat boshqaruvi",
+        "starter": false,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "Ko'p til (UZ/RU/EN)",
+        "starter": false,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "To'liq Mission Control",
+        "starter": false,
+        "growth": true,
+        "enterprise": true
+      },
+      {
+        "name": "Maxsus LLM konfiguratsiyasi",
+        "starter": false,
+        "growth": false,
+        "enterprise": true
+      },
+      {
+        "name": "Audit jurnalini eksport",
+        "starter": false,
+        "growth": false,
+        "enterprise": true
+      },
+      {
+        "name": "SLA kafolati",
+        "starter": false,
+        "growth": false,
+        "enterprise": true
+      },
+      {
+        "name": "On-premises joylashtirilishi",
+        "starter": false,
+        "growth": false,
+        "enterprise": true
+      },
+      {
+        "name": "Qo'llab-quvvatlash",
+        "starter": "Email",
+        "growth": "Ustuvor + CSM",
+        "enterprise": "Maxsus SLA"
+      }
     ],
     "customQuote": "Maxsus narx taklifi olish",
     "customQuoteNote": "Barcha narxlar sizning hajmingiz va talablaringiz asosida individual hisoblanadi."
@@ -781,14 +1111,38 @@
     ],
     "techTitle": "Texnik stack",
     "techStack": [
-      ["Backend API", "Hono · Node.js"],
-      ["Quvur navbati", "BullMQ · Redis 7"],
-      ["Ma'lumotlar bazasi", "PostgreSQL 16 + pgvector"],
-      ["Vektor qidiruvi", "pgvector embeddings"],
-      ["LLM provayderlari", "OpenRouter · Anthropic · OpenAI"],
-      ["Frontend", "Next.js 16 · React 19"],
-      ["Kuzatuvchanlik", "OpenTelemetry · Prometheus"],
-      ["Joylashtirilishi", "Docker · Dokploy · Traefik"]
+      [
+        "Backend API",
+        "Hono · Node.js"
+      ],
+      [
+        "Quvur navbati",
+        "BullMQ · Redis 7"
+      ],
+      [
+        "Ma'lumotlar bazasi",
+        "PostgreSQL 16 + pgvector"
+      ],
+      [
+        "Vektor qidiruvi",
+        "pgvector embeddings"
+      ],
+      [
+        "LLM provayderlari",
+        "OpenRouter · Anthropic · OpenAI"
+      ],
+      [
+        "Frontend",
+        "Next.js 16 · React 19"
+      ],
+      [
+        "Kuzatuvchanlik",
+        "OpenTelemetry · Prometheus"
+      ],
+      [
+        "Joylashtirilishi",
+        "Docker · Dokploy · Traefik"
+      ]
     ],
     "ctaTitle": "Chuqurroq ko'rishga tayyormisiz?",
     "ctaDescription": "Texnik demo buyurtma qiling va to'liq quvurni o'z Instagram hisobingiz bilan ko'rib chiqing.",
@@ -905,7 +1259,11 @@
         "excerpt": "Toshkentdagi fashion chakana sotuvchi Qaqnuzni L1 ishonch darajasida joriy etdi va 8 hafta ichida L3 ga ko'tarildi. Javob darajasi 31% dan 94% ga o'sdi.",
         "metric": "3×",
         "metricLabel": "Javob darajasi",
-        "tags": ["Fashion", "Faollik", "L3 Ishonch"]
+        "tags": [
+          "Fashion",
+          "Faollik",
+          "L3 Ishonch"
+        ]
       },
       {
         "slug": "24-7-automation",
@@ -913,7 +1271,11 @@
         "excerpt": "Kosmetika brendi kecha-kunduz va dam olish kunlaridagi javob kechikishlarini yo'q qildi. L2 avtomatik nashr oddiy so'rovlarni hal qiladi; operator navbati faqat murakkab holatlarni ko'rsatadi.",
         "metric": "24/7",
         "metricLabel": "Har doim faol",
-        "tags": ["Kosmetika", "Operatsiyalar", "L2 Ishonch"]
+        "tags": [
+          "Kosmetika",
+          "Operatsiyalar",
+          "L2 Ishonch"
+        ]
       }
     ],
     "ctaTitle": "Misol bo'lishni xohlaysizmi?",
@@ -921,14 +1283,31 @@
     "ctaButton": "Demo buyurtma",
     "backToStudies": "Barcha misollar",
     "brandGrowth": {
-      "tags": ["Fashion", "Toshkent", "L3 Ishonch", "Ko'p kanal"],
+      "tags": [
+        "Fashion",
+        "Toshkent",
+        "L3 Ishonch",
+        "Ko'p kanal"
+      ],
       "title": "Fashion brend DM javob darajasini qanday uch baravarga oshirdi",
       "description": "Toshkentdagi fashion chakana sotuvchi Qaqnuzni uchta hisob bo'yicha Instagram DMlarini boshqarish uchun joriy etdi. L1 ishonch darajasidan boshlab, 8 hafta ichida L3 ga ko'tarildi.",
       "metrics": [
-        { "value": "3×", "label": "Javob darajasi" },
-        { "value": "4 daqiqa", "label": "O'rtacha javob vaqti" },
-        { "value": "94%", "label": "AI tomonidan ko'rilgan DMlar" },
-        { "value": "1 200+", "label": "DM/oy" }
+        {
+          "value": "3×",
+          "label": "Javob darajasi"
+        },
+        {
+          "value": "4 daqiqa",
+          "label": "O'rtacha javob vaqti"
+        },
+        {
+          "value": "94%",
+          "label": "AI tomonidan ko'rilgan DMlar"
+        },
+        {
+          "value": "1 200+",
+          "label": "DM/oy"
+        }
       ],
       "challengeTitle": "Muammo",
       "challengeText": "Qaqnuzdan oldin brendning DM javob darajasi 31% edi — ko'p xabarlar soatlar yoki kunlar davomida javovsiz qoldi.",
@@ -939,14 +1318,31 @@
       "ctaButton": "Brendingiz uchun shunga o'xshash natijalar"
     },
     "automation247": {
-      "tags": ["Kosmetika", "Toshkent", "L2 Ishonch", "Har doim faol"],
+      "tags": [
+        "Kosmetika",
+        "Toshkent",
+        "L2 Ishonch",
+        "Har doim faol"
+      ],
       "title": "24/7 jamoa bo'lmagan holda 24/7 qamrov",
       "description": "Toshkentdagi kosmetika brendi kecha va dam olish kuni javob bo'shliqlarini yo'q qildi. 30 kun ichida AI barcha so'rovlarning 78% ini mustaqil ravishda hal qildi.",
       "metrics": [
-        { "value": "24/7", "label": "Qamrov" },
-        { "value": "78%", "label": "Avtomatik ko'rilgan" },
-        { "value": "2 daqiqa", "label": "O'rtacha javob vaqti" },
-        { "value": "800+", "label": "DM/oy" }
+        {
+          "value": "24/7",
+          "label": "Qamrov"
+        },
+        {
+          "value": "78%",
+          "label": "Avtomatik ko'rilgan"
+        },
+        {
+          "value": "2 daqiqa",
+          "label": "O'rtacha javob vaqti"
+        },
+        {
+          "value": "800+",
+          "label": "DM/oy"
+        }
       ],
       "challengeTitle": "Muammo",
       "challengeText": "Brend haftalik yuzlab DM olardi, lekin kechasi va dam olish kunlarida qamrov yo'q edi.",

@@ -69,22 +69,22 @@ export default function BookDemoPage() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
+    phone: "",
     brand: "",
-    igHandle: "",
     volume: "",
-    email: "",
   });
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     if (supabase) {
+      // We qualify further details on the call, so we only collect name,
+      // phone, brand and monthly DM volume here.
       await supabase.from("leads").insert({
         name: form.name,
+        phone: form.phone,
         company: form.brand,
-        role: form.igHandle,
         message: form.volume,
-        email: form.email,
         source: "book-demo",
       });
     }
@@ -161,10 +161,9 @@ export default function BookDemoPage() {
 
                   {(
                     [
-                      { name: "name",     label: t("form.name"),     placeholder: t("form.namePlaceholder"),     type: "text"  },
-                      { name: "brand",    label: t("form.brand"),    placeholder: t("form.brandPlaceholder"),    type: "text"  },
-                      { name: "igHandle", label: t("form.igHandle"), placeholder: t("form.igHandlePlaceholder"), type: "text"  },
-                      { name: "email",    label: t("form.email"),    placeholder: t("form.emailPlaceholder"),    type: "email" },
+                      { name: "name",  label: t("form.name"),  placeholder: t("form.namePlaceholder"),  type: "text" },
+                      { name: "phone", label: t("form.phone"), placeholder: t("form.phonePlaceholder"), type: "tel"  },
+                      { name: "brand", label: t("form.brand"), placeholder: t("form.brandPlaceholder"), type: "text" },
                     ] as const
                   ).map((field) => (
                     <div key={field.name}>

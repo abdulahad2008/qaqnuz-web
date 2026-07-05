@@ -8,14 +8,19 @@ create table if not exists leads (
   id          uuid primary key default gen_random_uuid(),
   created_at  timestamptz default now(),
   name        text not null,
-  email       text not null,
-  company     text,
-  role        text,       -- Instagram handle
-  message     text,       -- volume option selected
+  phone       text,       -- primary contact (we qualify details on the call)
+  email       text,       -- optional (legacy)
+  company     text,       -- brand name
+  role        text,       -- legacy: Instagram handle
+  message     text,       -- monthly DM volume selected
   source      text default 'book-demo',
   status      text default 'pending',   -- 'pending' | 'invited'
   invited_at  timestamptz
 );
+
+-- Migration for existing installs (book-demo now collects name/phone/brand/volume):
+alter table leads add column if not exists phone text;
+alter table leads alter column email drop not null;
 
 create table if not exists newsletter_signups (
   id          uuid primary key default gen_random_uuid(),
